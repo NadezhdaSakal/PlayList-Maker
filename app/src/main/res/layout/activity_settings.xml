@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/back_to_main_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start"
+            android:contentDescription="@string/settings"
+            android:foreground="?attr/selectableItemBackground"
+            android:padding="7dp"
+            android:src="@drawable/arrow_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:text="@string/settings"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size" />
+    </LinearLayout>
+
+    <Switch
+        android:id="@+id/switch_dark_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_header"
+        android:paddingStart="@dimen/margin_start"
+        android:paddingTop="@dimen/settings_btn_padding_top"
+        android:paddingBottom="@dimen/settings_btn_padding_bottom"
+        android:paddingEnd="7dp"
+        android:text="@string/dark_theme"
+        android:textColor="@color/black"
+        android:textSize="@dimen/settings_text_size"
+        android:textAllCaps="false"
+        android:textStyle="normal"
+        android:foreground="?attr/selectableItemBackground"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Button
+        android:id="@+id/button_sharing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:paddingTop="@dimen/settings_btn_padding_top"
+        android:paddingBottom="@dimen/settings_btn_padding_bottom"
+        android:paddingStart="@dimen/settings_btn_padding_start"
+        android:paddingEnd="@dimen/settings_btn_padding_end"
+        android:text="@string/share"
+        android:textColor="@color/black"
+        android:textSize="@dimen/settings_text_size"
+        android:textStyle="normal"
+        android:textAllCaps="false"
+        app:icon="@drawable/share"
+        app:iconGravity="end"
+        app:iconTint="@color/grey"
+        style="?android:attr/borderlessButtonStyle"
+        android:foreground="?attr/selectableItemBackground" />
+
+    <Button
+        android:id="@+id/button_support"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:paddingTop="@dimen/settings_btn_padding_top"
+        android:paddingBottom="@dimen/settings_btn_padding_bottom"
+        android:paddingStart="@dimen/settings_btn_padding_start"
+        android:paddingEnd="@dimen/settings_btn_padding_end"
+        android:text="@string/support"
+        android:textColor="@color/black"
+        android:textSize="@dimen/settings_text_size"
+        android:textAllCaps="false"
+        app:icon="@drawable/support"
+        app:iconGravity="end"
+        app:iconTint="@color/grey"
+        style="?android:attr/borderlessButtonStyle"
+        android:foreground="?attr/selectableItemBackground" />
+
+    <Button
+        android:id="@+id/button_user_agreement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:paddingTop="@dimen/settings_btn_padding_top"
+        android:paddingBottom="@dimen/settings_btn_padding_bottom"
+        android:paddingStart="@dimen/settings_btn_padding_start"
+        android:paddingEnd="22dp"
+        android:text="@string/user_agreement"
+        android:textColor="@color/black"
+        android:textSize="@dimen/settings_text_size"
+        android:textAllCaps="false"
+        app:icon="@drawable/arrow_forward"
+        app:iconGravity="end"
+        app:iconTint="@color/grey"
+        style="?android:attr/borderlessButtonStyle"
+        android:foreground="?attr/selectableItemBackground" />
+</LinearLayout>

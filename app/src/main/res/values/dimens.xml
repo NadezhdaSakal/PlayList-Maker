@@ -5,4 +5,18 @@
     <dimen name="margin">16dp</dimen>
     <dimen name="corner_radius">16dp</dimen>
     <dimen name="icon_padding">10dp</dimen>
+
+    <dimen name="margin_top">14dp</dimen>
+    <dimen name="margin_start">17dp</dimen>
+    <dimen name="margin_header">40dp</dimen>
+    <dimen name="settings_text_size">16sp</dimen>
+    <dimen name="settings_btn_padding_top">21dp</dimen>
+    <dimen name="settings_btn_padding_bottom">21dp</dimen>
+    <dimen name="settings_btn_padding_start">16dp</dimen>
+    <dimen name="settings_btn_padding_end">16dp</dimen>
+
+
+
+
+
 </resources>
