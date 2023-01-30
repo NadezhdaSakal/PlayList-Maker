@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:text="@string/settings"
+            android:fontFamily="@font/yandex_sans_text_medium"
             android:textColor="@color/text_color"
             android:textSize="@dimen/text_size" />
     </LinearLayout>
@@ -46,7 +47,6 @@
         android:textColor="@color/black"
         android:textSize="@dimen/settings_text_size"
         android:textAllCaps="false"
-        android:textStyle="normal"
         android:foreground="?attr/selectableItemBackground"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
@@ -63,7 +63,6 @@
         android:fontFamily="@font/yandex_sans_display_regular"
         android:textColor="@color/black"
         android:textSize="@dimen/settings_text_size"
-        android:textStyle="normal"
         android:textAllCaps="false"
         app:icon="@drawable/share"
         app:iconGravity="end"
