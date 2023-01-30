@@ -1,5 +1,6 @@
 package com.sakal.playlistmaker
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,19 +14,24 @@ class MainActivity : AppCompatActivity() {
 
         val buttonClickListener: View.OnClickListener = object : View.OnClickListener {
             override fun onClick(v: View?) {
-                startActivity(Intent(this@MainActivity, SearchActivity::class.java))
+                navigateTo(SearchActivity::class.java)
             }
         }
 
         findViewById<Button>(R.id.btn_search).setOnClickListener(buttonClickListener)
 
         findViewById<Button>(R.id.btn_media).setOnClickListener {
-            startActivity(Intent(this@MainActivity, LibraryActivity::class.java))
+            navigateTo(LibraryActivity::class.java)
         }
 
         findViewById<Button>(R.id.btn_settings).setOnClickListener {
-            startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
+            navigateTo(SettingsActivity::class.java)
         }
 
+
+    }
+
+    private fun navigateTo(clazz: Class<out Activity>) {
+        startActivity(Intent(this@MainActivity, clazz))
     }
 }
