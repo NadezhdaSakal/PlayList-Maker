@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/settings_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginBottom="24dp"
+        app:navigationIcon="@drawable/arrow_back">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/settings"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/header_text_size" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_dark_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/yandex_sans_display_regular"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingVertical="@dimen/settings_btn_padding_vertical"
+        android:paddingStart="@dimen/margin_start"
+        android:paddingEnd="7dp"
+        android:text="@string/dark_theme"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/settings_text_size"
+        app:thumbTint="@color/grey"
+        app:trackTint="@color/grey_light"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Button
+        android:id="@+id/button_sharing"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/yandex_sans_display_regular"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="start"
+        android:paddingHorizontal="@dimen/settings_btn_padding_horizontal"
+        android:paddingVertical="@dimen/settings_btn_padding_vertical"
+        android:text="@string/share"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/settings_text_size"
+        app:icon="@drawable/share"
+        app:iconGravity="end"
+        app:iconTint="@color/grey" />
+
+    <Button
+        android:id="@+id/button_support"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/yandex_sans_display_regular"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="start"
+        android:paddingHorizontal="@dimen/settings_btn_padding_horizontal"
+        android:paddingVertical="@dimen/settings_btn_padding_vertical"
+        android:text="@string/support"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/settings_text_size"
+        app:icon="@drawable/support"
+        app:iconGravity="end"
+        app:iconTint="@color/grey" />
+
+    <Button
+        android:id="@+id/button_user_agreement"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/yandex_sans_display_regular"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="start"
+        android:paddingVertical="@dimen/settings_btn_padding_vertical"
+        android:paddingStart="@dimen/settings_btn_padding_start"
+        android:paddingEnd="22dp"
+        android:text="@string/user_agreement"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/settings_text_size"
+        app:icon="@drawable/arrow_forward"
+        app:iconGravity="end"
+        app:iconTint="@color/grey" />
+</LinearLayout>
