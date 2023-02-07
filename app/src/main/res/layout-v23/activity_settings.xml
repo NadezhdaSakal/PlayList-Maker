@@ -28,7 +28,6 @@
         android:id="@+id/switch_dark_theme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_header"
         android:fontFamily="@font/yandex_sans_display_regular"
         android:foreground="?attr/selectableItemBackground"
         android:paddingVertical="@dimen/settings_btn_padding_vertical"

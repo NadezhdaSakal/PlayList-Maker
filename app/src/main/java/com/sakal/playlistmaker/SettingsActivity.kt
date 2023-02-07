@@ -10,7 +10,9 @@ class SettingsActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_settings)
 
-        findViewById<Toolbar>(R.id.settings_toolbar).setNavigationOnClickListener() {
+        val toolbar = findViewById<Toolbar>(R.id.settings_toolbar)
+
+        toolbar.setNavigationOnClickListener() {
             finish()
         }
     }
