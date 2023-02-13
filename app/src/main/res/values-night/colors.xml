@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="main_background">#1A1B22</color>
+    <color name="settings_screen_background">#1A1B22</color>
+    <color name="settings_text_color">#FFFFFF</color>
+    <color name="settings_icon_color">#FFFFFF</color>
+    <color name="settings_button_background_color">#1A1B22</color>
+    <color name="settings_switch">#3772E7</color>
+
+    <color name="search_form_background_color">#FFFFFF</color>
+    <color name="search_form_text_color">#1A1B22</color>
+    <color name="search_form_text_hint_color">#1A1B22</color>
+</resources>

@@ -3,95 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/settings_screen_background"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/settings_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginBottom="24dp"
-        app:navigationIcon="@drawable/arrow_back">
+        app:navigationIcon="@drawable/arrow_back"
+        app:navigationIconTint="@color/settings_text_color">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="@string/settings"
-            android:fontFamily="@font/yandex_sans_text_medium"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/header_text_size" />
+            android:fontFamily="@font/ys_display_medium"
+            android:textColor="@color/settings_text_color"
+            android:textSize="@dimen/text_size_22" />
 
-    </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.MaterialToolbar>
 
-    <androidx.appcompat.widget.SwitchCompat
+    <Switch
+        style="@style/SettingsBtn"
         android:id="@+id/switch_dark_theme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
-        android:paddingVertical="@dimen/settings_btn_padding_vertical"
-        android:paddingStart="@dimen/margin_start"
-        android:paddingEnd="7dp"
         android:text="@string/dark_theme"
-        android:fontFamily="@font/yandex_sans_display_regular"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="@dimen/settings_text_size"
-        app:thumbTint="@color/grey"
-        app:trackTint="@color/grey_light" />
+        tools:ignore="UseSwitchCompatOrMaterialXml"
+        android:thumbTint="@color/settings_switch"
+        android:trackTint="@color/settings_switch" />
 
     <Button
         android:id="@+id/button_sharing"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
-        android:gravity="start"
-        android:paddingHorizontal="@dimen/settings_btn_padding_horizontal"
-        android:paddingVertical="@dimen/settings_btn_padding_vertical"
+        style="@style/SettingsBtn"
         android:text="@string/share"
-        android:fontFamily="@font/yandex_sans_display_regular"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="@dimen/settings_text_size"
-        app:icon="@drawable/share"
-        app:iconGravity="end"
-        app:iconTint="@color/grey" />
+        app:icon="@drawable/share" />
 
     <Button
         android:id="@+id/button_support"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
-        android:gravity="start"
-        android:paddingHorizontal="@dimen/settings_btn_padding_horizontal"
-        android:paddingVertical="@dimen/settings_btn_padding_vertical"
+        style="@style/SettingsBtn"
         android:text="@string/support"
-        android:fontFamily="@font/yandex_sans_display_regular"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="@dimen/settings_text_size"
-        app:icon="@drawable/support"
-        app:iconGravity="end"
-        app:iconTint="@color/grey" />
+        app:icon="@drawable/support" />
 
     <Button
         android:id="@+id/button_user_agreement"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
-        android:gravity="start"
-        android:paddingVertical="@dimen/settings_btn_padding_vertical"
-        android:paddingStart="@dimen/settings_btn_padding_start"
-        android:paddingEnd="22dp"
+        style="@style/SettingsBtn"
         android:text="@string/user_agreement"
-        android:fontFamily="@font/yandex_sans_display_regular"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="@dimen/settings_text_size"
-        app:icon="@drawable/arrow_forward"
-        app:iconGravity="end"
-        app:iconTint="@color/grey" />
+        app:icon="@drawable/arrow_forward" />
+
 </LinearLayout>
