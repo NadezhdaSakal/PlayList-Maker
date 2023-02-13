@@ -27,8 +27,8 @@
     </com.google.android.material.appbar.MaterialToolbar>
 
     <Switch
-        style="@style/SettingsBtn"
         android:id="@+id/switch_dark_theme"
+        style="@style/SettingsBtn"
         android:text="@string/dark_theme"
         tools:ignore="UseSwitchCompatOrMaterialXml"
         android:thumbTint="@color/settings_switch"

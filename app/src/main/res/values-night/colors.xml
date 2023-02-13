@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="main_background">#1A1B22</color>
+
     <color name="settings_screen_background">#1A1B22</color>
     <color name="settings_text_color">#FFFFFF</color>
     <color name="settings_icon_color">#FFFFFF</color>
