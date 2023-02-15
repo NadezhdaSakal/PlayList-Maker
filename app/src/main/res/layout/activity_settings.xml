@@ -22,6 +22,7 @@
             android:text="@string/settings"
             android:fontFamily="@font/ys_display_medium"
             android:textColor="@color/settings_text_color"
+            android:textFontWeight="500"
             android:textSize="@dimen/text_size_22" />
 
     </com.google.android.material.appbar.MaterialToolbar>

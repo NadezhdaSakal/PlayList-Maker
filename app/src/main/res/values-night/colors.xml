@@ -11,4 +11,5 @@
     <color name="search_form_background_color">#FFFFFF</color>
     <color name="search_form_text_color">#1A1B22</color>
     <color name="search_form_text_hint_color">#1A1B22</color>
+
 </resources>

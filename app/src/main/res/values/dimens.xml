@@ -13,6 +13,7 @@
     <dimen name="text_size_16">16sp</dimen>
     <dimen name="padding_21">21dp</dimen>
     <dimen name="padding_16">16dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
 
 
 
