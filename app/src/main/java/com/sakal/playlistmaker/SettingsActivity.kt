@@ -27,13 +27,15 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.button_support).setOnClickListener() {
-            val intent = Intent(Intent.ACTION_SENDTO)
-            intent.data = Uri.parse("mailto:")
-            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.support_address)))
-            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_message))
-            intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_theme))
-            startActivity(Intent.createChooser(intent, null))
+            Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.support_address)))
+                intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_theme))
+                putExtra(Intent.EXTRA_TEXT, getString(R.string.email_message))
+                startActivity(Intent.createChooser(this, null))
+            }
         }
+
 
         findViewById<Button>(R.id.button_user_agreement).setOnClickListener() {
             val intent = Intent(Intent.ACTION_VIEW)

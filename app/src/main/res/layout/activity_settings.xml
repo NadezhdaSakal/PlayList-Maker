@@ -30,6 +30,8 @@
     <Switch
         android:id="@+id/switch_dark_theme"
         style="@style/SettingsBtn"
+        android:paddingVertical="@dimen/padding_20"
+        android:paddingHorizontal="@dimen/padding_16"
         android:text="@string/dark_theme"
         tools:ignore="UseSwitchCompatOrMaterialXml"
         android:thumbTint="@color/settings_switch"
@@ -38,18 +40,24 @@
     <Button
         android:id="@+id/button_sharing"
         style="@style/SettingsBtn"
+        android:paddingVertical="@dimen/padding_20"
+        android:paddingHorizontal="@dimen/padding_16"
         android:text="@string/share"
         app:icon="@drawable/share" />
 
     <Button
         android:id="@+id/button_support"
         style="@style/SettingsBtn"
+        android:paddingVertical="@dimen/padding_20"
+        android:paddingHorizontal="@dimen/padding_16"
         android:text="@string/support"
         app:icon="@drawable/support" />
 
     <Button
         android:id="@+id/button_user_agreement"
         style="@style/SettingsBtn"
+        android:paddingVertical="@dimen/padding_20"
+        android:paddingHorizontal="@dimen/padding_16"
         android:text="@string/user_agreement"
         app:icon="@drawable/arrow_forward" />
 

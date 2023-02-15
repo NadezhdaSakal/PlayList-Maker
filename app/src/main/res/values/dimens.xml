@@ -11,7 +11,7 @@
     <dimen name="margin_start">17dp</dimen>
     <dimen name="margin_header">40dp</dimen>
     <dimen name="text_size_16">16sp</dimen>
-    <dimen name="padding_21">21dp</dimen>
+    <dimen name="padding_20">20dp</dimen>
     <dimen name="padding_16">16dp</dimen>
     <dimen name="padding_8">8dp</dimen>
 
