@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/Theme.PlaylistMaker"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/settings_screen_background"
+    android:background="?attr/colorSecondary"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -12,7 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_marginBottom="24dp"
         app:navigationIcon="@drawable/arrow_back"
-        app:navigationIconTint="@color/settings_text_color">
+        app:navigationIconTint="@color/toolbar_color">
 
         <TextView
             android:layout_width="wrap_content"
@@ -20,7 +21,7 @@
             android:fontFamily="@font/ys_display_medium"
             android:gravity="center_vertical"
             android:text="@string/search"
-            android:textColor="@color/settings_text_color"
+            android:textColor="@color/toolbar_color"
             android:textFontWeight="500"
             android:textSize="@dimen/text_size_22" />
 
