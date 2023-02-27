@@ -1,69 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:padding="@dimen/padding_8">
+    android:padding="@dimen/padding_8"
+    android:orientation="horizontal"
+    android:theme="@style/Theme.PlaylistMaker">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/trackAva"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        <ImageView
+            android:id="@+id/trackAva"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/margin_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/trackName"
-        android:layout_width="@dimen/layout_width_0"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_16"
-        android:layout_marginTop="@dimen/margin_8"
-        android:ellipsize="end"
-        android:fontFamily="@font/ys_display_regular"
-        android:lines="1"
-        android:textColor="@color/search_result_track_text_color"
-        android:textFontWeight="400"
-        android:textSize="@dimen/text_size_16"
-        app:layout_constraintEnd_toStartOf="@+id/moreImageViewButton"
-        app:layout_constraintStart_toEndOf="@id/trackAva"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/lorem" />
+        <LinearLayout
+            android:id="@+id/texts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/trackAva">
 
-    <TextView
-        android:id="@+id/artistNameTrackTime"
-        android:layout_width="@dimen/layout_width_0"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_16"
-        android:ellipsize="end"
-        android:fontFamily="@font/ys_display_regular"
-        android:lines="1"
-        android:textColor="@color/search_result_artist_text_color"
-        android:textFontWeight="400"
-        android:textSize="@dimen/text_size_12"
-        app:layout_constraintEnd_toStartOf="@+id/moreImageViewButton"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/trackAva"
-        app:layout_constraintTop_toBottomOf="@id/trackName"
-        tools:text="Artist Name  •  00:00" />
+            <TextView
+                android:id="@+id/trackName"
+                style="@style/TextTrackView"
+                android:layout_marginStart="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_8"
+                android:textColor="@color/search_result_track_text_color"
+                android:textSize="@dimen/text_size_16"
+                tools:text="Track Name" />
 
-    <ImageView
-        android:id="@+id/moreImageViewButton"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:src="@drawable/arrow_forward"
-        android:padding="6dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/settings_icon_color" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:layout_marginStart="@dimen/margin_8">
 
+                <TextView
+                    android:id="@+id/artistName"
+                    style="@style/TextTrackView"
+                    tools:text="Artist Name" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/ic_ellipse" />
 
+                <TextView
+                    android:id="@+id/trackTime"
+                    style="@style/TextTrackView"
+                    tools:text="0:00" />
+            </LinearLayout>
 
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/moreImageViewButton"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="@dimen/margin_4"
+            android:padding="6dp"
+            android:src="@drawable/arrow_forward"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
