@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:theme="@style/Theme.PlaylistMaker"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,8 +40,10 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_background"
             android:drawableStart="@drawable/search"
-            android:drawablePadding="@dimen/icon_padding_10"
+            android:drawablePadding="@dimen/padding_10"
             android:drawableTint="@color/search_form_text_hint_color"
+            android:textCursorDrawable="@color/blue"
+            android:cursorVisible="true"
             android:fontFamily="@font/ys_display_regular"
             android:hint="@string/search"
             android:inputType="text"
@@ -64,4 +67,16 @@
             android:src="@drawable/clear"
             app:tint="@color/search_form_text_hint_color" />
     </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        tools:listitem="@layout/item_search_recycler">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>
