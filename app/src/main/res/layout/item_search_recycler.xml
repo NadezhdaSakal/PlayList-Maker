@@ -15,7 +15,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/trackAva"
+            android:id="@+id/trackIcon"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="@dimen/margin_4"
@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/trackAva">
+            app:layout_constraintStart_toEndOf="@id/trackIcon">
 
             <TextView
                 android:id="@+id/trackName"
