@@ -36,11 +36,7 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        initSearchResult()
-
-        findViewById<Toolbar>(R.id.search_toolbar).setNavigationOnClickListener() {
-            finish()
-        }
+        initToolbar()
 
         searchInput = findViewById(R.id.input_search_form)
         searchInput.requestFocus()
@@ -50,6 +46,15 @@ class SearchActivity : AppCompatActivity() {
         searchInputClearButton.visibility = clearButtonVisibility(searchInput.text)
         searchInputClearButton.setOnClickListener {
             clearSearchForm()
+        }
+
+        initSearchResult()
+
+    }
+
+    private fun initToolbar() {
+        findViewById<Toolbar>(R.id.search_toolbar).setNavigationOnClickListener() {
+            finish()
         }
     }
 
@@ -114,7 +119,7 @@ class SearchActivity : AppCompatActivity() {
         ),
         Track(
             "Sweet Child O'Mine",
-            "Guns N' Roses Guns N' RosesGuns N' RosesGuns N' RosesGuns N' RosesGuns N' Roses",
+            " Guns N' Roses",
             "5:03",
             "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/a0/4d/c4/a04dc484-03cc-02aa-fa82-5334fcb4bc16/18UMGIM24878.rgb.jpg/100x100bb.jpg",
         )

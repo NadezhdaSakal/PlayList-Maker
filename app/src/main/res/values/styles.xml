@@ -40,7 +40,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/search_result_artist_text_color</item>
-        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textSize">@dimen/text_size_11</item>
         <item name="android:textFontWeight">400</item>
         <item name="android:fontFamily">@font/ys_text_regular</item>
         <item name="maxLines">1</item>

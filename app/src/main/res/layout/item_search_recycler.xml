@@ -57,7 +57,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="@dimen/margin_4"
                     android:src="@drawable/ic_ellipse" />
 
                 <TextView
@@ -65,7 +65,6 @@
                     style="@style/TextTrackView"
                     tools:text="0:00" />
             </LinearLayout>
-
         </LinearLayout>
 
         <ImageView
@@ -73,7 +72,8 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginEnd="@dimen/margin_4"
-            android:padding="6dp"
+            android:paddingVertical="@dimen/padding_4"
+            android:paddingHorizontal="@dimen/padding_8"
             android:src="@drawable/arrow_forward"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
