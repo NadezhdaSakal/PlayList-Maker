@@ -5,78 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:padding="@dimen/padding_8"
-    android:orientation="horizontal"
-    android:theme="@style/Theme.PlaylistMaker">
+    android:gravity="center_vertical"
+    android:padding="@dimen/padding_8">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/trackIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        tools:src="@tools:sample/avatars"
+        android:layout_marginStart="@dimen/margin_12" />
 
-        <ImageView
-            android:id="@+id/trackIcon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="@dimen/margin_4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.70"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/trackName"
+            style="@style/TextTrackView"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/search_result_track_text_color"
+            android:textSize="@dimen/text_size_16"
+            tools:text="Track Name" />
 
         <LinearLayout
-            android:id="@+id/texts"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/trackIcon">
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/trackName"
+                android:id="@+id/artistName"
                 style="@style/TextTrackView"
-                android:layout_marginStart="@dimen/margin_8"
-                android:layout_marginTop="@dimen/margin_8"
-                android:textColor="@color/search_result_track_text_color"
-                android:textSize="@dimen/text_size_16"
-                tools:text="Track Name" />
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_weight="1"
+                tools:text="Artist Name" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/margin_8"
-                android:layout_marginStart="@dimen/margin_8">
+            <TextView
+                style="@style/TextTrackView"
+                android:layout_weight="0"
+                tools:text="  •  " />
 
-                <TextView
-                    android:id="@+id/artistName"
-                    style="@style/TextTrackView"
-                    tools:text="Artist Name" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_4"
-                    android:src="@drawable/ic_ellipse" />
-
-                <TextView
-                    android:id="@+id/trackTime"
-                    style="@style/TextTrackView"
-                    tools:text="0:00" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/trackTime"
+                style="@style/TextTrackView"
+                android:layout_weight="0"
+                tools:text="00:00" />
         </LinearLayout>
+    </LinearLayout>
 
-        <ImageView
-            android:id="@+id/moreImageViewButton"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginEnd="@dimen/margin_4"
-            android:paddingVertical="@dimen/padding_4"
-            android:paddingHorizontal="@dimen/padding_8"
-            android:src="@drawable/arrow_forward"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginHorizontal="@dimen/margin_12"
+        android:src="@drawable/arrow_forward"
+        app:tint="@color/settings_icon_color" />
+
+
 </LinearLayout>

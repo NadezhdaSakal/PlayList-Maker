@@ -49,7 +49,7 @@
             android:drawableStart="@drawable/search"
             android:drawablePadding="@dimen/padding_8"
             android:drawableTint="@color/search_form_text_hint_color"
-            android:paddingStart="12dp"
+            android:paddingStart="@dimen/padding_12"
             android:paddingEnd="32dp" />
 
         <ImageView
