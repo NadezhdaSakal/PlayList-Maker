@@ -38,6 +38,20 @@ class SearchActivity : AppCompatActivity() {
 
         initToolbar()
 
+        initSearch()
+
+        initRecycler()
+
+    }
+
+    private fun initToolbar() {
+        findViewById<Toolbar>(R.id.search_toolbar).setNavigationOnClickListener() {
+            finish()
+        }
+    }
+
+    private fun initSearch() {
+
         searchInput = findViewById(R.id.input_search_form)
         searchInput.requestFocus()
         searchInput.addTextChangedListener(searchInputTextWatcher)
@@ -48,14 +62,6 @@ class SearchActivity : AppCompatActivity() {
             clearSearchForm()
         }
 
-        initSearchResult()
-
-    }
-
-    private fun initToolbar() {
-        findViewById<Toolbar>(R.id.search_toolbar).setNavigationOnClickListener() {
-            finish()
-        }
     }
 
     private fun clearSearchForm() {
@@ -87,9 +93,9 @@ class SearchActivity : AppCompatActivity() {
         searchInput.setText(searchInputQwery)
     }
 
-    private fun initSearchResult() {
+    private fun initRecycler() {
         val searchResultRv = findViewById<RecyclerView>(R.id.recycler_view)
-        searchResultRv.adapter = SearchRecyclerAdapter(dataBase, this)
+        searchResultRv.adapter = SearchRecyclerAdapter(dataBase)
     }
 
     private val dataBase = arrayListOf(

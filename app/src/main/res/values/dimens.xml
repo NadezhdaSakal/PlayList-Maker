@@ -12,7 +12,10 @@
     <dimen name="padding_8">8dp</dimen>
 
     <dimen name="text_size_11">11sp</dimen>
-    <dimen name="margin_12">12dp</dimen>
     <dimen name="padding_12">12dp</dimen>
     <dimen name="margin_24">24dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="icon_size_48">48dp</dimen>
+    <dimen name="icon_size_24">24dp</dimen>
 </resources>

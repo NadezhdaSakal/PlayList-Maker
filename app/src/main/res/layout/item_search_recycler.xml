@@ -6,27 +6,30 @@
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
     android:gravity="center_vertical"
-    android:padding="@dimen/padding_8">
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/padding_12"
+    android:paddingVertical="@dimen/padding_8"
+    android:theme="@style/Theme.PlaylistMaker">
+
 
     <ImageView
         android:id="@+id/trackIcon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        tools:src="@tools:sample/avatars"
-        android:layout_marginStart="@dimen/margin_12" />
+        android:layout_width="@dimen/icon_size_48"
+        android:layout_height="@dimen/icon_size_48"
+        android:layout_weight="0"
+        tools:src="@tools:sample/avatars" />
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.70"
+        android:layout_marginHorizontal="@dimen/margin_8"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/trackName"
             style="@style/TextTrackView"
-            android:layout_marginStart="@dimen/margin_16"
             android:layout_marginTop="0dp"
-            android:layout_weight="1"
             android:textColor="@color/search_result_track_text_color"
             android:textSize="@dimen/text_size_16"
             tools:text="Track Name" />
@@ -38,29 +41,31 @@
             <TextView
                 android:id="@+id/artistName"
                 style="@style/TextTrackView"
-                android:layout_marginStart="@dimen/margin_16"
                 android:layout_weight="1"
                 tools:text="Artist Name" />
 
-            <TextView
+            <ImageView
                 style="@style/TextTrackView"
-                android:layout_weight="0"
-                tools:text="  •  " />
+                android:paddingHorizontal="@dimen/padding_4"
+                android:paddingVertical="6dp"
+                android:src="@drawable/ellipse" />
 
             <TextView
                 android:id="@+id/trackTime"
                 style="@style/TextTrackView"
-                android:layout_weight="0"
                 tools:text="00:00" />
         </LinearLayout>
     </LinearLayout>
 
     <ImageView
-        android:layout_width="14dp"
-        android:layout_height="14dp"
-        android:layout_marginHorizontal="@dimen/margin_12"
+        android:id="@+id/arrow_right"
+        android:layout_width="@dimen/icon_size_24"
+        android:layout_height="@dimen/icon_size_24"
+        android:layout_marginVertical="10dp"
+        android:layout_weight="0"
+        android:paddingHorizontal="@dimen/padding_8"
+        android:paddingVertical="@dimen/padding_4"
         android:src="@drawable/arrow_forward"
         app:tint="@color/settings_icon_color" />
-
 
 </LinearLayout>
