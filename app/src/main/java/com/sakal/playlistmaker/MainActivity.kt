@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
             navigateTo(SettingsActivity::class.java)
         }
 
-
     }
 
     private fun navigateTo(clazz: Class<out Activity>) {

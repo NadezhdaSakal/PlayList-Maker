@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
 class SettingsActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,15 +38,12 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
-
         findViewById<Button>(R.id.button_user_agreement).setOnClickListener() {
             Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(getString(R.string.support_user_agreement))
                 startActivity(Intent.createChooser(this, null))
             }
         }
-
     }
-
 }
 
