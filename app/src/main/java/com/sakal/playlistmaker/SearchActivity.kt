@@ -29,9 +29,13 @@ class SearchActivity : AppCompatActivity() {
     lateinit var searchClearIcon: ImageView
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     lateinit var searchAdapter: SearchRecyclerAdapter
-    lateinit var placeholderNothingWasFound: LinearLayout
+    lateinit var placeholderNothingWasFound: TextView
     lateinit var placeholderCommunicationsProblem: LinearLayout
-    lateinit var buttonReturn: Button
+    lateinit var buttonRetry: Button
+
+    enum class PlaceHolder {
+        SEARCH_RESULT, NOT_FOUND, ERROR
+    }
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(ApiConstants.BASE_URL)
@@ -46,28 +50,42 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-
         initRecycler(tracks)
 
-        initViews()
-
-        setListeners()
+        retry()
 
         initToolbar()
+
+        initSearch()
 
         inputText()
     }
 
-    private fun initViews() {
+    private fun retry() {
+        buttonRetry = findViewById(R.id.button_retry)
+        buttonRetry.setOnClickListener() {
+            placeholderCommunicationsProblem.visibility = View.INVISIBLE
+            getTrack()
+        }
+    }
+
+    private fun initToolbar() {
+        toolbar = findViewById(R.id.search_toolbar)
+        toolbar.setNavigationOnClickListener() {
+            finish()
+        }
+    }
+
+    private fun initRecycler(tracks: ArrayList<Track>) {
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+        searchAdapter = SearchRecyclerAdapter(tracks)
+        recyclerView.adapter = searchAdapter
+    }
+
+    private fun initSearch() {
         searchClearIcon = findViewById(R.id.clear_form)
         searchEditText = findViewById(R.id.input_search_form)
         searchEditText.setText(textSearch)
-        placeholderNothingWasFound = findViewById(R.id.placeholderNothingWasFound)
-        placeholderCommunicationsProblem = findViewById(R.id.placeholderCommunicationsProblem)
-        buttonReturn = findViewById(R.id.button_return)
-    }
-
-    private fun setListeners() {
 
         searchClearIcon.setOnClickListener {
             val inputMethodManager =
@@ -88,25 +106,6 @@ class SearchActivity : AppCompatActivity() {
             }
             false
         }
-
-        buttonReturn.setOnClickListener() {
-            placeholderCommunicationsProblem.visibility = View.INVISIBLE
-            getTrack()
-        }
-
-    }
-
-    private fun initToolbar() {
-        toolbar = findViewById(R.id.search_toolbar)
-        toolbar.setNavigationOnClickListener() {
-            finish()
-        }
-    }
-
-    fun initRecycler(tracks: ArrayList<Track>) {
-        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        searchAdapter = SearchRecyclerAdapter(tracks)
-        recyclerView.adapter = searchAdapter
     }
 
     private fun inputText() {
@@ -116,7 +115,7 @@ class SearchActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 searchClearIcon.visibility = searchClearIconVisibility(s)
-                textSearch = searchEditText.getText().toString()
+                textSearch = searchEditText.text.toString()
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -159,18 +158,38 @@ class SearchActivity : AppCompatActivity() {
                         tracks.clear()
                         tracks.addAll(response.body()?.results!!)
                         searchAdapter.notifyDataSetChanged()
-                        placeholderNothingWasFound.isVisible = false
-                        placeholderCommunicationsProblem.isVisible = false
+                        showPlaceholder(PlaceHolder.SEARCH_RESULT)
+
                     } else {
-                        placeholderNothingWasFound.isVisible = true
-                        placeholderCommunicationsProblem.isVisible = false
+                        showPlaceholder(PlaceHolder.NOT_FOUND)
                     }
                 }
 
                 override fun onFailure(call: Call<TrackResponse>, t: Throwable) {
-                    placeholderCommunicationsProblem.isVisible = true
-                    placeholderNothingWasFound.isVisible = false
+                    showPlaceholder(PlaceHolder.ERROR)
                 }
             })
     }
+
+    private fun showPlaceholder(placeholder: PlaceHolder) {
+
+        placeholderNothingWasFound = findViewById(R.id.placeholderNothingWasFind)
+        placeholderCommunicationsProblem = findViewById(R.id.placeholderCommunicationsProblem)
+
+        when (placeholder) {
+            PlaceHolder.NOT_FOUND -> {
+                placeholderCommunicationsProblem.visibility = View.GONE
+                placeholderNothingWasFound.visibility = View.VISIBLE
+            }
+            PlaceHolder.ERROR -> {
+                placeholderNothingWasFound.visibility = View.GONE
+                placeholderCommunicationsProblem.visibility = View.VISIBLE
+            }
+            else -> {
+                placeholderNothingWasFound.visibility = View.GONE
+                placeholderCommunicationsProblem.visibility = View.GONE
+            }
+        }
+    }
+
 }

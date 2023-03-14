@@ -16,9 +16,9 @@
     <string name="support_user_agreement">https://yandex.ru/legal/practicum_offer/</string>
 
     <string name="nothing_found">Ничего не нашлось</string>
-    <string name="communications_problem1">Проблемы со связью</string>
-    <string name="communications_problem2">Загрузка не удалась. Проверьте подключение к интернету</string>
-    <string name="refresh_button">Обновить</string>
+    <string name="connection_problem">Проблемы со связью</string>
+    <string name="check_internet_connection">Загрузка не удалась. Проверьте подключение к интернету</string>
+    <string name="retry_button">Обновить</string>
 
 
 
