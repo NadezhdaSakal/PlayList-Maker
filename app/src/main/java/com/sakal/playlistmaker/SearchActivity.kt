@@ -69,7 +69,6 @@ class SearchActivity : AppCompatActivity() {
     private fun retry() {
         buttonRetry = findViewById(R.id.button_retry)
         buttonRetry.setOnClickListener() {
-            showPlaceholder(PlaceHolder.ERROR)
             getTrack()
         }
     }
