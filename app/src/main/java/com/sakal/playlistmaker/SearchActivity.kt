@@ -69,7 +69,7 @@ class SearchActivity : AppCompatActivity() {
     private fun retry() {
         buttonRetry = findViewById(R.id.button_retry)
         buttonRetry.setOnClickListener() {
-            placeholderCommunicationsProblem.visibility = View.INVISIBLE
+            showPlaceholder(PlaceHolder.ERROR)
             getTrack()
         }
     }
@@ -91,6 +91,8 @@ class SearchActivity : AppCompatActivity() {
         searchClearIcon = findViewById(R.id.clear_form)
         searchEditText = findViewById(R.id.input_search_form)
         searchEditText.setText(textSearch)
+        searchEditText.requestFocus()
+
 
         searchClearIcon.setOnClickListener {
             val inputMethodManager =
