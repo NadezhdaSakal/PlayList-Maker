@@ -92,7 +92,6 @@ class SearchActivity : AppCompatActivity() {
         searchEditText.setText(textSearch)
         searchEditText.requestFocus()
 
-
         searchClearIcon.setOnClickListener {
             val inputMethodManager =
                 getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
