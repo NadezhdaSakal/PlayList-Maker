@@ -34,9 +34,9 @@ class SearchActivity : AppCompatActivity() {
     lateinit var searchClearIcon: ImageView
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     lateinit var searchAdapter: SearchRecyclerAdapter
-    lateinit var placeholderNothingWasFound: TextView
-    lateinit var placeholderCommunicationsProblem: LinearLayout
-    lateinit var buttonRetry: Button
+    private lateinit var placeholderNothingWasFound: TextView
+    private lateinit var placeholderCommunicationsProblem: LinearLayout
+    private lateinit var buttonRetry: Button
 
     enum class PlaceHolder {
         SEARCH_RESULT, NOT_FOUND, ERROR
@@ -68,14 +68,14 @@ class SearchActivity : AppCompatActivity() {
 
     private fun retry() {
         buttonRetry = findViewById(R.id.button_retry)
-        buttonRetry.setOnClickListener() {
+        buttonRetry.setOnClickListener {
             getTrack()
         }
     }
 
     private fun initToolbar() {
         toolbar = findViewById(R.id.search_toolbar)
-        toolbar.setNavigationOnClickListener() {
+        toolbar.setNavigationOnClickListener {
             finish()
         }
     }
