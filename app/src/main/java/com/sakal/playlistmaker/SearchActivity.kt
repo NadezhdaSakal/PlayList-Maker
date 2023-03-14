@@ -24,6 +24,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchActivity : AppCompatActivity() {
+
+    companion object {
+        const val TEXT_SEARCH = "TEXT_SEARCH"
+    }
+
     var textSearch = ""
     lateinit var searchEditText: EditText
     lateinit var searchClearIcon: ImageView
@@ -141,10 +146,6 @@ class SearchActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         textSearch = savedInstanceState.getString(TEXT_SEARCH).toString()
         searchEditText.setText(textSearch)
-    }
-
-    companion object {
-        const val TEXT_SEARCH = "TEXT_SEARCH"
     }
 
     private fun getTrack() {
