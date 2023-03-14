@@ -7,7 +7,9 @@ import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.model.Track
 import com.sakal.playlistmaker.viewHolders.SearchViewHolder
 
-class SearchRecyclerAdapter(private val items: ArrayList<Track>) : RecyclerView.Adapter<SearchViewHolder>() {
+class SearchRecyclerAdapter( private val searchResults: List<Track>) :
+    RecyclerView.Adapter<SearchViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -15,9 +17,14 @@ class SearchRecyclerAdapter(private val items: ArrayList<Track>) : RecyclerView.
         return SearchViewHolder(view)
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount() = searchResults.size
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(searchResults[position])
+
     }
+
+
+
 }
+

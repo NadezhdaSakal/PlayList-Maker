@@ -7,6 +7,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.model.Track
 import com.sakal.playlistmaker.databinding.ItemSearchRecyclerBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class SearchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
@@ -16,7 +18,7 @@ class SearchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
     fun bind(track: Track) = with(binding) {
         trackName.text = track.trackName
         artistName.text = track.artistName
-        trackTime.text = track.trackTime
+        trackTime.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis.toInt())
 
         Glide.with(itemView)
             .load(track.artworkUrl100)
