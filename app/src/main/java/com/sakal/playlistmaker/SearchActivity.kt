@@ -37,6 +37,8 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var placeholderNothingWasFound: TextView
     private lateinit var placeholderCommunicationsProblem: LinearLayout
     private lateinit var buttonRetry: Button
+    private lateinit var recyclerView: RecyclerView
+
 
     enum class PlaceHolder {
         SEARCH_RESULT, NOT_FOUND, ERROR
@@ -48,7 +50,6 @@ class SearchActivity : AppCompatActivity() {
         .build()
 
     private val serviceSearch = retrofit.create(iTunesSearchAPI::class.java)
-
     private val tracks = ArrayList<Track>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,7 +82,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun initRecycler(tracks: ArrayList<Track>) {
-        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+        recyclerView = findViewById(R.id.recycler_view)
         searchAdapter = SearchRecyclerAdapter(tracks)
         recyclerView.adapter = searchAdapter
     }
@@ -179,14 +180,17 @@ class SearchActivity : AppCompatActivity() {
 
         when (placeholder) {
             PlaceHolder.NOT_FOUND -> {
+                recyclerView.visibility = View.GONE
                 placeholderCommunicationsProblem.visibility = View.GONE
                 placeholderNothingWasFound.visibility = View.VISIBLE
             }
             PlaceHolder.ERROR -> {
+                recyclerView.visibility = View.GONE
                 placeholderNothingWasFound.visibility = View.GONE
                 placeholderCommunicationsProblem.visibility = View.VISIBLE
             }
             else -> {
+                recyclerView.visibility = View.VISIBLE
                 placeholderNothingWasFound.visibility = View.GONE
                 placeholderCommunicationsProblem.visibility = View.GONE
             }
