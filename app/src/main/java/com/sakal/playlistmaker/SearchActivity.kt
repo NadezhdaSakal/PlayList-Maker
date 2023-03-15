@@ -175,7 +175,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun showPlaceholder(placeholder: PlaceHolder) {
 
-        placeholderNothingWasFound = findViewById(R.id.placeholderNothingWasFind)
+        placeholderNothingWasFound = findViewById(R.id.placeholderNothingWasFound)
         placeholderCommunicationsProblem = findViewById(R.id.placeholderCommunicationsProblem)
 
         when (placeholder) {

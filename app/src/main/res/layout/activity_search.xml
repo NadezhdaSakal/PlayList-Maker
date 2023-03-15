@@ -81,7 +81,7 @@
             tools:listitem="@layout/item_search_recycler" />
 
         <TextView
-            android:id="@+id/placeholderNothingWasFind"
+            android:id="@+id/placeholderNothingWasFound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
