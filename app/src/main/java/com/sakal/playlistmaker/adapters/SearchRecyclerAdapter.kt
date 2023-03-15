@@ -7,7 +7,7 @@ import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.model.Track
 import com.sakal.playlistmaker.viewHolders.SearchViewHolder
 
-class SearchRecyclerAdapter(private var searchResults: List<Track>) :
+class SearchRecyclerAdapter(private val searchResults: List<Track>) :
     RecyclerView.Adapter<SearchViewHolder>() {
 
 
