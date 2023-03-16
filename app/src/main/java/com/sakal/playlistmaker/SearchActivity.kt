@@ -39,10 +39,6 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var buttonRetry: Button
     private lateinit var recyclerView: RecyclerView
 
-    enum class PlaceHolder {
-        SEARCH_RESULT, NOT_FOUND, ERROR
-    }
-
     private val retrofit = Retrofit.Builder()
         .baseUrl(ApiConstants.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
