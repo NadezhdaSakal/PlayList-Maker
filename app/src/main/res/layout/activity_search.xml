@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:theme="@style/Theme.PlaylistMaker"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSecondary"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:theme="@style/Theme.PlaylistMaker">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/search_toolbar"
@@ -37,20 +37,22 @@
         <EditText
             android:id="@+id/input_search_form"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/search"
-            android:inputType="text"
-            android:textColor="@color/search_form_text_color"
-            android:textColorHint="@color/search_form_text_hint_color"
-            android:lines="1"
-            android:maxLength="255"
-            android:padding="@dimen/padding_8"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
             android:background="@drawable/edittext_background"
             android:drawableStart="@drawable/search"
             android:drawablePadding="@dimen/padding_8"
             android:drawableTint="@color/search_form_text_hint_color"
+            android:hint="@string/search"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLength="255"
+            android:padding="@dimen/padding_8"
             android:paddingStart="@dimen/padding_12"
-            android:paddingEnd="32dp" />
+            android:paddingEnd="32dp"
+            android:singleLine="true"
+            android:textColor="@color/search_form_text_color"
+            android:textColorHint="@color/search_form_text_hint_color" />
 
         <ImageView
             android:id="@+id/clear_form"
@@ -58,19 +60,71 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginStart="@dimen/margin_16"
-            android:padding="14dp"
+            android:padding="@dimen/padding_18"
             android:src="@drawable/clear"
+            android:visibility="visible"
             app:tint="@color/search_form_text_hint_color" />
     </FrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_24"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
-        tools:listitem="@layout/item_search_recycler">
+        android:layout_height="match_parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_24"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_search_recycler" />
+
+        <TextView
+            android:id="@+id/placeholderNothingWasFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawablePadding="20dp"
+            android:text="@string/nothing_found"
+            android:textAlignment="center"
+            android:textColor="@color/text_color_primary"
+            android:textSize="19sp"
+            android:visibility="gone"
+            app:drawableTopCompat="@drawable/nothingfound" />
+
+
+        <LinearLayout
+            android:id="@+id/placeholderCommunicationsProblem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/margin_24"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/connection_problem"
+                android:src="@drawable/nointernet" />
+
+            <TextView
+                style="@style/ErrorTextPlaceholder"
+                android:text="@string/connection_problem" />
+
+            <TextView
+                style="@style/ErrorTextPlaceholder"
+                android:text="@string/check_internet_connection" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_retry"
+                style="@style/ErrorButtonPlaceholder"
+                android:text="@string/retry_button"
+                app:cornerRadius="54dp" />
+        </LinearLayout>
+
+    </FrameLayout>
+
 </LinearLayout>
