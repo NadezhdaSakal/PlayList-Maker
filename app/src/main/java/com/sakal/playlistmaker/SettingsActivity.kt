@@ -1,5 +1,6 @@
 package com.sakal.playlistmaker
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var themeSwitcher: Switch
     private lateinit var buttonSharing: Button
     private lateinit var buttonSupport: Button
