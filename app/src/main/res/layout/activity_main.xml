@@ -15,7 +15,7 @@
         android:text="@string/playlist_maker"
         android:fontFamily="@font/ys_display_medium"
         android:textFontWeight="500"
-        android:textColor="?attr/colorOnPrimary"
+        android:textColor="@color/white"
         android:textSize="@dimen/text_size_22" />
 
     <LinearLayout
