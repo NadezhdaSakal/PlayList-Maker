@@ -29,6 +29,7 @@
     </com.google.android.material.appbar.MaterialToolbar>
 
     <Switch
+        android:id="@+id/themeSwitcher"
         style="@style/SettingsBtn"
         android:paddingVertical="@dimen/padding_20"
         android:paddingHorizontal="@dimen/padding_16"
