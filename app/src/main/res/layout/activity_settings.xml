@@ -32,10 +32,10 @@
         style="@style/SettingsBtn"
         android:paddingVertical="@dimen/padding_20"
         android:paddingHorizontal="@dimen/padding_16"
-        android:text="@string/dark_theme"
         tools:ignore="UseSwitchCompatOrMaterialXml"
         android:thumbTint="@color/settings_switch"
-        android:trackTint="@color/settings_switch" />
+        android:trackTint="@color/settings_switch"
+        android:text="@string/dark_theme" />
 
     <Button
         android:id="@+id/button_sharing"

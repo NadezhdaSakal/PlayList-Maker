@@ -43,6 +43,10 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun initSwitch() {
         themeSwitcher = findViewById(R.id.themeSwitcher)
+
+        themeSwitcher.isChecked = getSharedPreferences(Constants.PLAYLIST_MAKER_PREFS, MODE_PRIVATE)
+            .getBoolean(Constants.DARK_THEME_KEY, false)
+
         themeSwitcher.setOnCheckedChangeListener { switcher, checked ->
             (applicationContext as App).switchTheme(checked)
             (applicationContext as App).saveTheme(checked)
