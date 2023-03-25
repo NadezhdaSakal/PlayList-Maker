@@ -9,13 +9,14 @@ import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 
 class SettingsActivity : AppCompatActivity() {
-
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var themeSwitcher: Switch
     private lateinit var buttonSharing: Button
     private lateinit var buttonSupport: Button
     private lateinit var buttonUserAgreement: Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
