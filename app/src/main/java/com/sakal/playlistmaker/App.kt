@@ -2,7 +2,6 @@ package com.sakal.playlistmaker
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 
@@ -12,22 +11,8 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        val preferences: SharedPreferences =
-            getSharedPreferences(Constants.PLAYLIST_MAKER_PREFS, MODE_PRIVATE)
-        darkTheme = preferences.getBoolean(Constants.DARK_THEME_KEY, false)
-        switchTheme(darkTheme)
-    }
-
-    fun switchTheme(darkThemeEnabled: Boolean) {
-        if (darkTheme != darkThemeEnabled) {
-            darkTheme = darkThemeEnabled
-            val sharedPrefs: SharedPreferences =
-                getSharedPreferences(Constants.PLAYLIST_MAKER_PREFS, MODE_PRIVATE)
-            sharedPrefs.edit()
-                .putBoolean(Constants.DARK_THEME_KEY, darkTheme)
-                .apply()
-        }
+        val sharedPrefs = getSharedPreferences(Constants.PLAYLIST_MAKER_PREFS, MODE_PRIVATE)
+        darkTheme = sharedPrefs.getBoolean(Constants.DARK_THEME_KEY, false)
 
         AppCompatDelegate.setDefaultNightMode(
             if (darkTheme || isDarkMode(applicationContext as App)) {
@@ -39,15 +24,24 @@ class App : Application() {
     }
 
     private fun isDarkMode(context: Context): Boolean {
-        val darkModeFlag =
-            context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        val darkModeFlag = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         return darkModeFlag == Configuration.UI_MODE_NIGHT_YES
     }
 
-    fun saveTheme(darkThemeEnabled: Boolean) {
+    fun switchTheme(darkThemeEnabled: Boolean) {
+        darkTheme = darkThemeEnabled
+        AppCompatDelegate.setDefaultNightMode(
+            if (darkThemeEnabled) {
+                AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                AppCompatDelegate.MODE_NIGHT_NO
+            }
+        )
+    }
+
+    fun saveTheme(darkThemeEnabled: Boolean){
         getSharedPreferences(Constants.PLAYLIST_MAKER_PREFS, MODE_PRIVATE).edit()
             .putBoolean(Constants.DARK_THEME_KEY, darkThemeEnabled)
             .apply()
     }
 }
-
