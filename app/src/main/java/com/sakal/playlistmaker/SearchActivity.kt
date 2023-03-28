@@ -1,7 +1,9 @@
 package com.sakal.playlistmaker
 
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -12,7 +14,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.sakal.playlistmaker.adapters.SearchRecyclerAdapter
+import com.sakal.playlistmaker.adapters.SearchHistoryAdapter
+import com.sakal.playlistmaker.adapters.TrackRecyclerAdapter
 import com.sakal.playlistmaker.model.ApiConstants
 import com.sakal.playlistmaker.model.Track
 import com.sakal.playlistmaker.model.TrackResponse
@@ -29,15 +32,22 @@ class SearchActivity : AppCompatActivity() {
         const val TEXT_SEARCH = "TEXT_SEARCH"
     }
 
-    var textSearch = ""
     lateinit var searchEditText: EditText
     lateinit var searchClearIcon: ImageView
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
-    lateinit var searchAdapter: SearchRecyclerAdapter
+    lateinit var searchAdapter: TrackRecyclerAdapter
+    lateinit var searchHistoryAdapter: SearchHistoryAdapter
     private lateinit var placeholderNothingWasFound: TextView
     private lateinit var placeholderCommunicationsProblem: LinearLayout
     private lateinit var buttonRetry: Button
     private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerHistory: RecyclerView
+    private lateinit var historyList: LinearLayout
+    private lateinit var buttonClear: Button
+    private lateinit var searchHistory: SearchHistory
+    private lateinit var prefs: SharedPreferences
+
+    var textSearch = ""
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(ApiConstants.BASE_URL)
@@ -46,12 +56,20 @@ class SearchActivity : AppCompatActivity() {
 
     private val serviceSearch = retrofit.create(iTunesSearchAPI::class.java)
     private val tracks = ArrayList<Track>()
+    private var historyTracks = ArrayList<Track>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        initHistory()
+
         initRecycler(tracks)
+
+        initSearchHistoryRecycler(historyTracks)
+
+        visibleHistoryTrack()
 
         retry()
 
@@ -76,10 +94,44 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+    private fun initHistory() {
+        historyList = findViewById(R.id.history_list)
+        buttonClear = findViewById(R.id.button_clear_history)
+        prefs = getSharedPreferences(Constants.HISTORY_TRACKS_SHARED_PREF, MODE_PRIVATE)
+        searchHistory = SearchHistory(prefs)
+        historyTracks = searchHistory.tracksHistoryFromJson() as ArrayList<Track>
+
+        buttonClear.setOnClickListener {
+            searchHistory.clearHistory()
+            historyTracks = searchHistory.tracksHistoryFromJson() as ArrayList<Track>
+            searchHistoryAdapter.tracksHistory.clear()
+            searchHistoryAdapter.notifyDataSetChanged()
+            historyList.visibility = View.GONE
+        }
+    }
+
+    private fun initSearchHistoryRecycler(historyTracks: ArrayList<Track>) {
+        recyclerHistory = findViewById(R.id.recyclerViewHistory)
+        searchHistoryAdapter = SearchHistoryAdapter(historyTracks)
+        recyclerHistory.adapter = searchHistoryAdapter
+    }
+
+    private fun visibleHistoryTrack() {
+        if (historyTracks.isNotEmpty()) historyList.visibility = View.VISIBLE
+        else historyList.visibility = View.GONE
+    }
+
+
     private fun initRecycler(tracks: ArrayList<Track>) {
         recyclerView = findViewById(R.id.recycler_view)
-        searchAdapter = SearchRecyclerAdapter(tracks)
+        searchAdapter = TrackRecyclerAdapter(tracks)
         recyclerView.adapter = searchAdapter
+
+        searchAdapter.itemClickListener = { position, track ->
+            searchHistory.addTrack(track, position)
+            historyTracks = searchHistory.tracksHistoryFromJson() as ArrayList<Track>
+            historyTracks.addAll(historyTracks)
+        }
     }
 
     private fun initSearch() {
@@ -98,6 +150,11 @@ class SearchActivity : AppCompatActivity() {
             placeholderNothingWasFound.isVisible = false
             tracks.clear()
             searchAdapter.notifyDataSetChanged()
+
+            historyList.visibility = View.VISIBLE
+            historyTracks = searchHistory.tracksHistoryFromJson() as ArrayList<Track>
+            searchHistoryAdapter.tracksHistory = historyTracks
+            searchHistoryAdapter.notifyDataSetChanged()
         }
 
         searchEditText.setOnEditorActionListener { _, actionId, _ ->
@@ -147,6 +204,7 @@ class SearchActivity : AppCompatActivity() {
     private fun getTrack() {
         serviceSearch.searchTrack(searchEditText.text.toString())
             .enqueue(object : Callback<TrackResponse> {
+                @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
                     call: Call<TrackResponse>,
                     response: Response<TrackResponse>,

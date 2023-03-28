@@ -71,10 +71,12 @@
         <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textColor">@color/button_text_color</item>
         <item name="android:textAlignment">center</item>
+        <item name="android:letterSpacing">0</item>
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:padding">15dp</item>
         <item name="android:backgroundTint">@color/button_background_color</item>
         <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">54dp</item>
     </style>
 
 

@@ -5,14 +5,15 @@ import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 
+
 class App : Application() {
 
-    var darkTheme = false
+    private var darkTheme = false
 
     override fun onCreate() {
         super.onCreate()
-        val sharedPrefs = getSharedPreferences(Constants.PLAYLIST_MAKER_PREFS, MODE_PRIVATE)
-        darkTheme = sharedPrefs.getBoolean(Constants.DARK_THEME_KEY, false)
+        val preferences = getSharedPreferences(Constants.PLAYLIST_MAKER_PREFS, MODE_PRIVATE)
+        darkTheme = preferences.getBoolean(Constants.DARK_THEME_KEY, false)
 
         AppCompatDelegate.setDefaultNightMode(
             if (darkTheme || isDarkMode(applicationContext as App)) {
@@ -24,8 +25,7 @@ class App : Application() {
     }
 
     private fun isDarkMode(context: Context): Boolean {
-        val darkModeFlag =
-            context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        val darkModeFlag = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         return darkModeFlag == Configuration.UI_MODE_NIGHT_YES
     }
 
@@ -40,7 +40,7 @@ class App : Application() {
         )
     }
 
-    fun saveTheme(darkThemeEnabled: Boolean) {
+    fun saveTheme(darkThemeEnabled: Boolean){
         getSharedPreferences(Constants.PLAYLIST_MAKER_PREFS, MODE_PRIVATE)
             .edit()
             .putBoolean(Constants.DARK_THEME_KEY, darkThemeEnabled)
