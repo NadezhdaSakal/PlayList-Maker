@@ -36,7 +36,7 @@ class SearchActivity : AppCompatActivity() {
     lateinit var searchClearIcon: ImageView
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     lateinit var searchAdapter: TrackRecyclerAdapter
-    lateinit var searchHistoryAdapter: SearchHistoryAdapter
+    private lateinit var searchHistoryAdapter: SearchHistoryAdapter
     private lateinit var placeholderNothingWasFound: TextView
     private lateinit var placeholderCommunicationsProblem: LinearLayout
     private lateinit var buttonRetry: Button
@@ -94,6 +94,7 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initHistory() {
         historyList = findViewById(R.id.history_list)
         buttonClear = findViewById(R.id.button_clear_history)
@@ -132,8 +133,10 @@ class SearchActivity : AppCompatActivity() {
             historyTracks = searchHistory.tracksHistoryFromJson() as ArrayList<Track>
             historyTracks.addAll(historyTracks)
         }
+
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initSearch() {
         searchClearIcon = findViewById(R.id.clear_form)
         searchEditText = findViewById(R.id.input_search_form)
@@ -174,6 +177,10 @@ class SearchActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 searchClearIcon.visibility = searchClearIconVisibility(s)
                 textSearch = searchEditText.text.toString()
+
+                historyList.visibility = if (searchEditText.hasFocus() && s?.isEmpty() == true) View.VISIBLE
+                else View.GONE
+
             }
 
             override fun afterTextChanged(s: Editable?) {
