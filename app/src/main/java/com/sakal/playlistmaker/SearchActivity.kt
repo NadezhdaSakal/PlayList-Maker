@@ -74,7 +74,6 @@ class SearchActivity : AppCompatActivity() {
         initSearchResults()
 
         initHistory()
-
     }
 
     private fun initToolbar() {
@@ -86,7 +85,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun initSearch() {
         buttonRetry = findViewById(R.id.button_retry)
-        buttonClearSearch = findViewById(R.id.clear_button)
+        buttonClearSearch = findViewById(R.id.button_clear_search_form)
         searchEditText = findViewById(R.id.input_search_form)
         searchEditText.setText(textSearch)
         searchEditText.requestFocus()

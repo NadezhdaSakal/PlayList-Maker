@@ -54,7 +54,7 @@
             android:textColorHint="@color/search_form_text_hint_color" />
 
         <ImageView
-            android:id="@+id/clear_button"
+            android:id="@+id/button_clear_search_form"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
