@@ -13,19 +13,19 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         val sharedPrefs = getSharedPreferences(Constants.PLAYLIST_MAKER_PREFS, MODE_PRIVATE)
-        darkTheme = sharedPrefs.getBoolean(Constants.DARK_THEME_KEY, isDarkMode(this))
+        darkTheme = sharedPrefs.getBoolean(Constants.DARK_THEME_KEY, isDarkTheme(this))
         switchTheme(darkTheme)
     }
 
-    private fun isDarkMode(context: Context): Boolean {
-        val darkMode: Boolean
+    private fun isDarkTheme(context: Context): Boolean {
+        val isDarkMode: Boolean
         val currentNightMode =
             context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        darkMode = when ((currentNightMode)) {
+        isDarkMode = when ((currentNightMode)) {
             Configuration.UI_MODE_NIGHT_YES -> true
             else -> false
         }
-        return darkMode
+        return isDarkMode
     }
 
     fun switchTheme(darkThemeEnabled: Boolean) {

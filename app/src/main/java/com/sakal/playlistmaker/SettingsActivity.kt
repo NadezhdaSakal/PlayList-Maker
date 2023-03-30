@@ -17,7 +17,6 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var buttonSupport: Button
     private lateinit var buttonUserAgreement: Button
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
