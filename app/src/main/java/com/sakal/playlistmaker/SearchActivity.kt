@@ -65,15 +65,16 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        initToolbar()
+
         initSearch()
+
+        inputText()
 
         initSearchResults()
 
         initHistory()
 
-        initToolbar()
-
-        inputText()
     }
 
     private fun initToolbar() {
@@ -146,8 +147,8 @@ class SearchActivity : AppCompatActivity() {
         }
         val view = this.currentFocus
         if (view != null) {
-            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
+            val input = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            input.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 
@@ -224,7 +225,6 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun showContent(content: Content) {
-
         placeholderNothingWasFound = findViewById(R.id.placeholderNothingWasFound)
         placeholderCommunicationsProblem = findViewById(R.id.placeholderCommunicationsProblem)
 
@@ -232,8 +232,9 @@ class SearchActivity : AppCompatActivity() {
             Content.NOT_FOUND -> {
                 recyclerView.visibility = View.GONE
                 historyList.visibility = View.GONE
-                placeholderCommunicationsProblem.visibility = View.GONE
                 placeholderNothingWasFound.visibility = View.VISIBLE
+                placeholderCommunicationsProblem.visibility = View.GONE
+
             }
             Content.ERROR -> {
                 recyclerView.visibility = View.GONE
