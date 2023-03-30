@@ -13,7 +13,7 @@ class SearchHistory(private val preferences: SharedPreferences) {
         val history = get()
         history.remove(track)
         history.add(0, track)
-        if (history.size > 10) history.removeLast()
+        if (history.size > Constants.HISTORY_LIST_SIZE) history.removeLast()
         save(history)
     }
 

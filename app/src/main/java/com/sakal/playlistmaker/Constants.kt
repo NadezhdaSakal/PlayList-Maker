@@ -10,4 +10,6 @@ object Constants {
     const val CALL_TIMEOUT = 30
     const val READ_TIMEOUT = 30
 
+    const val HISTORY_LIST_SIZE = 10
+
 }
