@@ -29,7 +29,7 @@ class TrackRecyclerAdapter(private val clickListener: TrackClickListener) : Recy
 
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
         holder.bind(tracks[position])
-        holder.itemView.setOnClickListener { clickListener.onTrackClick(tracks.get(position)) }
+        holder.itemView.setOnClickListener { clickListener.onTrackClick(tracks[position]) }
     }
 
     fun interface TrackClickListener {

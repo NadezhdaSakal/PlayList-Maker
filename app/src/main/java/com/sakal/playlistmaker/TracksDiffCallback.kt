@@ -7,6 +7,7 @@ class TracksDiffCallback(
     private val trackList: ArrayList<Track>,
     private val newTrackList: ArrayList<Track>
 ) : DiffUtil.Callback() {
+
     override fun getOldListSize(): Int {
         return trackList.size
     }
@@ -15,17 +16,15 @@ class TracksDiffCallback(
         return newTrackList.size
     }
 
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldTrack = trackList[oldItemPosition]
+    override fun areItemsTheSame(itemPosition: Int, newItemPosition: Int): Boolean {
+        val track = trackList[itemPosition]
         val newTrack = newTrackList[newItemPosition]
-        return oldTrack.trackId == newTrack.trackId
+        return track.trackId == newTrack.trackId
     }
 
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldTrack = trackList[oldItemPosition]
+    override fun areContentsTheSame(itemPosition: Int, newItemPosition: Int): Boolean {
+        val track = trackList[itemPosition]
         val newTrack = newTrackList[newItemPosition]
-        return oldTrack == newTrack
+        return track == newTrack
     }
-
-
 }

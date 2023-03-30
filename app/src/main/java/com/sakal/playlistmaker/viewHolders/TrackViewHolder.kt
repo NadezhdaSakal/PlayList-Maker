@@ -14,24 +14,24 @@ import java.util.*
 
 class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val trackName: TextView = itemView.findViewById(R.id.trackName)
-        private val artistName: TextView = itemView.findViewById(R.id.artistName)
-        private val trackTime: TextView = itemView.findViewById(R.id.trackTime)
-        private val trackIcon: ImageView = itemView.findViewById(R.id.trackIcon)
+    private val trackName: TextView = itemView.findViewById(R.id.trackName)
+    private val artistName: TextView = itemView.findViewById(R.id.artistName)
+    private val trackTime: TextView = itemView.findViewById(R.id.trackTime)
+    private val trackIcon: ImageView = itemView.findViewById(R.id.trackIcon)
 
-        fun bind(track: Track) {
-            trackName.text = track.trackName
-            artistName.text = track.artistName
-            trackTime.text =
-                SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis.toInt())
+    fun bind(track: Track) {
+        trackName.text = track.trackName
+        artistName.text = track.artistName
+        trackTime.text =
+            SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis.toInt())
 
-            Glide.with(itemView)
-                .load(track.artworkUrl100)
-                .centerCrop()
-                .placeholder(R.drawable.track_icon)
-                .transform(RoundedCorners(2))
-                .into(trackIcon)
+        Glide.with(itemView)
+            .load(track.artworkUrl100)
+            .centerCrop()
+            .placeholder(R.drawable.track_icon)
+            .transform(RoundedCorners(2))
+            .into(trackIcon)
 
-        }
     }
+}
 
