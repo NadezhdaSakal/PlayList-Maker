@@ -19,11 +19,14 @@ import com.sakal.playlistmaker.adapters.TrackRecyclerAdapter
 import com.sakal.playlistmaker.model.ApiConstants
 import com.sakal.playlistmaker.model.TrackResponse
 import com.sakal.playlistmaker.model.iTunesSearchAPI
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class SearchActivity : AppCompatActivity() {
 
@@ -46,9 +49,20 @@ class SearchActivity : AppCompatActivity() {
 
     private var textSearch = ""
 
+    private val okHttpClient = OkHttpClient.Builder()
+        .callTimeout(Constants.CALL_TIMEOUT.toLong(), TimeUnit.SECONDS)
+        .readTimeout(Constants.READ_TIMEOUT.toLong(), TimeUnit.SECONDS)
+        .addInterceptor(HttpLoggingInterceptor().apply {
+            if (BuildConfig.DEBUG) {
+                level = HttpLoggingInterceptor.Level.BASIC
+            }
+        })
+        .build()
+
     private val retrofit = Retrofit.Builder()
         .baseUrl(ApiConstants.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpClient)
         .build()
 
     private val serviceSearch = retrofit.create(iTunesSearchAPI::class.java)
