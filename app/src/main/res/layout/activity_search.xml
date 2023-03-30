@@ -136,6 +136,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/ys_display_medium"
+                android:textFontWeight="500"
                 android:gravity="center"
                 android:text="@string/search_history"
                 android:textColor="?attr/colorOnSecondary"
@@ -152,7 +153,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_clear_history"
                 style="@style/ErrorButtonPlaceholder"
-                android:layout_margin="24dp"
+                android:layout_margin="@dimen/margin_24"
                 android:inputType="textCapSentences"
                 android:text="@string/clear_history" />
         </LinearLayout>

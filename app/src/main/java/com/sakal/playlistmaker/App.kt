@@ -15,13 +15,12 @@ class App : Application() {
         val preferences = getSharedPreferences(Constants.PLAYLIST_MAKER_PREFS, MODE_PRIVATE)
         darkTheme = preferences.getBoolean(Constants.DARK_THEME_KEY, isDarkMode(this))
         switchTheme(darkTheme)
-
-
     }
 
     private fun isDarkMode(context: Context): Boolean {
         val darkMode: Boolean
-         val currentNightMode = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        val currentNightMode =
+            context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         darkMode = when ((currentNightMode)) {
             Configuration.UI_MODE_NIGHT_YES -> true
             else -> false
@@ -40,7 +39,7 @@ class App : Application() {
         )
     }
 
-    fun saveTheme(darkThemeEnabled: Boolean){
+    fun saveTheme(darkThemeEnabled: Boolean) {
         getSharedPreferences(Constants.PLAYLIST_MAKER_PREFS, MODE_PRIVATE)
             .edit()
             .putBoolean(Constants.DARK_THEME_KEY, darkThemeEnabled)
