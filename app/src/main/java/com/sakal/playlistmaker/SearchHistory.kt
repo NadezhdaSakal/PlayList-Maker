@@ -1,6 +1,7 @@
 package com.sakal.playlistmaker
 
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.sakal.playlistmaker.model.Track
@@ -8,13 +9,12 @@ import com.sakal.playlistmaker.model.Track
 
 class SearchHistory(private val preferences: SharedPreferences) {
 
-
     fun add(track: Track) {
-        val tracksHistory = get()
-        tracksHistory.remove(track)
-        tracksHistory.add(0, track)
-        if (tracksHistory.size > 10) tracksHistory.removeLast()
-        save(tracksHistory)
+        val history = get()
+        history.remove(track)
+        history.add(0, track)
+        if (history.size > 10) history.removeLast()
+        save(history)
     }
 
     fun get(): ArrayList<Track> {
@@ -23,14 +23,11 @@ class SearchHistory(private val preferences: SharedPreferences) {
     }
 
     fun clear() {
-        val tracksHistory = ArrayList<Track>()
-        save(tracksHistory)
+        preferences.edit { remove(Constants.HISTORY_TRACKS) }
     }
 
-    private fun save(tracksHistory: MutableList<Track>) {
-        val json = Gson().toJson(tracksHistory)
-        preferences.edit()
-            .putString(Constants.HISTORY_TRACKS, json)
-            .apply()
+    private fun save(history: MutableList<Track>) {
+        val json = Gson().toJson(history)
+        preferences.edit { putString(Constants.HISTORY_TRACKS, json) }
     }
 }
