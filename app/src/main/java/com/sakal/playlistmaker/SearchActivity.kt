@@ -71,7 +71,6 @@ class SearchActivity : AppCompatActivity() {
 
         initHistory()
 
-
         initToolbar()
 
         inputText()
@@ -86,7 +85,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun initSearch() {
         buttonRetry = findViewById(R.id.button_retry)
-        buttonClearSearch = findViewById(R.id.clear_form)
+        buttonClearSearch = findViewById(R.id.clear_button)
         searchEditText = findViewById(R.id.input_search_form)
         searchEditText.setText(textSearch)
         searchEditText.requestFocus()
@@ -104,7 +103,6 @@ class SearchActivity : AppCompatActivity() {
         buttonClearSearch.setOnClickListener {
             clearSearch()
         }
-
     }
 
     private fun initHistory() {
@@ -131,11 +129,10 @@ class SearchActivity : AppCompatActivity() {
     private fun clearTracksHistory() {
         searchHistory.clear()
         showContent(Content.SEARCH_RESULT)
-
     }
 
     private fun initSearchResults() {
-        recyclerView = findViewById(R.id.recycler_view)
+        recyclerView = findViewById(R.id.recyclerViewSearch)
         recyclerView.adapter = searchAdapter
     }
 
@@ -258,5 +255,4 @@ class SearchActivity : AppCompatActivity() {
             }
         }
     }
-
 }

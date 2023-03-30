@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken
 import com.sakal.playlistmaker.model.Track
 
 
-class SearchHistory(private val sharedPref: SharedPreferences) {
+class SearchHistory(private val preferences: SharedPreferences) {
 
 
     fun add(track: Track) {
@@ -18,7 +18,7 @@ class SearchHistory(private val sharedPref: SharedPreferences) {
     }
 
     fun get(): ArrayList<Track> {
-        val json = sharedPref.getString(Constants.HISTORY_TRACKS, null) ?: return arrayListOf()
+        val json = preferences.getString(Constants.HISTORY_TRACKS, null) ?: return arrayListOf()
         return Gson().fromJson(json, object : TypeToken<ArrayList<Track>>() {}.type)
     }
 
@@ -29,7 +29,7 @@ class SearchHistory(private val sharedPref: SharedPreferences) {
 
     private fun save(tracksHistory: MutableList<Track>) {
         val json = Gson().toJson(tracksHistory)
-        sharedPref.edit()
+        preferences.edit()
             .putString(Constants.HISTORY_TRACKS, json)
             .apply()
     }

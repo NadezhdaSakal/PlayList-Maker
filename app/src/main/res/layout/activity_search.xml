@@ -54,7 +54,7 @@
             android:textColorHint="@color/search_form_text_hint_color" />
 
         <ImageView
-            android:id="@+id/clear_form"
+            android:id="@+id/clear_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -66,11 +66,12 @@
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/recyclerViewSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_24"
@@ -78,42 +79,6 @@
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_search_recycler" />
-
-        <LinearLayout
-            android:id="@+id/history_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="24dp"
-                android:text="@string/search_history"
-                android:gravity="center"
-                android:textSize="@dimen/text_size_19"
-                android:textColor="?attr/colorOnSecondary"
-                android:fontFamily="@font/ys_display_medium"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="20dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewHistory"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:listitem="@layout/item_search_recycler"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_clear_history"
-                style="@style/ErrorButtonPlaceholder"
-                android:text="@string/clear_history"
-                android:inputType="textCapSentences"
-                android:layout_margin="24dp" />
-        </LinearLayout>
-
-
 
         <TextView
             android:id="@+id/placeholderNothingWasFound"
@@ -127,7 +92,6 @@
             android:textSize="19sp"
             android:visibility="gone"
             app:drawableTopCompat="@drawable/nothingfound" />
-
 
         <LinearLayout
             android:id="@+id/placeholderCommunicationsProblem"
@@ -157,6 +121,40 @@
                 android:id="@+id/button_retry"
                 style="@style/ErrorButtonPlaceholder"
                 android:text="@string/retry_button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/history_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/ys_display_medium"
+                android:gravity="center"
+                android:text="@string/search_history"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="@dimen/text_size_19" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewHistory"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_search_recycler" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_clear_history"
+                style="@style/ErrorButtonPlaceholder"
+                android:layout_margin="24dp"
+                android:inputType="textCapSentences"
+                android:text="@string/clear_history" />
         </LinearLayout>
 
     </FrameLayout>
