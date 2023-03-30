@@ -79,6 +79,42 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_search_recycler" />
 
+        <LinearLayout
+            android:id="@+id/history_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:text="@string/search_history"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_19"
+                android:textColor="?attr/colorOnSecondary"
+                android:fontFamily="@font/ys_display_medium"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewHistory"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:listitem="@layout/item_search_recycler"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_clear_history"
+                style="@style/ErrorButtonPlaceholder"
+                android:text="@string/clear_history"
+                android:inputType="textCapSentences"
+                android:layout_margin="24dp" />
+        </LinearLayout>
+
+
+
         <TextView
             android:id="@+id/placeholderNothingWasFound"
             android:layout_width="wrap_content"
@@ -122,41 +158,6 @@
                 style="@style/ErrorButtonPlaceholder"
                 android:text="@string/retry_button" />
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/history_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="24dp"
-                android:text="@string/search_history"
-                android:gravity="center"
-                android:textSize="@dimen/text_size_19"
-                android:textColor="?attr/colorOnSecondary"
-                android:fontFamily="@font/ys_display_medium"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="20dp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewHistory"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:listitem="@layout/item_search_recycler"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_clear_history"
-                style="@style/ErrorButtonPlaceholder"
-                android:text="@string/clear_history"
-                android:inputType="textCapSentences"
-                android:layout_margin="24dp" />
-        </LinearLayout>
-
 
     </FrameLayout>
 

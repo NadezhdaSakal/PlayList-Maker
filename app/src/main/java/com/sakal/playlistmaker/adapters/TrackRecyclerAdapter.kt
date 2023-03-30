@@ -1,31 +1,43 @@
 package com.sakal.playlistmaker.adapters
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.sakal.playlistmaker.R
+import com.sakal.playlistmaker.TracksDiffCallback
 import com.sakal.playlistmaker.model.Track
 import com.sakal.playlistmaker.viewHolders.TrackViewHolder
 
-class TrackRecyclerAdapter ( private val tracks: List<Track>
-) : RecyclerView.Adapter<TrackViewHolder> (){
+class TrackRecyclerAdapter(private val clickListener: TrackClickListener) : RecyclerView.Adapter<TrackViewHolder>() {
 
-    var itemClickListener: ((Int, Track) -> Unit)? = null
+    var tracks = ArrayList<Track>()
+        set(newTrackList) {
+            val diffResult = DiffUtil.calculateDiff(
+                TracksDiffCallback(field, newTrackList)
+            )
+            field = newTrackList
+            diffResult.dispatchUpdatesTo(this)
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
-        return TrackViewHolder(parent)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_search_recycler, parent, false)
+        return TrackViewHolder(view)
     }
+
+    override fun getItemCount(): Int = tracks.size
 
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
-        val track = tracks[position]
-        holder.bind(track)
-        holder.itemView.setOnClickListener(){
-            itemClickListener?.invoke(position, track)
-        }
+        holder.bind(tracks[position])
+        holder.itemView.setOnClickListener { clickListener.onTrackClick(tracks.get(position)) }
     }
 
-    override fun getItemCount(): Int {
-        return tracks.size
+    fun interface TrackClickListener {
+        fun onTrackClick(track: Track)
     }
-
-
 }
+
+
+
+
 

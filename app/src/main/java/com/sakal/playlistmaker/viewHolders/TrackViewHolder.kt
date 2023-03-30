@@ -1,8 +1,6 @@
 package com.sakal.playlistmaker.viewHolders
 
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -14,9 +12,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class TrackViewHolder(parentView: ViewGroup): RecyclerView.ViewHolder(
-    LayoutInflater.from(parentView.context)
-        .inflate(R.layout.item_search_recycler, parentView, false)) {
+class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val trackName: TextView = itemView.findViewById(R.id.trackName)
         private val artistName: TextView = itemView.findViewById(R.id.artistName)
