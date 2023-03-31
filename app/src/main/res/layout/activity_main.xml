@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="?attr/colorPrimary"
-    android:theme="@style/Theme.PlaylistMaker"
+    android:background="@color/main_screen_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -16,7 +15,7 @@
         android:text="@string/playlist_maker"
         android:fontFamily="@font/ys_display_medium"
         android:textFontWeight="500"
-        android:textColor="?attr/colorOnPrimary"
+        android:textColor="@color/white"
         android:textSize="@dimen/text_size_22" />
 
     <LinearLayout

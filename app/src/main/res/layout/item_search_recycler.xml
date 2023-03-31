@@ -58,7 +58,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/arrow_right"
+        android:id="@+id/arrow_forward"
         android:layout_width="@dimen/icon_size_24"
         android:layout_height="@dimen/icon_size_24"
         android:layout_marginVertical="10dp"
@@ -66,6 +66,7 @@
         android:paddingHorizontal="@dimen/padding_8"
         android:paddingVertical="@dimen/padding_4"
         android:src="@drawable/arrow_forward"
-        app:tint="@color/settings_icon_color" />
+        app:tint="@color/settings_icon_color"
+        tools:ignore="ImageContrastCheck" />
 
 </LinearLayout>

@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSecondary"
-    android:orientation="vertical"
-    android:theme="@style/Theme.PlaylistMaker">
+    android:background="@color/screen_background"
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/search_toolbar"
@@ -55,23 +54,24 @@
             android:textColorHint="@color/search_form_text_hint_color" />
 
         <ImageView
-            android:id="@+id/clear_form"
+            android:id="@+id/button_clear_search_form"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginStart="@dimen/margin_16"
             android:padding="@dimen/padding_18"
             android:src="@drawable/clear"
-            android:visibility="visible"
+            android:visibility="gone"
             app:tint="@color/search_form_text_hint_color" />
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/recyclerViewSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_24"
@@ -92,7 +92,6 @@
             android:textSize="19sp"
             android:visibility="gone"
             app:drawableTopCompat="@drawable/nothingfound" />
-
 
         <LinearLayout
             android:id="@+id/placeholderCommunicationsProblem"
@@ -121,8 +120,42 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_retry"
                 style="@style/ErrorButtonPlaceholder"
-                android:text="@string/retry_button"
-                app:cornerRadius="54dp" />
+                android:text="@string/retry_button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/history_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/ys_display_medium"
+                android:textFontWeight="500"
+                android:gravity="center"
+                android:text="@string/search_history"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="@dimen/text_size_19" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewHistory"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_search_recycler" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_clear_history"
+                style="@style/ErrorButtonPlaceholder"
+                android:layout_margin="@dimen/margin_24"
+                android:inputType="textCapSentences"
+                android:text="@string/clear_history" />
         </LinearLayout>
 
     </FrameLayout>

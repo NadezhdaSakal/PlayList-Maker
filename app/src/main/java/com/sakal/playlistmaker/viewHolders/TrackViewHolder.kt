@@ -1,24 +1,29 @@
 package com.sakal.playlistmaker.viewHolders
 
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.model.Track
-import com.sakal.playlistmaker.databinding.ItemSearchRecyclerBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class SearchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+class TrackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val binding = ItemSearchRecyclerBinding.bind(itemView)
+    private val trackName: TextView = itemView.findViewById(R.id.trackName)
+    private val artistName: TextView = itemView.findViewById(R.id.artistName)
+    private val trackTime: TextView = itemView.findViewById(R.id.trackTime)
+    private val trackIcon: ImageView = itemView.findViewById(R.id.trackIcon)
 
-    fun bind(track: Track) = with(binding) {
+    fun bind(track: Track) {
         trackName.text = track.trackName
         artistName.text = track.artistName
-        trackTime.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis.toInt())
+        trackTime.text =
+            SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis.toInt())
 
         Glide.with(itemView)
             .load(track.artworkUrl100)

@@ -1,34 +1,72 @@
 package com.sakal.playlistmaker
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 
 class SettingsActivity : AppCompatActivity() {
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    private lateinit var themeSwitcher: Switch
+    private lateinit var buttonSharing: Button
+    private lateinit var buttonSupport: Button
+    private lateinit var buttonUserAgreement: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_settings)
 
-        val toolbar = findViewById<Toolbar>(R.id.settings_toolbar)
+        initToolbar()
 
-        toolbar.setNavigationOnClickListener() {
+        initSwitch()
+
+        initButtonSharing()
+
+        initButtonSupport()
+
+        initButtonUserAgreement()
+
+    }
+
+    private fun initToolbar() {
+        toolbar = findViewById(R.id.settings_toolbar)
+        toolbar.setNavigationOnClickListener {
             finish()
         }
+    }
 
-        findViewById<Button>(R.id.button_sharing).setOnClickListener() {
+    private fun initSwitch() {
+        themeSwitcher = findViewById(R.id.themeSwitcher)
+
+        themeSwitcher.isChecked = getSharedPreferences(Constants.PLAYLIST_MAKER_PREFS, MODE_PRIVATE)
+            .getBoolean(Constants.DARK_THEME_KEY, false)
+
+        themeSwitcher.setOnCheckedChangeListener { switcher, checked ->
+            (applicationContext as App).switchTheme(checked)
+            (applicationContext as App).saveTheme(checked)
+        }
+    }
+
+    private fun initButtonSharing() {
+        buttonSharing = findViewById(R.id.button_sharing)
+        buttonSharing.setOnClickListener {
             Intent(Intent.ACTION_SEND).apply {
                 putExtra(Intent.EXTRA_TEXT, getString(R.string.share_link))
                 type = "text/plain"
                 startActivity(Intent.createChooser(this, null))
             }
         }
+    }
 
-        findViewById<Button>(R.id.button_support).setOnClickListener() {
+    private fun initButtonSupport() {
+        buttonSupport = findViewById(R.id.button_support)
+        buttonSupport.setOnClickListener {
             Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:")
                 putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.support_address)))
@@ -37,13 +75,17 @@ class SettingsActivity : AppCompatActivity() {
                 startActivity(Intent.createChooser(this, null))
             }
         }
+    }
 
-        findViewById<Button>(R.id.button_user_agreement).setOnClickListener() {
+    private fun initButtonUserAgreement() {
+        buttonUserAgreement = findViewById(R.id.button_user_agreement)
+        buttonUserAgreement.setOnClickListener {
             Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(getString(R.string.support_user_agreement))
                 startActivity(Intent.createChooser(this, null))
             }
         }
     }
+
 }
 
