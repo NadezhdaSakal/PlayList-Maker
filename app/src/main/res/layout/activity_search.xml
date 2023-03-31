@@ -61,7 +61,7 @@
             android:layout_marginStart="@dimen/margin_16"
             android:padding="@dimen/padding_18"
             android:src="@drawable/clear"
-            android:visibility="visible"
+            android:visibility="gone"
             app:tint="@color/search_form_text_hint_color" />
     </FrameLayout>
 

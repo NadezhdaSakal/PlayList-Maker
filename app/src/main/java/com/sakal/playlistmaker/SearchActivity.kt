@@ -28,6 +28,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+
 class SearchActivity : AppCompatActivity() {
 
     companion object {
@@ -165,7 +166,7 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun searchClearIconVisibility(s: CharSequence?): Int {
+    private fun buttonSearchClearVisibility(s: CharSequence?): Int {
         return if (s.isNullOrEmpty()) {
             View.GONE
         } else {
@@ -179,7 +180,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                buttonClearSearch.visibility = searchClearIconVisibility(s)
+                buttonClearSearch.visibility = buttonSearchClearVisibility(s)
                 textSearch = searchEditText.text.toString()
 
                 if (searchEditText.hasFocus() && textSearch.isNotEmpty()) {
