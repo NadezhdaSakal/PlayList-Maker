@@ -1,6 +1,5 @@
 package com.sakal.playlistmaker
 
-import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
@@ -212,23 +211,24 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun getTrack() {
-        serviceSearch.searchTrack(searchEditText.text.toString())
-            .enqueue(object : Callback<TrackResponse> {
-                @SuppressLint("NotifyDataSetChanged")
+        if (textSearch.isNotEmpty()) {
+            serviceSearch.searchTrack(textSearch).enqueue(object : Callback<TrackResponse> {
                 override fun onResponse(
                     call: Call<TrackResponse>,
-                    response: Response<TrackResponse>,
+                    response: Response<TrackResponse>
                 ) {
-                    if (textSearch.isNotEmpty() && !response.body()?.results.isNullOrEmpty() && response.code()
-                        == ApiConstants.SUCCESS_CODE
-                    ) {
-                        searchAdapter.tracks.clear()
-                        searchAdapter.tracks.addAll(response.body()?.results!!)
-                        searchAdapter.notifyDataSetChanged()
-                        showContent(Content.SEARCH_RESULT)
-
-                    } else {
-                        showContent(Content.NOT_FOUND)
+                    when (response.code()) {
+                        ApiConstants.SUCCESS_CODE -> {
+                            if (response.body()?.results?.isNotEmpty() == true) {
+                                searchAdapter.tracks = response.body()?.results!!
+                                showContent(Content.SEARCH_RESULT)
+                            } else {
+                                showContent(Content.NOT_FOUND)
+                            }
+                        }
+                        else -> {
+                            showContent(Content.ERROR)
+                        }
                     }
                 }
 
@@ -236,6 +236,7 @@ class SearchActivity : AppCompatActivity() {
                     showContent(Content.ERROR)
                 }
             })
+        }
     }
 
     private fun showContent(content: Content) {
