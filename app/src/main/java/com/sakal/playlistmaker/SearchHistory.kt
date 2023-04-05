@@ -12,7 +12,7 @@ class SearchHistory(private val preferences: SharedPreferences) {
     fun add(track: Track) {
         val history = get()
         history.remove(track)
-        history.add(0, track)
+        history.add(Constants.INDEX_FIRST, track)
         if (history.size > Constants.HISTORY_LIST_SIZE) history.removeLast()
         save(history)
     }

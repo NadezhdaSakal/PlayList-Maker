@@ -11,5 +11,6 @@ object Constants {
     const val READ_TIMEOUT = 30
 
     const val HISTORY_LIST_SIZE = 10
+    const val INDEX_FIRST = 0
 
 }
