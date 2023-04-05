@@ -4,6 +4,7 @@
     <dimen name="height_0">0dp</dimen>
     <dimen name="margin_16">16dp</dimen>
     <dimen name="corner_radius_16">16dp</dimen>
+    <dimen name="corner_radius_2">2dp</dimen>
     <dimen name="padding_10">10dp</dimen>
 
     <dimen name="text_size_16">16sp</dimen>
