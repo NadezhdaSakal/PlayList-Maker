@@ -245,8 +245,8 @@ class SearchActivity : AppCompatActivity() {
 
     private fun clickOnTrack(track: Track) {
         searchHistory.add(track)
-        val intent = Intent(this, AudioPlayerActivity::class.java).apply {
-            putExtra(TRACK, Gson().toJson(track))
+        val intent = Intent(this, AudioplayerActivity::class.java).apply {
+            putExtra(Constants.TRACK, Gson().toJson(track))
         }
         startActivity(intent)
     }
