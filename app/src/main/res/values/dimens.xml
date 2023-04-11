@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="text_size_22">22sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_11">11sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_19">19sp</dimen>
+    <dimen name="text_size_13">13sp</dimen>
+
+
     <dimen name="height_0">0dp</dimen>
+
     <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_12">12dp</dimen>
+    <dimen name="margin_54">52dp</dimen>
+
     <dimen name="corner_radius_16">16dp</dimen>
     <dimen name="corner_radius_2">2dp</dimen>
-    <dimen name="padding_10">10dp</dimen>
+    <dimen name="corner_radius_8">8dp</dimen>
 
-    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="padding_10">10dp</dimen>
     <dimen name="padding_20">20dp</dimen>
     <dimen name="padding_16">16dp</dimen>
     <dimen name="padding_8">8dp</dimen>
     <dimen name="padding_18">18dp</dimen>
-
-    <dimen name="text_size_11">11sp</dimen>
     <dimen name="padding_12">12dp</dimen>
-    <dimen name="margin_24">24dp</dimen>
-    <dimen name="margin_8">8dp</dimen>
     <dimen name="padding_4">4dp</dimen>
+
     <dimen name="icon_size_48">48dp</dimen>
     <dimen name="icon_size_24">24dp</dimen>
 
-    <dimen name="text_size_14">14sp</dimen>
-    <dimen name="text_size_20">20sp</dimen>
-    <dimen name="text_size_19">19sp</dimen>
+    <dimen name="size_button">52dp</dimen>
+
+
 
 </resources>

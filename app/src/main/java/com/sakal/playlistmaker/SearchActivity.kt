@@ -1,7 +1,9 @@
 package com.sakal.playlistmaker
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.MediaStore.Audio.AudioColumns.TRACK
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -14,8 +16,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.sakal.playlistmaker.adapters.TrackRecyclerAdapter
 import com.sakal.playlistmaker.model.ApiConstants
+import com.sakal.playlistmaker.model.Track
 import com.sakal.playlistmaker.model.TrackResponse
 import com.sakal.playlistmaker.model.iTunesSearchAPI
 import okhttp3.OkHttpClient
@@ -68,11 +72,11 @@ class SearchActivity : AppCompatActivity() {
     private val serviceSearch = retrofit.create(iTunesSearchAPI::class.java)
 
     private val searchAdapter = TrackRecyclerAdapter {
-        searchHistory.add(it)
+        clickOnTrack(it)
     }
 
     private val historyAdapter = TrackRecyclerAdapter {
-        searchHistory.add(it)
+        clickOnTrack(it)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -238,6 +242,15 @@ class SearchActivity : AppCompatActivity() {
             })
         }
     }
+
+    private fun clickOnTrack(track: Track) {
+        searchHistory.add(track)
+        val intent = Intent(this, AudioPlayerActivity::class.java).apply {
+            putExtra(TRACK, Gson().toJson(track))
+        }
+        startActivity(intent)
+    }
+
 
     private fun showContent(content: Content) {
         placeholderNothingWasFound = findViewById(R.id.placeholderNothingWasFound)
