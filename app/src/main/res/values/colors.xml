@@ -22,7 +22,8 @@
     <color name="search_form_text_hint_color">#AEAFB4</color>
     <color name="search_result_track_text_color">#000000</color>
     <color name="search_result_artist_text_color">#AEAFB4</color>
-    <color name="button_player">#1A1B22</color>
+    <color name="dark_gray">#4d4d4d</color>
+
 </resources>
 
 

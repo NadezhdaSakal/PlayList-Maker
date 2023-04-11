@@ -19,7 +19,7 @@ class AudioPlayerActivity : AppCompatActivity() {
     private lateinit var trackName: TextView
     private lateinit var trackTime: TextView
     private lateinit var artistName: TextView
-    private lateinit var albumArt: ImageView
+    private lateinit var albumIcon: ImageView
     private lateinit var collectionName: TextView
     private lateinit var collectionNameTitle: TextView
     private lateinit var releaseDate: TextView
@@ -30,25 +30,35 @@ class AudioPlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_audio_player)
 
+        initToolbar()
+
+        initTrackInfo()
+
+    }
+
+    private fun initToolbar() {
+        toolbar = findViewById(R.id.player_toolbar)
+
+        toolbar.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun initTrackInfo() {
         val track = Gson().fromJson(intent.getStringExtra(TRACK), Track::class.java)
 
-        toolbar = findViewById(R.id.player_toolbar)
         trackName = findViewById(R.id.trackName)
         artistName = findViewById(R.id.artistName)
         trackTime = findViewById(R.id.track_time_data)
-        albumArt = findViewById(R.id.audio_icon)
+        albumIcon = findViewById(R.id.audio_icon)
         trackTime = findViewById(R.id.track_time_data)
         collectionName = findViewById(R.id.album_name)
         releaseDate = findViewById(R.id.release_date_data)
         primaryGenreName = findViewById(R.id.primary_genre_name_data)
         country = findViewById(R.id.country_data)
 
-        toolbar.setOnClickListener {
-            finish()
-        }
-
         Glide
-            .with(albumArt)
+            .with(albumIcon)
             .load(track.artworkUrl100.replaceAfterLast('/', "512x512bb.jpg"))
             .placeholder(R.drawable.placeholder_512)
             .centerCrop()
@@ -59,14 +69,15 @@ class AudioPlayerActivity : AppCompatActivity() {
                     )
                 )
             )
-            .into(albumArt)
+            .into(albumIcon)
 
         trackName.text = track.trackName
         artistName.text = track.artistName
         primaryGenreName.text = track.primaryGenreName
         country.text = track.country
 
-        trackTime.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis.toInt())
+        trackTime.text =
+            SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis.toInt())
 
         val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(track.releaseDate)
         if (date != null) {
@@ -81,4 +92,5 @@ class AudioPlayerActivity : AppCompatActivity() {
             collectionNameTitle.visibility = View.GONE
         }
     }
+
 }
