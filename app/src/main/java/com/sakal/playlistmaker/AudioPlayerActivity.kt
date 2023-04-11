@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.gson.Gson
 import com.sakal.playlistmaker.model.Track
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AudioPlayerActivity : AppCompatActivity() {
 
@@ -35,11 +37,11 @@ class AudioPlayerActivity : AppCompatActivity() {
         artistName = findViewById(R.id.artistName)
         trackTime = findViewById(R.id.track_time_data)
         albumArt = findViewById(R.id.audio_icon)
-        collectionName = findViewById(R.id.collectName)
-        collectionNameTitle = findViewById(R.id.collectionNameTitle)
-        releaseDate = findViewById(R.id.releaseDate)
-        primaryGenreName = findViewById(R.id.primaryGenreName)
-        country = findViewById(R.id.country)
+        trackTime = findViewById(R.id.track_time_data)
+        collectionName = findViewById(R.id.album_name)
+        releaseDate = findViewById(R.id.release_date_data)
+        primaryGenreName = findViewById(R.id.primary_genre_name_data)
+        country = findViewById(R.id.country_data)
 
         toolbar.setOnClickListener {
             finish()
@@ -64,8 +66,7 @@ class AudioPlayerActivity : AppCompatActivity() {
         primaryGenreName.text = track.primaryGenreName
         country.text = track.country
 
-        trackTime.text =
-            SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
+        trackTime.text = SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis.toInt())
 
         val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(track.releaseDate)
         if (date != null) {
