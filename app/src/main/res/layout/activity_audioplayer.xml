@@ -131,41 +131,42 @@
         android:contentDescription="TODO" />
 
     <TextView
-        android:id="@+id/duration"
-        android:layout_width="wrap_content"
+        android:id="@+id/playingTime"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/left_guideline"
+        android:layout_marginTop="@dimen/margin_12"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="00:30"
+        android:textColor="@color/player_text_color"
+        android:textSize="@dimen/text_size_14"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
+        app:layout_constraintStart_toStartOf="@id/left_guideline"
         app:layout_constraintTop_toBottomOf="@id/play_track"
-        app:layout_constraintBottom_toTopOf="@id/track_time"
-        android:fontFamily="@font/ys_text_regular"
-        android:textSize="13sp"
-        android:textColor="?attr/colorOnSecondary"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginBottom="40dp"
-        tools:text="0:00"/>
+        app:layout_constraintWidth_max="64dp" />
+
 
     <TextView
         style="@style/DataNameTrack"
-        android:id="@+id/track_time"
-        app:layout_constraintTop_toBottomOf="@id/duration"
+        android:id="@+id/duration"
+        app:layout_constraintTop_toBottomOf="@id/playingTime"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
         app:layout_constraintBottom_toTopOf="@id/album_name"
         android:text="@string/track_time"/>
 
     <TextView
         style="@style/DataTrack"
-        android:id="@+id/track_time_data"
+        android:id="@+id/trackTime"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
-        app:layout_constraintTop_toTopOf="@id/track_time"
-        app:layout_constraintBottom_toBottomOf="@id/track_time"
+        app:layout_constraintTop_toTopOf="@id/duration"
+        app:layout_constraintBottom_toBottomOf="@id/duration"
         tools:text="0:00"/>
 
     <TextView
         style="@style/DataNameTrack"
         android:id="@+id/album"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
-        app:layout_constraintTop_toBottomOf="@id/track_time"
+        app:layout_constraintTop_toBottomOf="@id/duration"
         app:layout_constraintBottom_toTopOf="@id/release_date"
         android:text="@string/album"/>
 
@@ -182,7 +183,7 @@
         android:id="@+id/release_date"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
         app:layout_constraintTop_toBottomOf="@id/album"
-        app:layout_constraintBottom_toTopOf="@id/primary_genre_name"
+        app:layout_constraintBottom_toTopOf="@id/genre"
         android:text="@string/year" />
 
     <TextView
@@ -195,7 +196,7 @@
 
     <TextView
         style="@style/DataNameTrack"
-        android:id="@+id/primary_genre_name"
+        android:id="@+id/genre"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
         app:layout_constraintTop_toBottomOf="@id/release_date"
         app:layout_constraintBottom_toTopOf="@id/country"
@@ -203,17 +204,17 @@
 
     <TextView
         style="@style/DataTrack"
-        android:id="@+id/primary_genre_name_data"
+        android:id="@+id/primary_genre_name"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
-        app:layout_constraintTop_toTopOf="@id/primary_genre_name"
-        app:layout_constraintBottom_toBottomOf="@id/primary_genre_name"
+        app:layout_constraintTop_toTopOf="@id/genre"
+        app:layout_constraintBottom_toBottomOf="@id/genre"
         tools:text="Название жанра"/>
 
     <TextView
         style="@style/DataNameTrack"
         android:id="@+id/country"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
-        app:layout_constraintTop_toBottomOf="@id/primary_genre_name"
+        app:layout_constraintTop_toBottomOf="@id/genre"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
         android:text="@string/country"/>

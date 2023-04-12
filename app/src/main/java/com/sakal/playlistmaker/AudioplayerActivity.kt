@@ -49,12 +49,11 @@ class AudioplayerActivity : AppCompatActivity() {
 
         trackName = findViewById(R.id.trackName)
         artistName = findViewById(R.id.artistName)
-        trackTime = findViewById(R.id.track_time_data)
+        trackTime = findViewById(R.id.trackTime)
         albumIcon = findViewById(R.id.audio_icon)
-        trackTime = findViewById(R.id.track_time_data)
         collectionName = findViewById(R.id.album_name)
         releaseDate = findViewById(R.id.release_date_data)
-        primaryGenreName = findViewById(R.id.primary_genre_name_data)
+        primaryGenreName = findViewById(R.id.primary_genre_name)
         country = findViewById(R.id.country_data)
 
         Glide
