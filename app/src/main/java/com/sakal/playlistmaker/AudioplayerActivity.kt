@@ -50,7 +50,7 @@ class AudioplayerActivity : AppCompatActivity() {
         trackName = findViewById(R.id.trackName)
         artistName = findViewById(R.id.artistName)
         trackTime = findViewById(R.id.trackTime)
-        albumIcon = findViewById(R.id.audio_icon)
+        albumIcon = findViewById(R.id.track_icon)
         collectionName = findViewById(R.id.album_name)
         releaseDate = findViewById(R.id.release_date_data)
         primaryGenreName = findViewById(R.id.primary_genre_name)
