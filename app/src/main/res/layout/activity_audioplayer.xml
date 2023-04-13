@@ -155,8 +155,6 @@
     <TextView
         android:id="@+id/duration"
         style="@style/TitleTrack"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_8"
         android:text="@string/track_time"
         app:layout_constraintTag="durationTag"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
@@ -166,8 +164,6 @@
     <TextView
         android:id="@+id/album"
         style="@style/TitleTrack"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_8"
         android:text="@string/album"
         app:layout_constraintTag="albumTag"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
@@ -177,8 +173,6 @@
     <TextView
         android:id="@+id/year"
         style="@style/TitleTrack"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_8"
         android:text="@string/year"
         app:layout_constraintTag="yearTag"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
@@ -188,8 +182,6 @@
     <TextView
         android:id="@+id/genre"
         style="@style/TitleTrack"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_8"
         android:text="@string/genre"
         app:layout_constraintTag="genreTag"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
@@ -199,8 +191,7 @@
     <TextView
         android:id="@+id/country"
         style="@style/TitleTrack"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/margin_28"
         android:text="@string/country"
         app:layout_constraintTag="countryTag"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
@@ -228,8 +219,6 @@
     <TextView
         android:id="@+id/album_name"
         style="@style/DataTrack"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_8"
         app:layout_constraintStart_toEndOf="@id/textBarrier"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
         app:layout_constraintTop_toTopOf="@id/album"
@@ -239,8 +228,6 @@
     <TextView
         android:id="@+id/release_date_data"
         style="@style/DataTrack"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_8"
         app:layout_constraintStart_toEndOf="@id/textBarrier"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
         app:layout_constraintBottom_toBottomOf="@id/year"
@@ -250,8 +237,6 @@
     <TextView
         android:id="@+id/primary_genre_name"
         style="@style/DataTrack"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_8"
         app:layout_constraintStart_toEndOf="@id/textBarrier"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
         app:layout_constraintTop_toTopOf="@id/genre"
@@ -261,8 +246,6 @@
     <TextView
         android:id="@+id/country_data"
         style="@style/DataTrack"
-        android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginBottom="@dimen/margin_8"
         app:layout_constraintStart_toEndOf="@id/textBarrier"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
         app:layout_constraintTop_toTopOf="@id/country"
