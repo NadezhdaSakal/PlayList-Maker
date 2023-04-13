@@ -38,7 +38,6 @@ class AudioplayerActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         toolbar = findViewById(R.id.player_toolbar)
-
         toolbar.setOnClickListener {
             finish()
         }

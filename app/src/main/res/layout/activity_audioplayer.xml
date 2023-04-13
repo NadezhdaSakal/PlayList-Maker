@@ -113,14 +113,14 @@
         app:elevation="0dp"
         app:fabCustomSize="84dp"
         app:layout_constraintBottom_toTopOf="@id/duration"
-        app:layout_constraintEnd_toStartOf="@id/add_to_favorites"
+        app:layout_constraintEnd_toStartOf="@id/button_add_to_favorites"
         app:layout_constraintStart_toEndOf="@id/button_add_to_playlist"
         app:layout_constraintTop_toBottomOf="@id/artistName"
         app:maxImageSize="64dp"
         app:tint="?attr/colorSecondary" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_to_favorites"
+        android:id="@+id/button_add_to_favorites"
         android:layout_width="@dimen/size_button"
         android:layout_height="@dimen/size_button"
         android:layout_marginEnd="@dimen/margin_8"
@@ -150,7 +150,6 @@
         app:layout_constraintStart_toStartOf="@id/left_guideline"
         app:layout_constraintTop_toBottomOf="@id/play_track"
         app:layout_constraintWidth_max="64dp" />
-
 
     <TextView
         android:id="@+id/duration"
