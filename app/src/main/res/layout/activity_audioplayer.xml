@@ -78,7 +78,6 @@
         android:textColor="?attr/colorOnSecondary"
         android:textSize="@dimen/text_size_14"
         android:textFontWeight="400"
-
         app:layout_constraintBottom_toTopOf="@id/button_add_to_playlist"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
         app:layout_constraintTop_toBottomOf="@id/trackName"
@@ -138,7 +137,7 @@
         app:tint="@color/white" />
 
     <TextView
-        android:id="@+id/playingTime"
+        android:id="@+id/progress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_12"
@@ -155,123 +154,119 @@
 
     <TextView
         android:id="@+id/duration"
-        style="@style/TitleNameTrack"
-        android:layout_marginStart="@dimen/margin_8"
+        style="@style/TitleTrack"
         android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginBottom="@dimen/margin_8"
         android:text="@string/track_time"
-        app:layout_constraintBottom_toTopOf="@id/album"
+        app:layout_constraintTag="durationTag"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
-        app:layout_constraintTop_toBottomOf="@id/playingTime" />
+        app:layout_constraintTop_toBottomOf="@id/progress"
+        app:layout_constraintBottom_toTopOf="@id/album" />
 
     <TextView
         android:id="@+id/album"
-        style="@style/TitleNameTrack"
-        android:layout_marginStart="@dimen/margin_8"
+        style="@style/TitleTrack"
         android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginBottom="@dimen/margin_8"
         android:text="@string/album"
-        app:layout_constraintBottom_toTopOf="@id/year"
+        app:layout_constraintTag="albumTag"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
-        app:layout_constraintTop_toBottomOf="@id/duration" />
+        app:layout_constraintTop_toBottomOf="@id/duration"
+        app:layout_constraintBottom_toTopOf="@id/year" />
 
     <TextView
         android:id="@+id/year"
-        style="@style/TitleNameTrack"
-        android:layout_marginStart="@dimen/margin_8"
+        style="@style/TitleTrack"
         android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginBottom="@dimen/margin_8"
         android:text="@string/year"
-        app:layout_constraintBottom_toTopOf="@id/genre"
+        app:layout_constraintTag="yearTag"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
-        app:layout_constraintTop_toBottomOf="@id/album" />
+        app:layout_constraintTop_toBottomOf="@id/album"
+        app:layout_constraintBottom_toTopOf="@id/genre" />
 
     <TextView
         android:id="@+id/genre"
-        style="@style/TitleNameTrack"
-        android:layout_marginStart="@dimen/margin_8"
+        style="@style/TitleTrack"
         android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginBottom="@dimen/margin_8"
         android:text="@string/genre"
-        app:layout_constraintBottom_toTopOf="@id/country"
+        app:layout_constraintTag="genreTag"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
-        app:layout_constraintTop_toBottomOf="@id/year" />
+        app:layout_constraintTop_toBottomOf="@id/year"
+        app:layout_constraintBottom_toTopOf="@id/country" />
 
     <TextView
         android:id="@+id/country"
-        style="@style/TitleNameTrack"
-        android:layout_marginStart="@dimen/margin_8"
+        style="@style/TitleTrack"
         android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginBottom="16dp"
         android:text="@string/country"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTag="countryTag"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
-        app:layout_constraintTop_toBottomOf="@id/genre" />
+        app:layout_constraintTop_toBottomOf="@id/genre"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/textBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_tags="durationTag, albumTag, yearTag, genreTag, countryTag" />
 
     <TextView
         android:id="@+id/trackTime"
         style="@style/DataTrack"
-        android:layout_marginStart="@dimen/margin_8"
         android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginBottom="@dimen/margin_8"
-        app:layout_constraintBottom_toBottomOf="@id/duration"
+        app:layout_constraintStart_toEndOf="@id/textBarrier"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
         app:layout_constraintTop_toTopOf="@id/duration"
+        app:layout_constraintBottom_toBottomOf="@id/duration"
         tools:text="0:00" />
 
     <TextView
         android:id="@+id/album_name"
         style="@style/DataTrack"
-        android:layout_marginStart="@dimen/margin_8"
         android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginBottom="@dimen/margin_8"
-        app:layout_constraintBottom_toBottomOf="@id/album"
+        app:layout_constraintStart_toEndOf="@id/textBarrier"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
         app:layout_constraintTop_toTopOf="@id/album"
+        app:layout_constraintBottom_toBottomOf="@id/album"
         tools:text="Название альбома" />
 
     <TextView
         android:id="@+id/release_date_data"
         style="@style/DataTrack"
-        android:layout_marginStart="@dimen/margin_8"
         android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginBottom="@dimen/margin_8"
-        app:layout_constraintBottom_toBottomOf="@id/year"
+        app:layout_constraintStart_toEndOf="@id/textBarrier"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
+        app:layout_constraintBottom_toBottomOf="@id/year"
         app:layout_constraintTop_toTopOf="@id/year"
         tools:text="1994" />
 
     <TextView
         android:id="@+id/primary_genre_name"
         style="@style/DataTrack"
-        android:layout_marginStart="@dimen/margin_8"
         android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginBottom="@dimen/margin_8"
-        app:layout_constraintBottom_toBottomOf="@id/genre"
+        app:layout_constraintStart_toEndOf="@id/textBarrier"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
         app:layout_constraintTop_toTopOf="@id/genre"
+        app:layout_constraintBottom_toBottomOf="@id/genre"
         tools:text="Название жанра" />
 
     <TextView
         android:id="@+id/country_data"
         style="@style/DataTrack"
-        android:layout_marginStart="@dimen/margin_8"
         android:layout_marginTop="@dimen/margin_8"
-        android:layout_marginEnd="@dimen/margin_8"
         android:layout_marginBottom="@dimen/margin_8"
-        app:layout_constraintBottom_toBottomOf="@id/country"
+        app:layout_constraintStart_toEndOf="@id/textBarrier"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
         app:layout_constraintTop_toTopOf="@id/country"
+        app:layout_constraintBottom_toBottomOf="@id/country"
         tools:text="Название страны" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
