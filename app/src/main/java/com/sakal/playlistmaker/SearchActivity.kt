@@ -122,6 +122,14 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+    private fun clickOnTrack(track: Track) {
+        searchHistory.add(track)
+        val intent = Intent(this, AudioplayerActivity::class.java).apply {
+            putExtra(Constants.TRACK, Gson().toJson(track))
+        }
+        startActivity(intent)
+    }
+
     private fun initHistory() {
         buttonClearHistory = findViewById(R.id.button_clear_history)
         historyList = findViewById(R.id.history_list)
@@ -187,6 +195,7 @@ class SearchActivity : AppCompatActivity() {
 
                 if (searchEditText.hasFocus() && textSearch.isNotEmpty()) {
                     showContent(Content.SEARCH_RESULT)
+                    initHistory()
                 }
             }
 
@@ -241,15 +250,6 @@ class SearchActivity : AppCompatActivity() {
             })
         }
     }
-
-    private fun clickOnTrack(track: Track) {
-        searchHistory.add(track)
-        val intent = Intent(this, AudioplayerActivity::class.java).apply {
-            putExtra(Constants.TRACK, Gson().toJson(track))
-        }
-        startActivity(intent)
-    }
-
 
     private fun showContent(content: Content) {
         placeholderNothingWasFound = findViewById(R.id.placeholderNothingWasFound)

@@ -1,11 +1,11 @@
 package com.sakal.playlistmaker
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore.Audio.AudioColumns.TRACK
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.gson.Gson
@@ -33,7 +33,6 @@ class AudioplayerActivity : AppCompatActivity() {
         initToolbar()
 
         initTrackInfo()
-
     }
 
     private fun initToolbar() {
@@ -79,8 +78,8 @@ class AudioplayerActivity : AppCompatActivity() {
 
         val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(track.releaseDate)
         if (date != null) {
-            val formattedDatesString = SimpleDateFormat("yyyy", Locale.getDefault()).format(date)
-            releaseDate.text = formattedDatesString
+            val formatDatesString = SimpleDateFormat("yyyy", Locale.getDefault()).format(date)
+            releaseDate.text = formatDatesString
         }
 
         if (track.collectionName.isNotEmpty()) {
