@@ -30,4 +30,5 @@ class SearchHistory(private val preferences: SharedPreferences) {
         val json = Gson().toJson(history)
         preferences.edit { putString(Constants.HISTORY_TRACKS, json) }
     }
+
 }

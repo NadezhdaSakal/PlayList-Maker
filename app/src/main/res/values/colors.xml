@@ -7,6 +7,8 @@
     <color name="black_blue">#1A1B22</color>
     <color name="grey">#AEAFB4</color>
     <color name="status_bar_color">#3772E7</color>
+    <color name="dark_grey">#4d4d4d</color>
+
 
     <color name="main_screen_background">#3772E7</color>
     <color name="button_background_color">#1A1B22</color>
@@ -22,6 +24,8 @@
     <color name="search_form_text_hint_color">#AEAFB4</color>
     <color name="search_result_track_text_color">#000000</color>
     <color name="search_result_artist_text_color">#AEAFB4</color>
+    <color name="player_text_color">#1A1B22</color>
+
 </resources>
 
 

@@ -22,5 +22,16 @@
     <string name="search_history">Вы искали</string>
     <string name="clear_history">Очистить историю</string>
 
+    <string name="track_time">Длительность</string>
+    <string name="album">Альбом</string>
+    <string name="year">Год</string>
+    <string name="genre">Жанр</string>
+    <string name="country">Страна</string>
+    <string name="add_to_playlist">Добавить в плейлист</string>
+    <string name="play">Проиграть</string>
+    <string name="add_to_favorites">Добавить в избранное</string>
+    <string name="playing_time">00:30</string>
+    <string name="album_icon">Обложка альбома</string>
+
 
 </resources>

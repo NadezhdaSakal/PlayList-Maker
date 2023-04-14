@@ -79,9 +79,32 @@
         <item name="cornerRadius">54dp</item>
     </style>
 
+    <style name="DataTrack">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_8</item>
+        <item name="android:layout_marginBottom">@dimen/margin_8</item>
+        <item name="android:gravity">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:fontFamily">@font/ys_text_regular</item>
+        <item name="android:textSize">@dimen/text_size_13</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="fontWeight">400</item>
+        <item name="android:ellipsize">end</item>
+    </style>
 
-
-
+    <style name="TitleTrack">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_8</item>
+        <item name="android:layout_marginBottom">@dimen/margin_8</item>
+        <item name="android:fontFamily">@font/ys_text_regular</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="fontWeight">400</item>
+    </style>
 
 
 </resources>
