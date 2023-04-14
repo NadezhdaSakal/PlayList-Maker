@@ -60,12 +60,7 @@ class AudioplayerActivity : AppCompatActivity() {
             .placeholder(R.drawable.placeholder_512)
             .centerCrop()
             .transform(
-                RoundedCorners(
-                    resources.getDimensionPixelSize(
-                        R.dimen.corner_radius_8
-                    )
-                )
-            )
+                RoundedCorners(resources.getDimensionPixelSize(R.dimen.corner_radius_8)))
             .into(albumIcon)
 
         trackName.text = track.trackName
