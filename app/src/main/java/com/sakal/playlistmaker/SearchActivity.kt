@@ -33,10 +33,6 @@ import java.util.concurrent.TimeUnit
 
 class SearchActivity : AppCompatActivity() {
 
-    companion object {
-        const val TEXT_SEARCH = "TEXT_SEARCH"
-    }
-
     lateinit var searchEditText: EditText
     lateinit var buttonClearSearch: ImageView
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
@@ -282,5 +278,9 @@ class SearchActivity : AppCompatActivity() {
                 placeholderCommunicationsProblem.visibility = View.GONE
             }
         }
+    }
+
+    companion object {
+        const val TEXT_SEARCH = "TEXT_SEARCH"
     }
 }
