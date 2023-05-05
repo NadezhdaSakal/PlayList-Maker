@@ -3,6 +3,8 @@ package com.sakal.playlistmaker
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -12,6 +14,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -45,6 +48,8 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var buttonClearHistory: Button
     private lateinit var searchHistory: SearchHistory
     private lateinit var prefs: SharedPreferences
+    private lateinit var progressBar: ProgressBar
+
 
     private var textSearch = ""
 
@@ -74,6 +79,11 @@ class SearchActivity : AppCompatActivity() {
         clickOnTrack(it)
     }
 
+    private var isClickedAllowed = true
+    private val handler = Handler(Looper.getMainLooper())
+    private val searchRunnable = Runnable { getTrack() }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
@@ -81,6 +91,8 @@ class SearchActivity : AppCompatActivity() {
         initToolbar()
 
         initSearch()
+
+        initProgressBar()
 
         inputText()
 
@@ -105,7 +117,7 @@ class SearchActivity : AppCompatActivity() {
 
         searchEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                getTrack()
+                true
             }
             false
         }
@@ -119,12 +131,16 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun clickOnTrack(track: Track) {
-        searchHistory.add(track)
-        val intent = Intent(this, AudioplayerActivity::class.java).apply {
-            putExtra(Constants.TRACK, Gson().toJson(track))
+        if (clickDebounce()) {
+            searchHistory.add(track)
+            val intent = Intent(this, AudioplayerActivity::class.java).apply {
+                putExtra(Constants.TRACK, Gson().toJson(track))
+            }
+            startActivity(intent)
         }
-        startActivity(intent)
     }
+
+
 
     private fun initHistory() {
         buttonClearHistory = findViewById(R.id.button_clear_history)
@@ -180,6 +196,11 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+    private fun initProgressBar() {
+        progressBar = findViewById(R.id.searchProgressBar)
+
+    }
+
     private fun inputText() {
         val simpleTextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -187,24 +208,30 @@ class SearchActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 buttonClearSearch.visibility = buttonSearchClearVisibility(s)
-                textSearch = searchEditText.text.toString()
-
+                showContent(Content.LOADING)
                 if (searchEditText.hasFocus() && textSearch.isNotEmpty()) {
-                    showContent(Content.SEARCH_RESULT)
+                    searchDebounce()
                     initHistory()
+
+                } else if (searchEditText.hasFocus() && s?.isNotEmpty() == false && searchHistory.get()
+                        .isNotEmpty()
+                ) {
+                    handler.removeCallbacks(searchRunnable)
+                    showContent(Content.TRACKS_HISTORY)
+                } else {
+                    handler.removeCallbacks(searchRunnable)
+                    showContent(Content.SEARCH_RESULT)
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {
+                textSearch = searchEditText.text.toString()
+
             }
         }
         searchEditText.addTextChangedListener(simpleTextWatcher)
 
-        searchEditText.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus && searchEditText.text.isEmpty()) {
-                showContent(Content.SEARCH_RESULT)
-            }
-        }
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -277,7 +304,23 @@ class SearchActivity : AppCompatActivity() {
                 placeholderNothingWasFound.visibility = View.GONE
                 placeholderCommunicationsProblem.visibility = View.GONE
             }
+
+            Content.LOADING -> progressBar.visibility = View.VISIBLE
         }
+    }
+
+    private fun searchDebounce() {
+        handler.removeCallbacks(searchRunnable)
+        handler.postDelayed(searchRunnable, Constants.SEARCH_DEBOUNCE_DELAY)
+    }
+
+    private fun clickDebounce(): Boolean {
+        val current = isClickedAllowed
+        if (isClickedAllowed) {
+            isClickedAllowed = false
+            handler.postDelayed({ isClickedAllowed = true }, Constants.CLICK_DEBOUNCE_DELAY)
+        }
+        return current
     }
 
     companion object {
