@@ -79,7 +79,7 @@ class SearchActivity : AppCompatActivity() {
         clickOnTrack(it)
     }
 
-    private var isClickedAllowed = true
+    private var isClickAllowed = true
     private val handler = Handler(Looper.getMainLooper())
     private val searchRunnable = Runnable { getTrack() }
 
@@ -160,6 +160,8 @@ class SearchActivity : AppCompatActivity() {
 
         buttonClearHistory.setOnClickListener {
             clearTracksHistory()
+            historyAdapter.notifyDataSetChanged()
+
         }
     }
 
@@ -209,6 +211,8 @@ class SearchActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 buttonClearSearch.visibility = buttonSearchClearVisibility(s)
                 showContent(Content.LOADING)
+                textSearch = searchEditText.text.toString()
+
                 if (searchEditText.hasFocus() && textSearch.isNotEmpty()) {
                     searchDebounce()
                     initHistory()
@@ -225,7 +229,6 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                textSearch = searchEditText.text.toString()
 
             }
         }
@@ -284,28 +287,37 @@ class SearchActivity : AppCompatActivity() {
                 historyList.visibility = View.GONE
                 placeholderNothingWasFound.visibility = View.VISIBLE
                 placeholderCommunicationsProblem.visibility = View.GONE
-
+                progressBar.visibility = View.GONE
             }
             Content.ERROR -> {
                 recyclerView.visibility = View.GONE
                 historyList.visibility = View.GONE
                 placeholderNothingWasFound.visibility = View.GONE
                 placeholderCommunicationsProblem.visibility = View.VISIBLE
+                progressBar.visibility = View.GONE
             }
             Content.SEARCH_RESULT -> {
                 recyclerView.visibility = View.VISIBLE
                 historyList.visibility = View.GONE
                 placeholderNothingWasFound.visibility = View.GONE
                 placeholderCommunicationsProblem.visibility = View.GONE
+                progressBar.visibility = View.GONE
             }
             Content.TRACKS_HISTORY -> {
                 recyclerView.visibility = View.GONE
                 historyList.visibility = View.VISIBLE
                 placeholderNothingWasFound.visibility = View.GONE
                 placeholderCommunicationsProblem.visibility = View.GONE
+                progressBar.visibility = View.GONE
             }
 
-            Content.LOADING -> progressBar.visibility = View.VISIBLE
+            Content.LOADING -> {
+                recyclerView.visibility = View.GONE
+                historyList.visibility = View.GONE
+                placeholderNothingWasFound.visibility = View.GONE
+                placeholderCommunicationsProblem.visibility = View.GONE
+                progressBar.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -315,10 +327,10 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun clickDebounce(): Boolean {
-        val current = isClickedAllowed
-        if (isClickedAllowed) {
-            isClickedAllowed = false
-            handler.postDelayed({ isClickedAllowed = true }, Constants.CLICK_DEBOUNCE_DELAY)
+        val current = isClickAllowed
+        if (isClickAllowed) {
+            isClickAllowed = false
+            handler.postDelayed({ isClickAllowed = true }, Constants.CLICK_DEBOUNCE_DELAY)
         }
         return current
     }
