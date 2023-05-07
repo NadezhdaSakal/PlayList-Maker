@@ -1,5 +1,6 @@
 package com.sakal.playlistmaker
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -50,7 +51,6 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var prefs: SharedPreferences
     private lateinit var progressBar: ProgressBar
 
-
     private var textSearch = ""
 
     private val okHttpClient = OkHttpClient.Builder()
@@ -92,8 +92,6 @@ class SearchActivity : AppCompatActivity() {
 
         initSearch()
 
-        initProgressBar()
-
         inputText()
 
         initSearchResults()
@@ -133,15 +131,14 @@ class SearchActivity : AppCompatActivity() {
     private fun clickOnTrack(track: Track) {
         if (clickDebounce()) {
             searchHistory.add(track)
-            val intent = Intent(this, AudioplayerActivity::class.java).apply {
+            val intent = Intent(this, AudioPlayerActivity::class.java).apply {
                 putExtra(Constants.TRACK, Gson().toJson(track))
             }
             startActivity(intent)
         }
     }
 
-
-
+    @SuppressLint("NotifyDataSetChanged")
     private fun initHistory() {
         buttonClearHistory = findViewById(R.id.button_clear_history)
         historyList = findViewById(R.id.history_list)
@@ -198,16 +195,12 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun initProgressBar() {
-        progressBar = findViewById(R.id.searchProgressBar)
-
-    }
-
     private fun inputText() {
         val simpleTextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 buttonClearSearch.visibility = buttonSearchClearVisibility(s)
                 showContent(Content.LOADING)
@@ -215,8 +208,7 @@ class SearchActivity : AppCompatActivity() {
 
                 if (searchEditText.hasFocus() && textSearch.isNotEmpty()) {
                     searchDebounce()
-                    initHistory()
-
+                    historyAdapter.notifyDataSetChanged()
                 } else if (searchEditText.hasFocus() && s?.isNotEmpty() == false && searchHistory.get()
                         .isNotEmpty()
                 ) {
@@ -233,7 +225,6 @@ class SearchActivity : AppCompatActivity() {
             }
         }
         searchEditText.addTextChangedListener(simpleTextWatcher)
-
 
     }
 
@@ -280,6 +271,8 @@ class SearchActivity : AppCompatActivity() {
     private fun showContent(content: Content) {
         placeholderNothingWasFound = findViewById(R.id.placeholderNothingWasFound)
         placeholderCommunicationsProblem = findViewById(R.id.placeholderCommunicationsProblem)
+        progressBar = findViewById(R.id.searchProgressBar)
+
 
         when (content) {
             Content.NOT_FOUND -> {
@@ -310,7 +303,6 @@ class SearchActivity : AppCompatActivity() {
                 placeholderCommunicationsProblem.visibility = View.GONE
                 progressBar.visibility = View.GONE
             }
-
             Content.LOADING -> {
                 recyclerView.visibility = View.GONE
                 historyList.visibility = View.GONE

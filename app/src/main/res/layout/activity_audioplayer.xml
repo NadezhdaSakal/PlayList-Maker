@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSecondary"
     android:theme="@style/Theme.PlaylistMaker"
-    tools:context=".AudioplayerActivity">
+    tools:context=".AudioPlayerActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/player_toolbar"
@@ -104,20 +104,13 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/play_track"
-        android:layout_width="84dp"
-        android:layout_height="84dp"
+        style="@style/buttonPlayPause"
         android:contentDescription="@string/play"
-        android:foregroundGravity="center"
-        android:src="@drawable/play"
-        app:backgroundTint="?attr/colorOnSecondary"
-        app:elevation="0dp"
-        app:fabCustomSize="84dp"
+        android:src="@drawable/play_arrow"
         app:layout_constraintBottom_toTopOf="@id/duration"
         app:layout_constraintEnd_toStartOf="@id/button_add_to_favorites"
         app:layout_constraintStart_toEndOf="@id/button_add_to_playlist"
-        app:layout_constraintTop_toBottomOf="@id/artistName"
-        app:maxImageSize="64dp"
-        app:tint="?attr/colorSecondary" />
+        app:layout_constraintTop_toBottomOf="@id/artistName" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_add_to_favorites"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="MainBtn" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/height_0</item>
@@ -104,6 +105,18 @@
         <item name="android:textColor">@color/grey</item>
         <item name="android:letterSpacing">0</item>
         <item name="fontWeight">400</item>
+    </style>
+
+    <style name="buttonPlayPause">
+        <item name="android:layout_width">84dp</item>
+        <item name="android:layout_height">84dp</item>
+        <item name="maxImageSize">64dp</item>
+        <item name="fabCustomSize">84dp</item>
+        <item name="android:foregroundGravity">center</item>
+        <item name="elevation">0dp</item>
+        <item name="backgroundTint">?attr/colorOnSecondary</item>
+        <item name="tint">?attr/colorSecondary</item>
+
     </style>
 
 
