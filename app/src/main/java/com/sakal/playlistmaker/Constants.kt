@@ -21,8 +21,4 @@ object Constants {
     const val RELOAD_PROGRESS = 300L
     const val CURRENT_TIME_ZERO = "00:00"
 
-
-
-
-
 }

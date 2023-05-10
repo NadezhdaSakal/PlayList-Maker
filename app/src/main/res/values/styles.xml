@@ -107,7 +107,7 @@
         <item name="fontWeight">400</item>
     </style>
 
-    <style name="buttonPlayPause">
+    <style name="ButtonPlayPause">
         <item name="android:layout_width">84dp</item>
         <item name="android:layout_height">84dp</item>
         <item name="maxImageSize">64dp</item>

@@ -15,10 +15,11 @@ import com.google.gson.Gson
 import com.sakal.playlistmaker.model.Track
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.appcompat.widget.*
 
 class AudioPlayerActivity : AppCompatActivity() {
 
-    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private lateinit var toolbar: Toolbar
     private lateinit var trackName: TextView
     private lateinit var trackTime: TextView
     private lateinit var artistName: TextView
@@ -47,26 +48,6 @@ class AudioPlayerActivity : AppCompatActivity() {
                 Constants.RELOAD_PROGRESS
             )
         }
-    }
-
-    private fun progressTimeControl() {
-        when (playerState) {
-            STATE_PLAYING -> {
-                mainHandler?.postDelayed(
-                    runThread,
-                    Constants.RELOAD_PROGRESS
-                )
-            }
-            STATE_PAUSED -> {
-                mainHandler?.removeCallbacks(runThread)
-            }
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mediaPlayer.release()
-        mainHandler?.removeCallbacks(runThread)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -151,7 +132,6 @@ class AudioPlayerActivity : AppCompatActivity() {
         }
     }
 
-
     private fun preparePlayer(track: Track) {
         mediaPlayer.setDataSource(track.previewUrl)
         mediaPlayer.prepareAsync()
@@ -162,6 +142,20 @@ class AudioPlayerActivity : AppCompatActivity() {
         mediaPlayer.setOnCompletionListener {
             buttonPlay.setImageResource(play)
             playerState = STATE_PREPARED
+        }
+    }
+
+    private fun progressTimeControl() {
+        when (playerState) {
+            STATE_PLAYING -> {
+                mainHandler?.postDelayed(
+                    runThread,
+                    Constants.RELOAD_PROGRESS
+                )
+            }
+            STATE_PAUSED -> {
+                mainHandler?.removeCallbacks(runThread)
+            }
         }
     }
 
@@ -191,6 +185,12 @@ class AudioPlayerActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         pausePlayer()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer.release()
+        mainHandler?.removeCallbacks(runThread)
     }
 
     companion object {

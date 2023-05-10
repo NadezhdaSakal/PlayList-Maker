@@ -104,7 +104,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/play_track"
-        style="@style/buttonPlayPause"
+        style="@style/ButtonPlayPause"
         android:contentDescription="@string/play"
         android:src="@drawable/play_arrow"
         app:layout_constraintBottom_toTopOf="@id/duration"
