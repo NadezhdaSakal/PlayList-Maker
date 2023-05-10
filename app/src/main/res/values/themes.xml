@@ -13,9 +13,6 @@
         <item name="android:statusBarColor">@color/status_bar_color</item>
 
         <item name="button_player">@color/grey</item>
-
-
     </style>
-
 
 </resources>

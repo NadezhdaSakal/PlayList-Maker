@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+
 
 class SettingsActivity : AppCompatActivity() {
-    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private lateinit var toolbar: Toolbar
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private lateinit var themeSwitcher: Switch

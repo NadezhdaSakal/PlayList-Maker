@@ -17,6 +17,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -39,7 +40,7 @@ class SearchActivity : AppCompatActivity() {
 
     lateinit var searchEditText: EditText
     lateinit var buttonClearSearch: ImageView
-    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private lateinit var toolbar: Toolbar
     private lateinit var placeholderNothingWasFound: TextView
     private lateinit var placeholderCommunicationsProblem: LinearLayout
     private lateinit var buttonRetry: Button
@@ -158,7 +159,6 @@ class SearchActivity : AppCompatActivity() {
         buttonClearHistory.setOnClickListener {
             clearTracksHistory()
             historyAdapter.notifyDataSetChanged()
-
         }
     }
 
@@ -209,9 +209,9 @@ class SearchActivity : AppCompatActivity() {
                 if (searchEditText.hasFocus() && textSearch.isNotEmpty()) {
                     searchDebounce()
                     historyAdapter.notifyDataSetChanged()
-                } else if (searchEditText.hasFocus() && s?.isNotEmpty() == false && searchHistory.get()
-                        .isNotEmpty()
-                ) {
+                } else
+                    if (searchEditText.hasFocus() && s?.isNotEmpty() == false && searchHistory.get()
+                        .isNotEmpty()) {
                     handler.removeCallbacks(searchRunnable)
                     showContent(Content.TRACKS_HISTORY)
                 } else {

@@ -116,7 +116,6 @@
         <item name="elevation">0dp</item>
         <item name="backgroundTint">?attr/colorOnSecondary</item>
         <item name="tint">?attr/colorSecondary</item>
-
     </style>
 
 

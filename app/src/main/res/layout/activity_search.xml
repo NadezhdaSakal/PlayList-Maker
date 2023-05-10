@@ -76,7 +76,6 @@
             android:layout_height="@dimen/progress_bar_size"
             android:layout_gravity="center"
             android:indeterminateTint="@color/blue"
-            android:progress="45"
             android:visibility="gone"
             tools:visibility="visible"/>
 
