@@ -35,7 +35,5 @@
     <dimen name="icon_size_24">24dp</dimen>
 
     <dimen name="size_button">52dp</dimen>
-
-
-
+    <dimen name="progress_bar_size">44dp</dimen>
 </resources>

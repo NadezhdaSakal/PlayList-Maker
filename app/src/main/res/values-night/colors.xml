@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <color name="status_bar_color">#000000</color>
 
     <color name="settings_icon_color">#FFFFFF</color>
@@ -18,6 +17,4 @@
     <color name="search_result_track_text_color">#FFFFFF</color>
     <color name="search_result_artist_text_color">#FFFFFF</color>
     <color name="player_text_color">#FFFFFF</color>
-
-
 </resources>
