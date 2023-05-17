@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.TracksDiffCallback
-import com.sakal.playlistmaker.domain.Track
+import com.sakal.playlistmaker.data.Track
 import com.sakal.playlistmaker.viewHolders.TrackViewHolder
 
 class TrackRecyclerAdapter(private val clickListener: TrackClickListener) : RecyclerView.Adapter<TrackViewHolder>() {
