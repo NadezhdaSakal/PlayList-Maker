@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.sakal.playlistmaker.model.Track
+import com.sakal.playlistmaker.domain.Track
 
 
 class SearchHistory(private val preferences: SharedPreferences) {

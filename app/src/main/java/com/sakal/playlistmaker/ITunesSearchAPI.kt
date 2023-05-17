@@ -1,4 +1,4 @@
-package com.sakal.playlistmaker.model
+package com.sakal.playlistmaker
 
 import retrofit2.Call
 import retrofit2.http.GET
