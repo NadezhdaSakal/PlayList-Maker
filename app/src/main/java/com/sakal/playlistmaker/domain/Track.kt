@@ -1,4 +1,4 @@
-package com.sakal.playlistmaker.data
+package com.sakal.playlistmaker.domain
 
 data class Track(
     val trackId: Int,

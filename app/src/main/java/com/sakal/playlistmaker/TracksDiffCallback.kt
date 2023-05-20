@@ -1,7 +1,7 @@
 package com.sakal.playlistmaker
 
 import androidx.recyclerview.widget.DiffUtil
-import com.sakal.playlistmaker.data.Track
+import com.sakal.playlistmaker.domain.Track
 
 class TracksDiffCallback(
     private val trackList: ArrayList<Track>,

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.sakal.playlistmaker.R
-import com.sakal.playlistmaker.data.Track
+import com.sakal.playlistmaker.domain.Track
 import java.text.SimpleDateFormat
 import java.util.*
 

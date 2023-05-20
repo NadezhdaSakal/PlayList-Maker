@@ -6,10 +6,9 @@ import com.sakal.playlistmaker.domain.PlayerStateListener
 import android.os.Handler
 import android.os.Looper
 import com.sakal.playlistmaker.Constants
-import com.sakal.playlistmaker.data.Track
+import com.sakal.playlistmaker.domain.Track
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class PlayerPresenter(private val view: PlayerView) : PlayerStateListener {
 

@@ -2,7 +2,6 @@ package com.sakal.playlistmaker.domain
 
 import com.sakal.playlistmaker.data.MediaPlayerListener
 import com.sakal.playlistmaker.data.PlayerRepo
-import com.sakal.playlistmaker.data.Track
 
 class Interactor(private val playerStateListener: PlayerStateListener) : MediaPlayerListener {
 
