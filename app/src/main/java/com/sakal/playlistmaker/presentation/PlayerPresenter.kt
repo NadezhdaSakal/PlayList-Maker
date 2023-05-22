@@ -6,7 +6,7 @@ import com.sakal.playlistmaker.domain.PlayerStateListener
 import android.os.Handler
 import android.os.Looper
 import com.sakal.playlistmaker.Constants
-import com.sakal.playlistmaker.domain.Track
+import com.sakal.playlistmaker.domain.models.Track
 import java.text.SimpleDateFormat
 import java.util.*
 

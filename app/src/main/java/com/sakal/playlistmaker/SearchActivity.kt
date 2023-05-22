@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.sakal.playlistmaker.adapters.TrackRecyclerAdapter
 import com.sakal.playlistmaker.data.ApiConstants
-import com.sakal.playlistmaker.domain.Track
+import com.sakal.playlistmaker.domain.models.Track
 import com.sakal.playlistmaker.ui.AudioPlayerActivity
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -12,7 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.R
-import com.sakal.playlistmaker.domain.Track
+import com.sakal.playlistmaker.domain.models.Track
 import com.sakal.playlistmaker.presentation.PlayerPresenter
 import com.sakal.playlistmaker.presentation.PlayerView
 
