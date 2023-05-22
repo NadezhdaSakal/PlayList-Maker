@@ -22,10 +22,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.sakal.playlistmaker.adapters.TrackRecyclerAdapter
-import com.sakal.playlistmaker.model.ApiConstants
-import com.sakal.playlistmaker.model.Track
-import com.sakal.playlistmaker.model.TrackResponse
-import com.sakal.playlistmaker.model.iTunesSearchAPI
+import com.sakal.playlistmaker.data.ApiConstants
+import com.sakal.playlistmaker.domain.models.Track
+import com.sakal.playlistmaker.ui.AudioPlayerActivity
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
