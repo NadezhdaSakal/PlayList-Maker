@@ -1,0 +1,127 @@
+package com.sakal.playlistmaker.player.ui.activity
+
+import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.sakal.playlistmaker.Constants
+import com.sakal.playlistmaker.Constants.TRACK
+import com.sakal.playlistmaker.R
+import com.sakal.playlistmaker.databinding.ActivityAudioplayerBinding
+import com.sakal.playlistmaker.player.domain.model.PlayerState
+import com.sakal.playlistmaker.player.ui.view_model.AudioPlayerViewModel
+import com.sakal.playlistmaker.search.domain.Track
+import java.text.SimpleDateFormat
+import java.util.*
+
+class AudioPlayerActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityAudioplayerBinding
+
+    private lateinit var viewModel: AudioPlayerViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityAudioplayerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        viewModel = ViewModelProvider(this)[AudioPlayerViewModel::class.java]
+        viewModel.observeState().observe(this) {
+            render(it)
+        }
+
+        binding.playerToolbar.setNavigationOnClickListener {
+            finish()
+        }
+        val track = intent.getSerializableExtra(TRACK) as Track
+
+        showTrack(track)
+
+        binding.playTrack.isEnabled = false
+
+        viewModel.preparePlayer(track.previewUrl)
+
+        binding.playTrack.setOnClickListener {
+            viewModel.playbackControl()
+        }
+
+    }
+
+    private fun render(state: PlayerState) {
+        when (state) {
+            is PlayerState.Preparing -> {
+                binding.playerProgressBar.visibility = View.VISIBLE
+            }
+
+            is PlayerState.Stopped -> {
+                binding.playTrack.isEnabled = true
+                binding.playerProgressBar.visibility = View.GONE
+                binding.playTrack.setImageResource(R.drawable.play_arrow)
+                binding.progress.setText(R.string.playing_time)
+            }
+
+            is PlayerState.Paused -> {
+                binding.playTrack.setImageResource(R.drawable.play_arrow)
+            }
+
+            is PlayerState.Playing -> {
+                binding.playTrack.setImageResource(R.drawable.pause)
+            }
+
+            is PlayerState.UpdatePlayingTime -> {
+                binding.progress.text = state.playingTime
+            }
+        }
+    }
+
+    private fun showTrack(track: Track) {
+
+        binding.apply {
+            Glide
+                .with(trackIcon)
+                .load(track.artworkUrl100.replaceAfterLast('/', "512x512bb.jpg"))
+                .placeholder(R.drawable.placeholder_512)
+                .centerCrop()
+                .transform(
+                    RoundedCorners(
+                        resources.getDimensionPixelSize(
+                            R.dimen.corner_radius_8
+                        )
+                    )
+                )
+                .into(trackIcon)
+
+            trackName.text = track.trackName
+            trackName.isSelected = true
+            artistName.text = track.artistName
+            trackName.isSelected = true
+            primaryGenreName.text = track.primaryGenreName
+            country.text = track.country
+
+            trackTime.text =
+                SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
+
+            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(track.releaseDate)
+            if (date != null) {
+                val formattedDatesString =
+                    SimpleDateFormat("yyyy", Locale.getDefault()).format(date)
+                releaseDateData.text = formattedDatesString
+            }
+
+            if (track.collectionName.isNotEmpty()) {
+                albumName.text = track.collectionName
+            } else {
+                album.visibility = View.GONE
+                albumName.visibility = View.GONE
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.pausePlayer()
+    }
+
+}

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSecondary"
     android:theme="@style/Theme.PlaylistMaker"
-    tools:context=".ui.AudioPlayerActivity">
+    tools:context=".player.ui.activity.AudioPlayerActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/player_toolbar"
@@ -111,6 +111,17 @@
         app:layout_constraintEnd_toStartOf="@id/button_add_to_favorites"
         app:layout_constraintStart_toEndOf="@id/button_add_to_playlist"
         app:layout_constraintTop_toBottomOf="@id/artistName" />
+
+    <ProgressBar
+        android:id="@+id/player_progressBar"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:indeterminateTint="@color/blue"
+        app:layout_constraintBottom_toBottomOf="@+id/play_track"
+        app:layout_constraintEnd_toEndOf="@+id/play_track"
+        app:layout_constraintStart_toStartOf="@+id/play_track"
+        app:layout_constraintTop_toTopOf="@+id/play_track" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_add_to_favorites"
