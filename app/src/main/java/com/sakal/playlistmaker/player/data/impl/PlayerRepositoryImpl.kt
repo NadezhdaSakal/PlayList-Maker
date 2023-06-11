@@ -1,4 +1,4 @@
-package com.sakal.playlistmaker.player.data
+package com.sakal.playlistmaker.player.data.impl
 
 import android.media.MediaPlayer
 import com.sakal.playlistmaker.player.domain.api.PlayerRepository

@@ -1,4 +1,10 @@
-package com.sakal.playlistmaker.search.domain
+package com.sakal.playlistmaker.search.domain.impl
+
+import com.sakal.playlistmaker.search.domain.HistoryDataStore
+import com.sakal.playlistmaker.search.domain.SearchInteractor
+import com.sakal.playlistmaker.search.domain.SearchRepo
+import com.sakal.playlistmaker.search.domain.Track
+import com.sakal.playlistmaker.search.domain.TracksLoadResultListener
 
 class SearchInteractorImpl(
     private val historySearchDataStore: HistoryDataStore,

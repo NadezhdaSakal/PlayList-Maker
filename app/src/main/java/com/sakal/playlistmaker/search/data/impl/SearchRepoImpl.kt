@@ -1,4 +1,4 @@
-package com.sakal.playlistmaker.search.data
+package com.sakal.playlistmaker.search.data.impl
 
 import com.sakal.playlistmaker.ApiConstants
 import com.sakal.playlistmaker.search.data.dto.TrackDto
