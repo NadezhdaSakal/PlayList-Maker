@@ -10,7 +10,6 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.sakal.playlistmaker.creator.Creator
 import com.sakal.playlistmaker.databinding.ActivitySearchBinding
@@ -77,7 +76,6 @@ class SearchActivity : AppCompatActivity() {
             is SearchState.History -> showHistory(screenState.tracks)
             is SearchState.Loading -> showLoading()
             is SearchState.Empty -> showEmptyResult()
-            is SearchState.changeTextSearch -> showChangeTextSearch()
         }
     }
 
@@ -88,13 +86,6 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun showChangeTextSearch() {
-        binding.placeholderNothingWasFound.isVisible = false
-        binding.placeholderCommunicationsProblem.isVisible = false
-        binding.searchProgressBar.visibility = View.GONE
-        binding.buttonClearSearchForm.visibility = View.GONE
-        binding.buttonClearHistory.isEnabled = true
-    }
 
     private fun initSearch() {
         binding.inputSearchForm.setOnEditorActionListener { _, actionId, _ ->
@@ -133,8 +124,9 @@ class SearchActivity : AppCompatActivity() {
                     viewModel.searchDebounce()
                     adapterHistory.notifyDataSetChanged()
                 } else
-                    if (binding.inputSearchForm.hasFocus() && s?.isNotEmpty() == false && viewModel.showHistoryTracks()
-                            .isNotEmpty()) {
+                    if (binding.inputSearchForm.hasFocus() && (s?.isNotEmpty() == false) && adapterHistory.tracks
+                            .isNotEmpty()
+                    ) {
                         handler.removeCallbacks(searchRunnable)
                         showContent(Content.TRACKS_HISTORY)
                     } else {

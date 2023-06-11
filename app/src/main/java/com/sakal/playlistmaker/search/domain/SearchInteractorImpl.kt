@@ -2,8 +2,8 @@ package com.sakal.playlistmaker.search.domain
 
 class SearchInteractorImpl(
     private val historySearchDataStore: HistoryDataStore,
-    private val repository: SearchRepo,
-) : SearchInteractor {
+    private val repository: SearchRepo, ) : SearchInteractor {
+
     override fun clearHistory() {
         historySearchDataStore.clearHistory()
     }

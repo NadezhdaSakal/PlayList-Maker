@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.sakal.playlistmaker.Constants
-import com.sakal.playlistmaker.Constants.TRACK
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.databinding.ActivityAudioplayerBinding
 import com.sakal.playlistmaker.player.domain.model.PlayerState
@@ -35,7 +34,8 @@ class AudioPlayerActivity : AppCompatActivity() {
         binding.playerToolbar.setNavigationOnClickListener {
             finish()
         }
-        val track = intent.getSerializableExtra(TRACK) as Track
+        @Suppress("DEPRECATION")
+        val track = intent.getSerializableExtra(Constants.TRACK) as Track
 
         showTrack(track)
 

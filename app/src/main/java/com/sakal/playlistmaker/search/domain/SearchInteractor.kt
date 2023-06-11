@@ -7,4 +7,5 @@ interface SearchInteractor{
     fun writeHistory(historyTracks: List<Track>)
     fun unsubscribeFromTracksLoadResult()
     fun subscribeOnTracksLoadResult(listener: TracksLoadResultListener)
+
 }

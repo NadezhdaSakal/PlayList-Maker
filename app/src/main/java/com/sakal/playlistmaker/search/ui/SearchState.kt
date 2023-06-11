@@ -9,7 +9,6 @@ sealed class SearchState {
     data class Tracks(val tracks: List<Track>) : SearchState()
     object Error : SearchState()
     object Empty : SearchState()
-    object changeTextSearch : SearchState()
 
 
 }
