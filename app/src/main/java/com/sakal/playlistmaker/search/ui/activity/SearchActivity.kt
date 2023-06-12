@@ -31,10 +31,9 @@ class SearchActivity : ComponentActivity() {
 
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
-        binding.searchToolbar.apply {
-            setNavigationOnClickListener {
-                router.goBack()
-            }
+        binding.searchToolbar.setNavigationOnClickListener {
+            router.goBack()
+
         }
 
         viewModel.screenState.observe(this) { screenState ->
@@ -80,11 +79,10 @@ class SearchActivity : ComponentActivity() {
             }
         }
 
-        binding.buttonClearHistory.apply {
-            setOnClickListener {
+        binding.buttonClearHistory.setOnClickListener {
                 viewModel.clearHistory()
             }
-        }
+
 
         binding.buttonRetry.apply {
             setOnClickListener {
@@ -126,7 +124,8 @@ class SearchActivity : ComponentActivity() {
                         viewModel.showHistory()
                     }
                     viewModel.searchDebounce(binding.inputSearchForm.text.toString())
-                    binding.buttonClearSearchForm.visibility = clearButtonVisibility(text.toString())
+                    binding.buttonClearSearchForm.visibility =
+                        clearButtonVisibility(text.toString())
                 }
             }
     }
