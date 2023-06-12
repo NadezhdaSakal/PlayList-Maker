@@ -1,18 +1,29 @@
 package com.sakal.playlistmaker.search.domain
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
-@Parcelize
 data class Track(
+    val trackId: Int,
     val trackName: String,
     val artistName: String,
-    val trackTimeMillis: Long,
-    val artworkUrl100: String,
-    val trackId: String,
-    val collectionName: String,
-    val releaseDate: String,
-    val primaryGenreName: String,
+    val trackTime: String?,
+    val image: String,
+    val album: String,
+    val year: String?,
+    val genre: String,
     val country: String,
-    val previewUrl: String
-): Parcelable
+    val previewUrl: String?
+) : Serializable {
+
+    override fun equals(other: Any?): Boolean {
+            return if (other !is Track) {
+                false
+            } else {
+                other.trackId == trackId
+            }
+        }
+        override fun hashCode(): Int {
+            return trackId
+        }
+        fun getCoverArtwork() = image.replaceAfterLast('/', "512x512bb.jpg")
+    }

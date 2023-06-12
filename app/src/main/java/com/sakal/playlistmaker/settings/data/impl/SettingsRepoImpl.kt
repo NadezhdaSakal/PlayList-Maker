@@ -2,9 +2,9 @@ package com.sakal.playlistmaker.settings.data.impl
 
 import androidx.appcompat.app.AppCompatDelegate
 import com.sakal.playlistmaker.settings.data.LocalStorage
-import com.sakal.playlistmaker.settings.domain.api.SettingsRepository
+import com.sakal.playlistmaker.settings.domain.SettingsRepository
 
-class SettingsRepositoryImpl(private val themeStorage: LocalStorage) : SettingsRepository {
+class SettingsRepoImpl(private val themeStorage: LocalStorage) : SettingsRepository {
     override fun switchTheme(darkThemeEnabled: Boolean) {
         themeStorage.switch(darkThemeEnabled)
         applyCurrentTheme()

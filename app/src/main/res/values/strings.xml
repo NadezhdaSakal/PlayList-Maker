@@ -32,5 +32,7 @@
     <string name="add_to_favorites">Добавить в избранное</string>
     <string name="playing_time">00:00</string>
     <string name="album_icon">Обложка альбома</string>
+    <string name="track_duration_time_format" translatable="false">mm:ss</string>
+
 
 </resources>

@@ -1,7 +1,7 @@
 package com.sakal.playlistmaker.settings.domain.impl
 
-import com.sakal.playlistmaker.settings.domain.api.SettingsInteractor
-import com.sakal.playlistmaker.settings.domain.api.SettingsRepository
+import com.sakal.playlistmaker.settings.domain.SettingsInteractor
+import com.sakal.playlistmaker.settings.domain.SettingsRepository
 
 class SettingsInteractorImpl(private val themeSwitchRepository: SettingsRepository) :
     SettingsInteractor {

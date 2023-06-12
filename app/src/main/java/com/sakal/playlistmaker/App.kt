@@ -2,17 +2,16 @@ package com.sakal.playlistmaker
 
 import android.app.Application
 import com.sakal.playlistmaker.creator.Creator
-import com.sakal.playlistmaker.settings.domain.api.SettingsInteractor
+import com.sakal.playlistmaker.settings.domain.SettingsInteractor
 
 
 class App : Application() {
-    lateinit var settingsInteractor: SettingsInteractor
+    lateinit var themeSwitcherInteractor: SettingsInteractor
 
     override fun onCreate() {
         super.onCreate()
-
-        settingsInteractor = Creator.provideSettingsInteractor(this)
-        settingsInteractor.applyCurrentTheme()
+        themeSwitcherInteractor = Creator.provideThemeSwitchInteractor(this)
+        themeSwitcherInteractor.applyCurrentTheme()
     }
 }
 

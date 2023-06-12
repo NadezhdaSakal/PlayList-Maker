@@ -5,8 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sakal.playlistmaker.App
 
+
 class SettingsViewModel(application: App) : AndroidViewModel(application) {
-    private val switchThemeInteractor = application.settingsInteractor
+    private val switchThemeInteractor = application.themeSwitcherInteractor
     fun switchTheme(isChecked: Boolean) {
         switchThemeInteractor.switch(isChecked)
     }
