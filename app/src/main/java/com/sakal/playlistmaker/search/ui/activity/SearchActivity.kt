@@ -1,6 +1,5 @@
 package com.sakal.playlistmaker.search.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -9,10 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.databinding.ActivitySearchBinding
-import com.sakal.playlistmaker.player.ui.activity.AudioPlayerActivity
-import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.search.ui.Router
 import com.sakal.playlistmaker.search.ui.adapters.TrackAdapter
 import com.sakal.playlistmaker.search.ui.view_model.SearchViewModel
@@ -78,9 +74,9 @@ class SearchActivity : ComponentActivity() {
     private fun handleButtons() {
         binding.buttonClearSearchForm.apply {
             setOnClickListener {
+                viewModel.showHistory()
                 binding.inputSearchForm.text.clear()
                 binding.inputSearchForm.onEditorAction(EditorInfo.IME_ACTION_DONE)
-                viewModel.showHistory()
             }
         }
 
@@ -103,7 +99,7 @@ class SearchActivity : ComponentActivity() {
         trackAdapter = TrackAdapter {
             if (viewModel.trackOnClickDebounce()) {
                 viewModel.addToHistory(it)
-                navigateTo(AudioPlayerActivity::class.java, it)
+                router.sendToMedia(it)
             }
         }
 
@@ -156,11 +152,6 @@ class SearchActivity : ComponentActivity() {
         return false
     }
 
-    private fun navigateTo(clazz: Class<out ComponentActivity>, track: Track) {
-        val intent = Intent(this, clazz)
-        intent.putExtra(Constants.TRACK, track)
-        startActivity(intent)
-    }
 
     companion object {
         private const val INPUT_TEXT = "INPUT_TEXT"

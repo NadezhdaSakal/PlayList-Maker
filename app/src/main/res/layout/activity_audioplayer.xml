@@ -112,17 +112,6 @@
         app:layout_constraintStart_toEndOf="@id/button_add_to_playlist"
         app:layout_constraintTop_toBottomOf="@id/artistName" />
 
-    <ProgressBar
-        android:id="@+id/player_progressBar"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:indeterminateTint="@color/blue"
-        app:layout_constraintBottom_toBottomOf="@+id/play_track"
-        app:layout_constraintEnd_toEndOf="@+id/play_track"
-        app:layout_constraintStart_toStartOf="@+id/play_track"
-        app:layout_constraintTop_toTopOf="@+id/play_track" />
-
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_add_to_favorites"
         android:layout_width="@dimen/size_button"
