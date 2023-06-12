@@ -1,5 +1,6 @@
 package com.sakal.playlistmaker.search.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -8,7 +9,10 @@ import androidx.activity.ComponentActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.databinding.ActivitySearchBinding
+import com.sakal.playlistmaker.player.ui.activity.AudioPlayerActivity
+import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.search.ui.Router
 import com.sakal.playlistmaker.search.ui.adapters.TrackAdapter
 import com.sakal.playlistmaker.search.ui.view_model.SearchViewModel
@@ -17,7 +21,8 @@ import com.sakal.playlistmaker.search.ui.view_model.SearchViewModel
 class SearchActivity : ComponentActivity() {
     private lateinit var binding: ActivitySearchBinding
     private lateinit var viewModel: SearchViewModel
-    private lateinit var trackAdapter: TrackAdapter
+    private lateinit var searchAdapter: TrackAdapter
+    private lateinit var historyAdapter: TrackAdapter
     private lateinit var router: Router
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,12 +43,14 @@ class SearchActivity : ComponentActivity() {
 
         viewModel.screenState.observe(this) { screenState ->
             if (viewModel.isReadyToRender(screenState, binding.inputSearchForm.text.toString())) {
-                trackAdapter.setTracks(screenState.tracks)
+                searchAdapter.setTracks(screenState.tracks)
                 screenState.render(binding)
             }
         }
 
-        initRecycler()
+        initSearchResults()
+
+        initHistory()
 
         initEditText(savedInstanceState)
 
@@ -93,18 +100,32 @@ class SearchActivity : ComponentActivity() {
         }
     }
 
-    private fun initRecycler() {
-        trackAdapter = TrackAdapter {
+    private fun initSearchResults() {
+        searchAdapter = TrackAdapter {
             if (viewModel.trackOnClickDebounce()) {
                 viewModel.addToHistory(it)
-                router.sendToMedia(it)
+                navigateTo(AudioPlayerActivity::class.java, it)
             }
         }
 
         binding.recyclerViewSearch.apply {
-            adapter = trackAdapter
+            adapter = searchAdapter
             layoutManager = LinearLayoutManager(this.context)
         }
+
+    }
+
+    private  fun initHistory() {
+
+        historyAdapter = TrackAdapter {
+            navigateTo(AudioPlayerActivity::class.java, it)
+        }
+
+        binding.recyclerViewHistory.apply {
+            adapter = historyAdapter
+            layoutManager = LinearLayoutManager(this.context)
+        }
+
     }
 
     private fun initEditText(savedInstanceState: Bundle?) {
@@ -149,6 +170,12 @@ class SearchActivity : ComponentActivity() {
             }
         }
         return false
+    }
+
+    private fun navigateTo(clazz: Class<out ComponentActivity>, track: Track) {
+        val intent = Intent(this, clazz)
+        intent.putExtra(Constants.TRACK, track)
+        startActivity(intent)
     }
 
 
