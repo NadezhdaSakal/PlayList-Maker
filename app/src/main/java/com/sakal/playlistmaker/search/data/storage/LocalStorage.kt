@@ -2,17 +2,18 @@ package com.sakal.playlistmaker.search.data.storage
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.search.data.ILocalStorage
-import com.sakal.playlistmaker.search.data.model.*
+import com.sakal.playlistmaker.search.data.model.mapToTrackToStorage
 import com.sakal.playlistmaker.search.domain.Track
 
 class LocalStorage(private val sharedPreferences: SharedPreferences) :
     ILocalStorage {
 
     override fun addToHistory(track: Track) {
-        val searchedTracks = getHistory().map { it.mapToTrackToStorage() } as MutableList
 
+        val searchedTracks = getHistory().map { it.mapToTrackToStorage() } as MutableList
         if (searchedTracks.contains(track.mapToTrackToStorage())) {
             searchedTracks.remove(track)
         }
@@ -28,6 +29,7 @@ class LocalStorage(private val sharedPreferences: SharedPreferences) :
             .apply()
     }
 
+
     override fun clearHistory() {
         sharedPreferences
             .edit()
@@ -35,15 +37,14 @@ class LocalStorage(private val sharedPreferences: SharedPreferences) :
             .apply()
     }
 
-    override fun getHistory(): List<Track> {
+    override fun getHistory(): ArrayList<Track> {
         val json =
             sharedPreferences.getString(Constants.HISTORY_TRACKS_KEY, null) ?: return arrayListOf()
-        val tracksToStorage =
-            Gson().fromJson(json, Array<TrackToStorage>::class.java).toCollection(ArrayList())
-        return tracksToStorage.map { it.mapToTrack() }
+        return Gson().fromJson(json, object : TypeToken<ArrayList<Track>>() {}.type)
     }
-
 }
+
+
 
 
 

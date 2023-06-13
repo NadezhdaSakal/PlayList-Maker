@@ -11,10 +11,13 @@ import com.sakal.playlistmaker.utils.Resource
 import com.sakal.playlistmaker.search.data.model.*
 
 
-class TracksRepoImpl(private val networkClient: NetworkClient, private val localStorage:
-LocalStorage) : TracksRepo {
+class TracksRepoImpl(
+    private val networkClient: NetworkClient, private val localStorage:
+    LocalStorage
+) : TracksRepo {
 
     override fun searchTracks(query: String): Resource<List<Track>> {
+
         val response = networkClient.doRequest(
             TracksSearchRequest(
                 query
@@ -22,7 +25,10 @@ LocalStorage) : TracksRepo {
         )
         return when (response.resultCode) {
             ApiConstants.NO_INTERNET_CONNECTION_CODE -> {
-                Resource.Error(message = ApiConstants.INTERNET_CONNECTION_ERROR, code = ApiConstants.NO_INTERNET_CONNECTION_CODE)
+                Resource.Error(
+                    message = ApiConstants.INTERNET_CONNECTION_ERROR,
+                    code = ApiConstants.NO_INTERNET_CONNECTION_CODE
+                )
             }
             ApiConstants.SUCCESS_CODE -> {
                 Resource.Success((response as TracksSearchResponse).results.map {
