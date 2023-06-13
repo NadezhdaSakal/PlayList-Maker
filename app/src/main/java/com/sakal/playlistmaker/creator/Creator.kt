@@ -22,12 +22,10 @@ import com.sakal.playlistmaker.settings.domain.impl.SettingsInteractorImpl
 
 object Creator {
 
-    private const val LOCAL_STORAGE = "local_storage"
-
     private fun getTracksRepository(context: Context): TracksRepo {
         return TracksRepoImpl(
             RetrofitClient(context),
-            LocalStorage(context.getSharedPreferences(LOCAL_STORAGE, Context.MODE_PRIVATE))
+            LocalStorage(context.getSharedPreferences(Constants.HISTORY_TRACKS_SHARED_PREF, Context.MODE_PRIVATE))
         )
     }
 

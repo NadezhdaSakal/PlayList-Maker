@@ -12,8 +12,8 @@ import com.sakal.playlistmaker.search.data.model.*
 
 
 class TracksRepoImpl(private val networkClient: NetworkClient, private val localStorage:
-LocalStorage) :
-    TracksRepo {
+LocalStorage) : TracksRepo {
+
     override fun searchTracks(query: String): Resource<List<Track>> {
         val response = networkClient.doRequest(
             TracksSearchRequest(

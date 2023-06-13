@@ -8,6 +8,7 @@ import java.util.concurrent.Executors
 
 class TracksInteractorImpl(private val repository: TracksRepo): TracksInteractor {
     private val executor = Executors.newCachedThreadPool()
+
     override fun searchTracks(query: String, consumer: TracksInteractor.TracksConsumer) {
         executor.execute {
             when (val resource = repository.searchTracks(query)){

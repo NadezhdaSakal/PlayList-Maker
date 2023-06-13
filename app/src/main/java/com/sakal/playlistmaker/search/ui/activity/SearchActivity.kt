@@ -31,6 +31,14 @@ class SearchActivity : ComponentActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initSearchResults()
+
+        initHistory()
+
+        initEditText(savedInstanceState)
+
+        handleButtons()
+
         router = Router(this)
 
 
@@ -48,13 +56,6 @@ class SearchActivity : ComponentActivity() {
             }
         }
 
-        initSearchResults()
-
-        initHistory()
-
-        initEditText(savedInstanceState)
-
-        handleButtons()
     }
 
     override fun onResume() {
@@ -116,7 +117,6 @@ class SearchActivity : ComponentActivity() {
     }
 
     private  fun initHistory() {
-
         historyAdapter = TrackAdapter {
             navigateTo(AudioPlayerActivity::class.java, it)
         }
