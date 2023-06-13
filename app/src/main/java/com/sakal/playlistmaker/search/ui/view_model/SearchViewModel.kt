@@ -11,6 +11,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.sakal.playlistmaker.ApiConstants
 import com.sakal.playlistmaker.Constants
+import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.creator.Creator
 import com.sakal.playlistmaker.search.domain.TracksInteractor
 
@@ -18,7 +19,9 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 
     private val tracksInteractor = Creator.provideTracksInteractor(getApplication<Application>())
     private val _screenState = MutableLiveData<SearchScreenState>()
-    val screenState: LiveData<SearchScreenState> = _screenState
+
+    fun observeState(): LiveData<SearchScreenState> = _screenState
+
     private val handler = Handler(Looper.getMainLooper())
     private var lastQuery: String? = null
     private var isClickAllowed = true
@@ -57,22 +60,29 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    fun getTracks (query: String? = lastQuery) {
+    fun getTracks(query: String? = lastQuery) {
         handler.removeCallbacksAndMessages(SEARCH_REQUEST_TOKEN)
         query?.let {
-            _screenState.postValue(SearchScreenState.Loading())
+            _screenState.postValue(SearchScreenState.Loading)
             tracksInteractor.searchTracks(query, object : TracksInteractor.TracksConsumer {
                 override fun consume(foundTracks: List<Track>?, errorMessage: String?, code: Int) {
                     when (code) {
                         ApiConstants.SUCCESS_CODE -> {
+                            val tracks = arrayListOf<Track>()
                             if (foundTracks!!.isNotEmpty()) {
-                                _screenState.postValue(SearchScreenState.Success(foundTracks))
+                                tracks.addAll(foundTracks)
+
+                                _screenState.postValue(SearchScreenState.Success(tracks = tracks))
                             } else {
-                                _screenState.postValue(SearchScreenState.NothingFound())
+                                _screenState.postValue(SearchScreenState.NothingFound)
                             }
                         }
                         else -> {
-                            _screenState.postValue(SearchScreenState.Error())
+                            _screenState.postValue(
+                                SearchScreenState.Error(
+                                    message = getApplication<Application>().getString(R.string.check_internet_connection),
+                                )
+                            )
                         }
                     }
                 }
@@ -86,25 +96,16 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 
     fun clearHistory() {
         tracksInteractor.clearHistory()
-        _screenState.postValue(SearchScreenState.ShowHistory(null))
+        _screenState.postValue(SearchScreenState.Success(arrayListOf()))
     }
 
     fun showHistory() {
         if (tracksInteractor.getHistory().isNotEmpty()) {
-            _screenState.value = SearchScreenState.ShowHistory(tracksInteractor.getHistory())
+            _screenState.value =
+                SearchScreenState.ShowHistory(tracksInteractor.getHistory() as ArrayList<Track>)
         } else {
-            _screenState.value = SearchScreenState.Success(null)
+            _screenState.value = SearchScreenState.Success(arrayListOf())
         }
-    }
-
-    fun isReadyToRender(screenState: SearchScreenState, queryText: String): Boolean {
-        if ((screenState is SearchScreenState.Success
-                    && queryText.isNotEmpty())
-            || (screenState !is SearchScreenState.Success)
-        ) {
-            return true
-        }
-        return false
     }
 
     companion object {

@@ -12,7 +12,9 @@ import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.databinding.ActivitySearchBinding
 import com.sakal.playlistmaker.player.ui.activity.AudioPlayerActivity
 import com.sakal.playlistmaker.search.domain.Track
+import com.sakal.playlistmaker.search.ui.Content
 import com.sakal.playlistmaker.search.ui.Router
+import com.sakal.playlistmaker.search.ui.SearchScreenState
 import com.sakal.playlistmaker.search.ui.adapters.TrackAdapter
 import com.sakal.playlistmaker.search.ui.view_model.SearchViewModel
 
@@ -38,6 +40,8 @@ class SearchActivity : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initToolbar()
+
         initSearchResults()
 
         initHistory()
@@ -51,18 +55,36 @@ class SearchActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
+
+        viewModel.observeState().observe(this) {
+            render(it)
+        }
+    }
+
+    private fun render(state: SearchScreenState) {
+        when (state) {
+            is SearchScreenState.Success -> {
+                searchAdapter.tracks = state.tracks
+                showContent(Content.SEARCH_RESULT)
+            }
+            is SearchScreenState.ShowHistory -> {
+                historyAdapter.tracks = state.tracks
+                showContent(Content.TRACKS_HISTORY)
+            }
+            is SearchScreenState.Error -> {
+                binding.errorText.text = state.message
+                showContent(Content.ERROR)
+            }
+            is SearchScreenState.NothingFound -> showContent(Content.NOT_FOUND)
+            is SearchScreenState.Loading -> showContent(Content.LOADING)
+
+        }
+    }
+
+    private fun initToolbar() {
         binding.searchToolbar.setNavigationOnClickListener {
             router.goBack()
-
         }
-
-        viewModel.screenState.observe(this) { screenState ->
-            if (viewModel.isReadyToRender(screenState, binding.inputSearchForm.text.toString())) {
-                searchAdapter.setTracks(screenState.tracks)
-                screenState.render(binding)
-            }
-        }
-
     }
 
     private fun clickOnTrack(track: Track) {
@@ -105,8 +127,8 @@ class SearchActivity : AppCompatActivity() {
         }
 
         binding.buttonClearHistory.setOnClickListener {
-                viewModel.clearHistory()
-            }
+            viewModel.clearHistory()
+        }
 
 
         binding.buttonRetry.apply {
@@ -122,7 +144,7 @@ class SearchActivity : AppCompatActivity() {
         binding.recyclerViewSearch.adapter = searchAdapter
     }
 
-    private  fun initHistory() {
+    private fun initHistory() {
         binding.recyclerViewHistory.adapter = historyAdapter
     }
 
@@ -169,6 +191,51 @@ class SearchActivity : AppCompatActivity() {
         }
         return false
     }
+
+    private fun showContent(content: Content) {
+        when (content) {
+            Content.NOT_FOUND -> {
+                binding.recyclerViewSearch.visibility = View.GONE
+                binding.placeholderCommunicationsProblem.visibility = View.GONE
+                binding.historyList.visibility = View.GONE
+                binding.searchProgressBar.visibility = View.GONE
+                binding.placeholderNothingWasFound.visibility = View.VISIBLE
+            }
+
+            Content.ERROR -> {
+                binding.recyclerViewSearch.visibility = View.GONE
+                binding.placeholderCommunicationsProblem.visibility = View.VISIBLE
+                binding.historyList.visibility = View.GONE
+                binding.searchProgressBar.visibility = View.GONE
+                binding.placeholderNothingWasFound.visibility = View.GONE
+            }
+
+            Content.TRACKS_HISTORY -> {
+                binding.recyclerViewSearch.visibility = View.GONE
+                binding.placeholderCommunicationsProblem.visibility = View.GONE
+                binding.historyList.visibility = View.VISIBLE
+                binding.searchProgressBar.visibility = View.GONE
+                binding.placeholderNothingWasFound.visibility = View.GONE
+            }
+
+            Content.SEARCH_RESULT -> {
+                binding.recyclerViewSearch.visibility = View.VISIBLE
+                binding.placeholderCommunicationsProblem.visibility = View.GONE
+                binding.historyList.visibility = View.GONE
+                binding.searchProgressBar.visibility = View.GONE
+                binding.placeholderNothingWasFound.visibility = View.GONE
+            }
+
+            Content.LOADING -> {
+                binding.recyclerViewSearch.visibility = View.GONE
+                binding.placeholderCommunicationsProblem.visibility = View.GONE
+                binding.historyList.visibility = View.GONE
+                binding.searchProgressBar.visibility = View.VISIBLE
+                binding.placeholderNothingWasFound.visibility = View.GONE
+            }
+        }
+    }
+
 
     companion object {
         private const val INPUT_TEXT = "INPUT_TEXT"
