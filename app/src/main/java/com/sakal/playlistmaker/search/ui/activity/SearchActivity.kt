@@ -23,6 +23,7 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
     private lateinit var viewModel: SearchViewModel
+    private lateinit var router: Router
 
     private val searchAdapter = TrackAdapter {
         clickOnTrack(it)
@@ -32,8 +33,6 @@ class SearchActivity : AppCompatActivity() {
         clickOnTrack(it)
     }
 
-    private lateinit var router: Router
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,19 +41,17 @@ class SearchActivity : AppCompatActivity() {
 
         initToolbar()
 
+        initEditText(savedInstanceState)
+
         initSearchResults()
 
         initHistory()
-
-        initEditText(savedInstanceState)
 
         handleButtons()
 
         router = Router(this)
 
-
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
-
 
         viewModel.observeState().observe(this) {
             render(it)
@@ -129,7 +126,6 @@ class SearchActivity : AppCompatActivity() {
         binding.buttonClearHistory.setOnClickListener {
             viewModel.clearHistory()
         }
-
 
         binding.buttonRetry.apply {
             setOnClickListener {
@@ -211,6 +207,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
             Content.TRACKS_HISTORY -> {
+                historyAdapter.notifyDataSetChanged()
                 binding.recyclerViewSearch.visibility = View.GONE
                 binding.placeholderCommunicationsProblem.visibility = View.GONE
                 binding.historyList.visibility = View.VISIBLE
@@ -235,7 +232,6 @@ class SearchActivity : AppCompatActivity() {
             }
         }
     }
-
 
     companion object {
         private const val INPUT_TEXT = "INPUT_TEXT"
