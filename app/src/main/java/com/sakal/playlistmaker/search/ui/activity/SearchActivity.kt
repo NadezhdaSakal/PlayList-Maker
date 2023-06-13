@@ -60,7 +60,7 @@ class SearchActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         if (binding.inputSearchForm.text.toString().isNotEmpty()) {
-            viewModel.searchRightAway(binding.inputSearchForm.text.toString())
+            viewModel.getTracks(binding.inputSearchForm.text.toString())
         } else {
             viewModel.showHistory()
         }
@@ -94,7 +94,7 @@ class SearchActivity : ComponentActivity() {
         binding.buttonRetry.apply {
             setOnClickListener {
                 if (binding.inputSearchForm.text.toString().isNotEmpty()) {
-                    viewModel.searchRightAway()
+                    viewModel.getTracks()
                 }
             }
         }
@@ -158,7 +158,7 @@ class SearchActivity : ComponentActivity() {
         if (savedInstanceState != null) {
             if (savedInstanceState.getString(INPUT_TEXT)!!.isNotEmpty()) {
                 textField.setText(savedInstanceState.getString(INPUT_TEXT)!!)
-                viewModel.searchRightAway(savedInstanceState.getString(INPUT_TEXT)!!)
+                viewModel.getTracks(savedInstanceState.getString(INPUT_TEXT)!!)
             }
         }
     }
@@ -166,7 +166,7 @@ class SearchActivity : ComponentActivity() {
     private fun onClickOnEnterOnVirtualKeyboard(actionId: Int): Boolean {
         if (actionId == EditorInfo.IME_ACTION_DONE) {
             if (binding.inputSearchForm.text.toString().isNotEmpty()) {
-                viewModel.searchRightAway(binding.inputSearchForm.text.toString())
+                viewModel.getTracks(binding.inputSearchForm.text.toString())
             }
         }
         return false

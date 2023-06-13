@@ -24,7 +24,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
     private var isClickAllowed = true
 
     private fun makeDelaySearching(changedText: String) {
-        val searchRunnable = Runnable { searchRightAway(changedText) }
+        val searchRunnable = Runnable { getTracks(changedText) }
         val postTime = SystemClock.uptimeMillis() + Constants.SEARCH_DEBOUNCE_DELAY
         handler.postAtTime(
             searchRunnable,
@@ -57,7 +57,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    fun searchRightAway(query: String? = lastQuery) {
+    fun getTracks (query: String? = lastQuery) {
         handler.removeCallbacksAndMessages(SEARCH_REQUEST_TOKEN)
         query?.let {
             _screenState.postValue(SearchScreenState.Loading())
