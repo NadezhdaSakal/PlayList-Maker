@@ -21,7 +21,7 @@ class AudioPlayerViewModel(trackForPlayer: TrackForPlayer) : ViewModel() {
     private var playerState: PlayerState = PlayerState.STATE_DEFAULT
     private val handler: Handler = Handler(Looper.getMainLooper())
 
-            private val timerGo =
+    private val timerGo =
         object : Runnable {
             override fun run() {
                 updateTimer(getCurrentPosition())
@@ -31,17 +31,20 @@ class AudioPlayerViewModel(trackForPlayer: TrackForPlayer) : ViewModel() {
                 )
             }
         }
+
     init {
         _screenState.value = PlayerScreenState.BeginningState(trackForPlayer)
         preparePlayer()
         setOnCompletionListener()
     }
-    private fun preparePlayer(){
+
+    private fun preparePlayer() {
         playerInteractor.preparePlayer {
             playerState = PlayerState.STATE_PREPARED
             _screenState.value = PlayerScreenState.Preparing()
         }
     }
+
     private fun setOnCompletionListener() {
         playerInteractor.setOnCompletionListener {
             playerState = PlayerState.STATE_PREPARED
@@ -49,27 +52,30 @@ class AudioPlayerViewModel(trackForPlayer: TrackForPlayer) : ViewModel() {
             _screenState.value = PlayerScreenState.PlayCompleting()
         }
     }
+
     private fun start() {
         playerInteractor.start()
         playerState = PlayerState.STATE_PLAYING
         handler.postDelayed(timerGo, Constants.REFRESH_TIMER_DELAY)
         _screenState.value = PlayerScreenState.PlayButtonHandling(playerState)
     }
+
     fun pause() {
         playerInteractor.pause()
         playerState = PlayerState.STATE_PAUSED
         handler.removeCallbacks(timerGo)
         _screenState.value = PlayerScreenState.PlayButtonHandling(playerState)
     }
+
     private fun updateTimer(time: String) {
         _screenState.postValue(PlayerScreenState.TimerUpdating(time))
     }
 
-    private fun getCurrentPosition():String{
+    private fun getCurrentPosition(): String {
         return formatTime(playerInteractor.getCurrentTime())
     }
 
-    fun onDestroy(){
+    fun onDestroy() {
         handler.removeCallbacksAndMessages(SEARCH_REQUEST_TOKEN)
         playerInteractor.onDestroy()
     }

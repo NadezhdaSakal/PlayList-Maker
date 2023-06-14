@@ -1,16 +1,14 @@
 package com.sakal.playlistmaker.search.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
-import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.databinding.ActivitySearchBinding
-import com.sakal.playlistmaker.player.ui.activity.AudioPlayerActivity
 import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.search.ui.Content
 import com.sakal.playlistmaker.search.ui.Router
@@ -53,8 +51,16 @@ class SearchActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
-        viewModel.observeState().observe(this) {
-            render(it)
+        viewModel.apply {
+
+            observeState().observe(this@SearchActivity) {
+                render(it)
+            }
+
+            observeShowToast().observe(this@SearchActivity) {
+                showToast(it)
+            }
+
         }
     }
 
@@ -78,6 +84,10 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+    private fun showToast(additionalMessage: String) {
+        Toast.makeText(this, additionalMessage, Toast.LENGTH_LONG).show()
+    }
+
     private fun initToolbar() {
         binding.searchToolbar.setNavigationOnClickListener {
             router.goBack()
@@ -85,13 +95,9 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun clickOnTrack(track: Track) {
-        if (viewModel.trackOnClickDebounce()) {
-            viewModel.addToHistory(track)
-            val intent = Intent(this, AudioPlayerActivity::class.java).apply {
-                putExtra(Constants.TRACK, track)
-            }
-            startActivity(intent)
-        }
+        if (viewModel.trackIsClickable.value == false) return
+        viewModel.onSearchClicked(track)
+        router.openAudioPlayer(track)
     }
 
     override fun onResume() {
@@ -105,9 +111,8 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(INPUT_TEXT, binding.inputSearchForm.text.toString())
+        outState.putString(INPUT_TEXT, binding.inputSearchForm.toString())
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -158,23 +163,24 @@ class SearchActivity : AppCompatActivity() {
 
                 doOnTextChanged { text, _, _, _ ->
                     if (binding.inputSearchForm.hasFocus() && text.toString().isEmpty()) {
-                        viewModel.showHistory()
+                        showContent(Content.SEARCH_RESULT)
                     }
                     viewModel.searchDebounce(binding.inputSearchForm.text.toString())
-                    binding.buttonClearSearchForm.visibility =
-                        clearButtonVisibility(text.toString())
+
+                    binding.buttonClearSearchForm.visibility = clearButtonVisibility(text.toString())
                 }
             }
     }
 
-    private fun clearButtonVisibility(p0: CharSequence?) =
-        if (p0.isNullOrEmpty()) View.GONE else View.VISIBLE
+    private fun clearButtonVisibility(p0: CharSequence?) = if (p0.isNullOrEmpty()) View.GONE else View.VISIBLE
+
 
     private fun restoreTextFromBundle(textField: EditText, savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
-            if (savedInstanceState.getString(INPUT_TEXT)!!.isNotEmpty()) {
-                textField.setText(savedInstanceState.getString(INPUT_TEXT)!!)
-                viewModel.getTracks(savedInstanceState.getString(INPUT_TEXT)!!)
+            val savedText: String? = savedInstanceState.getString(INPUT_TEXT)
+            savedText?.let {
+                textField.setText(it)
+                viewModel.getTracks(it)
             }
         }
     }
@@ -216,6 +222,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
             Content.SEARCH_RESULT -> {
+                searchAdapter.notifyDataSetChanged()
                 binding.recyclerViewSearch.visibility = View.VISIBLE
                 binding.placeholderCommunicationsProblem.visibility = View.GONE
                 binding.historyList.visibility = View.GONE
