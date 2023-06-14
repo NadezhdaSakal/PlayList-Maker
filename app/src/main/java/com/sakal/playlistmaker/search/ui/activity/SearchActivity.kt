@@ -103,7 +103,7 @@ class SearchActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (binding.inputSearchForm.text.toString().isNotEmpty()) {
-            viewModel.getTracks(binding.inputSearchForm.text.toString())
+            viewModel.searchDebounce(binding.inputSearchForm.text.toString())
         } else {
             viewModel.showHistory()
         }
@@ -158,12 +158,12 @@ class SearchActivity : AppCompatActivity() {
                 }
 
                 setOnFocusChangeListener { _, hasFocus ->
-                    if (hasFocus && binding.inputSearchForm.text.isEmpty()) viewModel.showHistory()
+                    if (hasFocus && binding.inputSearchForm.text.isEmpty()) showContent(Content.TRACKS_HISTORY)
                 }
 
                 doOnTextChanged { text, _, _, _ ->
                     if (binding.inputSearchForm.hasFocus() && text.toString().isEmpty()) {
-                        showContent(Content.SEARCH_RESULT)
+                        showContent(Content.TRACKS_HISTORY)
                     }
                     viewModel.searchDebounce(binding.inputSearchForm.text.toString())
 

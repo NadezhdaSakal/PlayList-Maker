@@ -19,22 +19,20 @@ import com.sakal.playlistmaker.search.ui.activity.SingleLiveEvent
 class SearchViewModel(application: Application) : AndroidViewModel(application) {
 
     private val tracksInteractor = Creator.provideTracksInteractor(getApplication<Application>())
-
     private val _screenState = MutableLiveData<SearchScreenState>()
-
-    fun observeState(): LiveData<SearchScreenState> = _screenState
-
     private val showToast = SingleLiveEvent<String>()
-
-    fun observeShowToast(): LiveData<String> = showToast
-
-
     private val handler = Handler(Looper.getMainLooper())
     private var lastQuery: String? = null
-
     private val _trackIsClickable = MutableLiveData(true)
     var trackIsClickable: LiveData<Boolean> = _trackIsClickable
 
+    init {
+        showHistory()
+    }
+
+    fun observeState(): LiveData<SearchScreenState> = _screenState
+
+    fun observeShowToast(): LiveData<String> = showToast
 
     private fun makeDelaySearching(changedText: String) {
         val searchRunnable = Runnable { getTracks(changedText) }
@@ -56,6 +54,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
             makeDelaySearching(changedText)
         }
     }
+
 
     fun onSearchClicked(track: Track) {
         trackOnClickDebounce()
