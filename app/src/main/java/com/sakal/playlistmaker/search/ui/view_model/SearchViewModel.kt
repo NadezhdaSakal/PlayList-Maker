@@ -18,7 +18,7 @@ import com.sakal.playlistmaker.search.ui.activity.SingleLiveEvent
 
 class SearchViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val tracksInteractor = Creator.provideTracksInteractor(getApplication<Application>())
+    private val tracksInteractor = Creator.provideTracksInteractor(getApplication())
     private val _screenState = MutableLiveData<SearchScreenState>()
     private val showToast = SingleLiveEvent<String>()
     private val handler = Handler(Looper.getMainLooper())
@@ -107,21 +107,32 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 
     private fun addToHistory(track: Track) {
         tracksInteractor.addTrackToHistory(track)
+
+    }
+
+    fun clearSearch() {
+        val historyTracks = showHistory()
+        if (historyTracks.isNotEmpty()) {
+            renderState(SearchScreenState.ShowHistory(historyTracks))
+        } else {
+            renderState(SearchScreenState.Success(arrayListOf()))
+        }
     }
 
     fun clearHistory() {
         tracksInteractor.clearHistory()
         _screenState.postValue(SearchScreenState.Success(arrayListOf()))
+
     }
 
-    fun showHistory() {
-        if (tracksInteractor.getHistory().isNotEmpty()) {
-            _screenState.value =
-                SearchScreenState.ShowHistory(tracksInteractor.getHistory() as ArrayList<Track>)
-        } else {
-            _screenState.value = SearchScreenState.Success(arrayListOf())
-        }
+    private fun showHistory(): ArrayList<Track> {
+        return tracksInteractor.getHistory()
     }
+
+    private fun renderState(state: SearchScreenState) {
+        _screenState.postValue(state)
+    }
+
 
 
     companion object {

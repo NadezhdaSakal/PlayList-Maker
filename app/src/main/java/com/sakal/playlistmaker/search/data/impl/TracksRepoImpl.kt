@@ -49,7 +49,7 @@ class TracksRepoImpl(
         localStorage.clearHistory()
     }
 
-    override fun getHistory(): List<Track> {
+    override fun getHistory(): ArrayList<Track> {
         return localStorage.getHistory()
     }
 }

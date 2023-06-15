@@ -3,7 +3,7 @@ package com.sakal.playlistmaker.search.ui.activity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
@@ -37,18 +37,6 @@ class SearchActivity : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initToolbar()
-
-        initEditText(savedInstanceState)
-
-        initSearchResults()
-
-        initHistory()
-
-        handleButtons()
-
-        router = Router(this)
-
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
 
         viewModel.apply {
@@ -62,6 +50,17 @@ class SearchActivity : AppCompatActivity() {
             }
 
         }
+
+        initToolbar()
+
+        initInput()
+
+        initSearchResults()
+
+        initHistory()
+
+        router = Router(this)
+
     }
 
     private fun render(state: SearchScreenState) {
@@ -94,51 +93,60 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun clickOnTrack(track: Track) {
-        if (viewModel.trackIsClickable.value == false) return
-        viewModel.onSearchClicked(track)
-        router.openAudioPlayer(track)
+    private fun initInput() {
+
+        binding.inputSearchForm.doOnTextChanged { s: CharSequence?, _, _, _ ->
+            binding.buttonClearSearchForm.visibility = clearButtonVisibility(s)
+            if (binding.inputSearchForm.hasFocus() && s.toString().isNotEmpty()) {
+                showContent(Content.SEARCH_RESULT)
+            }
+            viewModel.searchDebounce(binding.inputSearchForm.text.toString())
+        }
+
+        binding.inputSearchForm.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                viewModel.getTracks(binding.inputSearchForm.text.toString())
+            }
+            false
+        }
+
+        binding.buttonRetry.setOnClickListener {
+            viewModel.getTracks(binding.inputSearchForm.text.toString())
+        }
+
+        binding.buttonClearSearchForm.visibility =
+            clearButtonVisibility(binding.inputSearchForm.text)
+
+        binding.inputSearchForm.requestFocus()
+
+        binding.buttonClearSearchForm.setOnClickListener {
+            clearSearch()
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (binding.inputSearchForm.text.toString().isNotEmpty()) {
-            viewModel.searchDebounce(binding.inputSearchForm.text.toString())
+    private fun clearButtonVisibility(s: CharSequence?): Int {
+        return if (s.isNullOrEmpty()) {
+            View.GONE
         } else {
-            viewModel.showHistory()
+            View.VISIBLE
         }
+    }
+
+    private fun clearSearch() {
+        searchAdapter.tracks = arrayListOf()
+        binding.inputSearchForm.setText("")
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+        viewModel.clearSearch()
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(INPUT_TEXT, binding.inputSearchForm.toString())
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.onDestroy()
-    }
-
-    private fun handleButtons() {
-        binding.buttonClearSearchForm.apply {
-            setOnClickListener {
-                viewModel.showHistory()
-                binding.inputSearchForm.text.clear()
-                binding.inputSearchForm.onEditorAction(EditorInfo.IME_ACTION_DONE)
-            }
-        }
-
-        binding.buttonClearHistory.setOnClickListener {
-            viewModel.clearHistory()
-        }
-
-        binding.buttonRetry.apply {
-            setOnClickListener {
-                if (binding.inputSearchForm.text.toString().isNotEmpty()) {
-                    viewModel.getTracks()
-                }
-            }
-        }
     }
 
     private fun initSearchResults() {
@@ -147,51 +155,21 @@ class SearchActivity : AppCompatActivity() {
 
     private fun initHistory() {
         binding.recyclerViewHistory.adapter = historyAdapter
-    }
-
-    private fun initEditText(savedInstanceState: Bundle?) {
-        binding.inputSearchForm
-            .apply {
-                restoreTextFromBundle(textField = this, savedInstanceState = savedInstanceState)
-                setOnEditorActionListener { _, actionId, _ ->
-                    onClickOnEnterOnVirtualKeyboard(actionId)
-                }
-
-                setOnFocusChangeListener { _, hasFocus ->
-                    if (hasFocus && binding.inputSearchForm.text.isEmpty()) showContent(Content.TRACKS_HISTORY)
-                }
-
-                doOnTextChanged { text, _, _, _ ->
-                    if (binding.inputSearchForm.hasFocus() && text.toString().isEmpty()) {
-                        showContent(Content.TRACKS_HISTORY)
-                    }
-                    viewModel.searchDebounce(binding.inputSearchForm.text.toString())
-
-                    binding.buttonClearSearchForm.visibility = clearButtonVisibility(text.toString())
-                }
-            }
-    }
-
-    private fun clearButtonVisibility(p0: CharSequence?) = if (p0.isNullOrEmpty()) View.GONE else View.VISIBLE
-
-
-    private fun restoreTextFromBundle(textField: EditText, savedInstanceState: Bundle?) {
-        if (savedInstanceState != null) {
-            val savedText: String? = savedInstanceState.getString(INPUT_TEXT)
-            savedText?.let {
-                textField.setText(it)
-                viewModel.getTracks(it)
-            }
+        binding.buttonClearHistory.setOnClickListener {
+            viewModel.clearHistory()
         }
     }
 
-    private fun onClickOnEnterOnVirtualKeyboard(actionId: Int): Boolean {
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
-            if (binding.inputSearchForm.text.toString().isNotEmpty()) {
-                viewModel.getTracks(binding.inputSearchForm.text.toString())
-            }
-        }
-        return false
+    private fun clickOnTrack(track: Track) {
+        if (viewModel.trackIsClickable.value == false) return
+        viewModel.onSearchClicked(track)
+        router.openAudioPlayer(track)
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.onDestroy()
     }
 
     private fun showContent(content: Content) {

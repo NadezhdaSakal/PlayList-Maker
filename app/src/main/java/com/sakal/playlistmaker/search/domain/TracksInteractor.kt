@@ -9,5 +9,6 @@ interface TracksInteractor {
 
     fun addTrackToHistory(track: Track)
     fun clearHistory()
-    fun getHistory(): List<Track>
+    fun getHistory(): ArrayList<Track>
+
 }
