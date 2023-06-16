@@ -71,31 +71,40 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
     }
 
 
-    fun getTracks(query: String? = lastQuery) {
-        handler.removeCallbacksAndMessages(SEARCH_REQUEST_TOKEN)
-        query?.let {
-            _screenState.postValue(SearchScreenState.Loading)
-            tracksInteractor.searchTracks(query, object : TracksInteractor.TracksConsumer {
-                override fun consume(
-                    foundTracks: List<Track>?,
-                    errorMessage: String?,
-                    code: Int
-                ) {
-                    when (code) {
-                        ApiConstants.SUCCESS_CODE -> {
-                            val tracks = arrayListOf<Track>()
-                            if (foundTracks!!.isNotEmpty()) {
-                                tracks.addAll(foundTracks)
+    fun getTracks(query: String) {
+        if (query.isNotEmpty()) {
 
-                                _screenState.postValue(SearchScreenState.Success(tracks = tracks))
-                            } else {
-                                _screenState.postValue(SearchScreenState.NothingFound)
-                            }
-                        }
-                        else -> {
-                            _screenState.postValue(
+            handler.removeCallbacksAndMessages(SEARCH_REQUEST_TOKEN)
+
+            renderState(SearchScreenState.Loading)
+
+            tracksInteractor.searchTracks(query, object : TracksInteractor.TracksConsumer {
+                override fun consume(foundTracks: ArrayList<Track>?, errorMessage: String?) {
+
+                    val tracks = arrayListOf<Track>()
+                    if (foundTracks != null) {
+                        tracks.addAll(foundTracks)
+                    }
+
+                    when {
+                        errorMessage != null -> {
+                            renderState(
                                 SearchScreenState.Error(
                                     message = getApplication<Application>().getString(R.string.check_internet_connection),
+                                )
+                            )
+                        }
+
+                        tracks.isEmpty() -> {
+                            renderState(
+                                SearchScreenState.NothingFound
+                            )
+                        }
+
+                        else -> {
+                            renderState(
+                                SearchScreenState.Success(
+                                    tracks = tracks,
                                 )
                             )
                         }

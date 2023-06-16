@@ -7,18 +7,19 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.databinding.ItemSearchRecyclerBinding
 import com.sakal.playlistmaker.search.domain.Track
-import com.sakal.playlistmaker.utils.formatTime
+import java.text.SimpleDateFormat
+import java.util.*
 
 class TrackViewHolder(private val binding: ItemSearchRecyclerBinding): RecyclerView.ViewHolder(binding.root) {
 
     fun bind(track: Track) {
         binding.trackName.text = track.trackName
         binding.artistName.text = track.artistName
-        binding.trackTime.text = track.trackTime?.let { formatTime(it.toInt()) }
-
+        binding.trackTime.text =
+            SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
         Glide
             .with(itemView)
-            .load(track.image)
+            .load(track.artworkUrl100)
             .placeholder(R.drawable.track_icon)
             .transform(
                 CenterCrop(), RoundedCorners(binding.trackIcon.resources.getDimensionPixelSize(

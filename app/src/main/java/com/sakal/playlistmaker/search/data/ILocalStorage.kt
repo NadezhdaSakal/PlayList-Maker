@@ -5,5 +5,5 @@ import com.sakal.playlistmaker.search.domain.Track
 interface ILocalStorage {
     fun addToHistory(track: Track)
     fun clearHistory()
-    fun getHistory(): List<Track>
+    fun getHistory(): ArrayList<Track>
 }

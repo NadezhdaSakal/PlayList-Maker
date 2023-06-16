@@ -2,11 +2,9 @@ package com.sakal.playlistmaker.creator
 
 import android.content.Context
 import com.sakal.playlistmaker.Constants
-import com.sakal.playlistmaker.player.data.MediaPlayer
 import com.sakal.playlistmaker.player.data.impl.PlayerRepoImpl
 import com.sakal.playlistmaker.player.domain.PlayerInteractor
 import com.sakal.playlistmaker.player.domain.PlayerRepo
-import com.sakal.playlistmaker.player.domain.TrackForPlayer
 import com.sakal.playlistmaker.player.domain.impl.PlayerInteractorImpl
 import com.sakal.playlistmaker.search.data.impl.TracksRepoImpl
 import com.sakal.playlistmaker.search.data.network.RetrofitClient
@@ -33,12 +31,12 @@ object Creator {
         return TracksInteractorImpl(getTracksRepository(context))
     }
 
-    private fun getPlayerRepo(trackForPlayer: TrackForPlayer): PlayerRepo {
-        return PlayerRepoImpl(MediaPlayer(trackForPlayer))
+    private fun getPlayerRepo(): PlayerRepo {
+        return PlayerRepoImpl()
     }
 
-    fun providePlayerInteractor(trackForPlayer: TrackForPlayer): PlayerInteractor {
-        return PlayerInteractorImpl(getPlayerRepo(trackForPlayer))
+    fun providePlayerInteractor(): PlayerInteractor {
+        return PlayerInteractorImpl(getPlayerRepo())
     }
 
     private fun getSettingsRepository(context: Context): SettingsRepository {
