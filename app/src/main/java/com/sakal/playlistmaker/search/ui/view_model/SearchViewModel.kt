@@ -10,7 +10,7 @@ import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.search.domain.TracksInteractor
 import com.sakal.playlistmaker.search.ui.SearchScreenState
-import com.sakal.playlistmaker.search.ui.activity.SingleLiveEvent
+import com.sakal.playlistmaker.utils.SingleLiveEvent
 
 class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewModel() {
 
@@ -137,6 +137,10 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
 
     private fun renderState(state: SearchScreenState) {
         _screenState.postValue(state)
+    }
+
+    override fun onCleared() {
+        handler.removeCallbacksAndMessages(SEARCH_REQUEST_TOKEN)
     }
 
     companion object {

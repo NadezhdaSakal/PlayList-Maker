@@ -35,23 +35,6 @@ class AudioPlayerViewModel(private val playerInteractor: PlayerInteractor) : Vie
             }
         )
     }
-/*
-    if (url != null) {
-        playerInteractor.preparePlayer(
-            url = url,
-            onPreparedListener = {
-                renderState(PlayerState.Stopped)
-            },
-            onCompletionListener = {
-                handler.removeCallbacks(updatePlayingTimeRunnable)
-                renderState(PlayerState.Stopped)
-            }
-        )
-    } else {
-        renderState(PlayerState.Unplayable)
-    }
-
- */
 
     private fun startPlayer() {
         playerInteractor.start()
@@ -98,5 +81,11 @@ class AudioPlayerViewModel(private val playerInteractor: PlayerInteractor) : Vie
     private fun renderState(state: PlayerScreenState) {
         stateLiveData.postValue(state)
     }
+
+    override fun onCleared() {
+        pausePlayer()
+        handler.removeCallbacksAndMessages(null)
+    }
+
 
 }
