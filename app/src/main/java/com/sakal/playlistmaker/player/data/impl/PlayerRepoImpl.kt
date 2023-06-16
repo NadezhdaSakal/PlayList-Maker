@@ -8,7 +8,7 @@ class PlayerRepoImpl: PlayerRepo {
 
     private var mediaPlayer = MediaPlayer()
 
-    override fun preparePlayer(
+    override fun prepare(
         url: String,
         onPreparedListener: () -> Unit,
         onCompletionListener: () -> Unit
@@ -23,11 +23,11 @@ class PlayerRepoImpl: PlayerRepo {
         }
     }
 
-    override fun startPlayer() {
+    override fun start() {
         mediaPlayer.start()
     }
 
-    override fun pausePlayer() {
+    override fun pause() {
         mediaPlayer.pause()
     }
 

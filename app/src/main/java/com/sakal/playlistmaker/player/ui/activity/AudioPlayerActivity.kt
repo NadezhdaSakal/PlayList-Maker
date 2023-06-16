@@ -31,9 +31,7 @@ class AudioPlayerActivity : AppCompatActivity() {
             render(it)
         }
 
-        binding.playerToolbar.setNavigationOnClickListener {
-            finish()
-        }
+        initToolbar()
 
         @Suppress("DEPRECATION") val track = intent.getSerializableExtra(Constants.TRACK) as Track
 
@@ -45,6 +43,13 @@ class AudioPlayerActivity : AppCompatActivity() {
 
         binding.playTrack.setOnClickListener {
             viewModel.playbackControl()
+        }
+
+    }
+
+    private fun initToolbar() {
+        binding.playerToolbar.setNavigationOnClickListener {
+            finish()
         }
 
     }

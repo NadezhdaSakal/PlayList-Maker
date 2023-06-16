@@ -12,10 +12,10 @@ import java.util.*
 
 class TrackViewHolder(private val binding: ItemSearchRecyclerBinding): RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(track: Track) {
-        binding.trackName.text = track.trackName
-        binding.artistName.text = track.artistName
-        binding.trackTime.text =
+    fun bind(track: Track) = with (binding) {
+        trackName.text = track.trackName
+        artistName.text = track.artistName
+        trackTime.text =
             SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
         Glide
             .with(itemView)
@@ -25,7 +25,7 @@ class TrackViewHolder(private val binding: ItemSearchRecyclerBinding): RecyclerV
                 CenterCrop(), RoundedCorners(binding.trackIcon.resources.getDimensionPixelSize(
                     R.dimen.corner_radius_2))
             )
-            .into(binding.trackIcon)
+            .into(trackIcon)
 
     }
 }

@@ -26,7 +26,7 @@ class AudioPlayerViewModel : ViewModel() {
 
     fun preparePlayer(url: String) {
         renderState(PlayerScreenState.Preparing)
-        playerInteractor.preparePlayer(
+        playerInteractor.prepare(
             url = url,
             onPreparedListener = {
                 renderState(PlayerScreenState.Stopped)
@@ -39,13 +39,13 @@ class AudioPlayerViewModel : ViewModel() {
     }
 
     private fun startPlayer() {
-        playerInteractor.startPlayer()
+        playerInteractor.start()
         renderState(PlayerScreenState.Playing)
         handler.postDelayed(updatePlayingTimeRunnable, Constants.REFRESH_TIMER_DELAY)
     }
 
     fun pausePlayer() {
-        playerInteractor.pausePlayer()
+        playerInteractor.pause()
         renderState(PlayerScreenState.Paused)
         handler.removeCallbacks(updatePlayingTimeRunnable)
     }

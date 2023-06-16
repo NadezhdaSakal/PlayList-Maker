@@ -1,9 +1,9 @@
 package com.sakal.playlistmaker.player.domain
 
 interface PlayerInteractor {
-    fun preparePlayer(url: String, onPreparedListener: () -> Unit, onCompletionListener: () -> Unit)
-    fun startPlayer()
-    fun pausePlayer()
+    fun prepare(url: String, onPreparedListener: () -> Unit, onCompletionListener: () -> Unit)
+    fun start()
+    fun pause()
     fun isPlaying(): Boolean
     fun getCurrentPosition(): Int
 }
