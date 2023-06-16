@@ -1,7 +1,7 @@
 package com.sakal.playlistmaker
 
 import android.app.Application
-import com.sakal.playlistmaker.creator.Creator
+import com.sakal.playlistmaker.search.di.Creator
 import com.sakal.playlistmaker.settings.domain.SettingsInteractor
 
 

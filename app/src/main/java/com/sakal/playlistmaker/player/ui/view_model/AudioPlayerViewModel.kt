@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sakal.playlistmaker.Constants
-import com.sakal.playlistmaker.creator.Creator
+import com.sakal.playlistmaker.search.di.Creator
 import com.sakal.playlistmaker.player.ui.PlayerScreenState
 import java.text.SimpleDateFormat
 import java.util.*

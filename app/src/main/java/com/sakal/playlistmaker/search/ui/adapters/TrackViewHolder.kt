@@ -17,6 +17,7 @@ class TrackViewHolder(private val binding: ItemSearchRecyclerBinding): RecyclerV
         artistName.text = track.artistName
         trackTime.text =
             SimpleDateFormat("mm:ss", Locale.getDefault()).format(track.trackTimeMillis)
+
         Glide
             .with(itemView)
             .load(track.artworkUrl100)

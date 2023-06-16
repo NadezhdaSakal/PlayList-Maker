@@ -1,4 +1,4 @@
-package com.sakal.playlistmaker.creator
+package com.sakal.playlistmaker.search.di
 
 import android.content.Context
 import com.sakal.playlistmaker.Constants
@@ -20,16 +20,6 @@ import com.sakal.playlistmaker.settings.domain.impl.SettingsInteractorImpl
 
 object Creator {
 
-    private fun getTracksRepository(context: Context): TracksRepo {
-        return TracksRepoImpl(
-            RetrofitClient(context),
-            LocalStorage(context.getSharedPreferences(Constants.HISTORY_TRACKS_SHARED_PREF, Context.MODE_PRIVATE))
-        )
-    }
-
-    fun provideTracksInteractor(context: Context): TracksInteractor {
-        return TracksInteractorImpl(getTracksRepository(context))
-    }
 
     private fun getPlayerRepo(): PlayerRepo {
         return PlayerRepoImpl()

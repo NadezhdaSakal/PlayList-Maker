@@ -4,37 +4,12 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import com.sakal.playlistmaker.ApiConstants
-import com.sakal.playlistmaker.BuildConfig
-import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.search.data.NetworkClient
 import com.sakal.playlistmaker.search.data.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import com.sakal.playlistmaker.search.data.TracksSearchRequest
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import java.util.concurrent.TimeUnit
 
 
-class RetrofitClient(private val context: Context): NetworkClient {
-
-    private val okHttpClient = OkHttpClient.Builder()
-        .callTimeout(Constants.CALL_TIMEOUT.toLong(), TimeUnit.SECONDS)
-        .readTimeout(Constants.READ_TIMEOUT.toLong(), TimeUnit.SECONDS)
-        .addInterceptor(HttpLoggingInterceptor().apply {
-            if (BuildConfig.DEBUG) {
-                level = HttpLoggingInterceptor.Level.BASIC
-            }
-        })
-        .build()
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(ApiConstants.BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(okHttpClient)
-        .build()
-
-    private val service = retrofit.create(ApiService::class.java)
+class RetrofitClient(private val service: ApiService, private val context: Context): NetworkClient {
 
     override fun doRequest(dto: Any): Response {
         if (!isConnected()){

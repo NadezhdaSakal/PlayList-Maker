@@ -8,7 +8,7 @@ import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.search.data.ILocalStorage
 import com.sakal.playlistmaker.search.domain.Track
 
-class LocalStorage(private val preferences: SharedPreferences) :
+class LocalStorage(private val preferences: SharedPreferences, private val gson: Gson) :
     ILocalStorage {
 
     override fun addToHistory(track: Track) {
@@ -20,7 +20,7 @@ class LocalStorage(private val preferences: SharedPreferences) :
         if (searchedTracks.size > Constants.HISTORY_LIST_SIZE)
             searchedTracks.removeLast()
 
-        val json = Gson().toJson(searchedTracks)
+        val json = gson.toJson(searchedTracks)
         preferences.edit { putString(Constants.HISTORY_TRACKS_KEY, json) }
     }
 
@@ -31,7 +31,7 @@ class LocalStorage(private val preferences: SharedPreferences) :
     override fun getHistory(): ArrayList<Track> {
         val json =
             preferences.getString(Constants.HISTORY_TRACKS_KEY, null) ?: return arrayListOf()
-        return Gson().fromJson(json, object : TypeToken<ArrayList<Track>>() {}.type)
+        return gson.fromJson(json, object : TypeToken<ArrayList<Track>>() {}.type)
     }
 }
 

@@ -63,4 +63,8 @@ dependencies {
 
     //LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+
+    //Koin
+    implementation "io.insert-koin:koin-android:3.3.0"
+
 }
