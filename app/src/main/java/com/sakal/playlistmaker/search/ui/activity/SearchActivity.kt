@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.sakal.playlistmaker.databinding.ActivitySearchBinding
@@ -44,11 +43,6 @@ class SearchActivity : AppCompatActivity() {
             observeState().observe(this@SearchActivity) {
                 render(it)
             }
-
-            observeShowToast().observe(this@SearchActivity) {
-                showToast(it)
-            }
-
         }
 
         initToolbar()
@@ -83,9 +77,6 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun showToast(additionalMessage: String) {
-        Toast.makeText(this, additionalMessage, Toast.LENGTH_LONG).show()
-    }
 
     private fun initToolbar() {
         binding.searchToolbar.setNavigationOnClickListener {

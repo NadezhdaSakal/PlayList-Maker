@@ -10,15 +10,12 @@ import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.search.domain.TracksInteractor
 import com.sakal.playlistmaker.search.ui.SearchScreenState
-import com.sakal.playlistmaker.utils.SingleLiveEvent
 
 class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewModel() {
 
     private val _screenState = MutableLiveData<SearchScreenState>()
-    private val showToast = SingleLiveEvent<String>()
 
     fun observeState(): LiveData<SearchScreenState> = _screenState
-    fun observeShowToast(): LiveData<String> = showToast
 
     private val handler = Handler(Looper.getMainLooper())
     private var lastQuery: String? = null
