@@ -11,6 +11,8 @@ sealed interface PlayerScreenState {
 
     object Paused : PlayerScreenState
 
+    object Unplayable : PlayerScreenState
+
     data class UpdatePlayingTime(
         val playingTime: String
     ) : PlayerScreenState

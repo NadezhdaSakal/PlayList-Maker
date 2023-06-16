@@ -74,6 +74,12 @@ class AudioPlayerActivity : AppCompatActivity() {
             is PlayerScreenState.UpdatePlayingTime -> {
                 binding.progress.text = state.playingTime
             }
+
+            is PlayerScreenState.Unplayable -> {
+                binding.playTrack.isEnabled = false
+                binding.playTrack.setImageResource(R.drawable.play_arrow)
+                binding.progress.setText(R.string.playing_time)
+            }
         }
     }
 

@@ -22,18 +22,22 @@ class AudioPlayerViewModel(private val playerInteractor: PlayerInteractor) : Vie
 
     private val updatePlayingTimeRunnable = Runnable { updatePlayingTime() }
 
-    fun preparePlayer(url: String) {
+    fun preparePlayer(url: String?) {
         renderState(PlayerScreenState.Preparing)
-        playerInteractor.prepare(
-            url = url,
-            onPreparedListener = {
-                renderState(PlayerScreenState.Stopped)
-            },
-            onCompletionListener = {
-                handler.removeCallbacks(updatePlayingTimeRunnable)
-                renderState(PlayerScreenState.Stopped)
-            }
-        )
+        if (url != null) {
+            playerInteractor.prepare(
+                url = url,
+                onPreparedListener = {
+                    renderState(PlayerScreenState.Stopped)
+                },
+                onCompletionListener = {
+                    handler.removeCallbacks(updatePlayingTimeRunnable)
+                    renderState(PlayerScreenState.Stopped)
+                }
+            )
+        } else {
+            renderState(PlayerScreenState.Unplayable)
+        }
     }
 
     private fun startPlayer() {
