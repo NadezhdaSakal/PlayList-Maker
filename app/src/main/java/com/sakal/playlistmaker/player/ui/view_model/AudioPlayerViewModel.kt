@@ -84,9 +84,4 @@ class AudioPlayerViewModel : ViewModel() {
         stateLiveData.postValue(state)
     }
 
-    override fun onCleared() {
-        super.onCleared()
-    }
-
-
 }
