@@ -1,10 +1,10 @@
 package com.sakal.playlistmaker.search.data.impl
 
 import com.sakal.playlistmaker.ApiConstants
-import com.sakal.playlistmaker.search.data.NetworkClient
-import com.sakal.playlistmaker.search.data.TracksSearchRequest
+import com.sakal.playlistmaker.search.data.network.NetworkClient
+import com.sakal.playlistmaker.search.data.network.TracksSearchRequest
 import com.sakal.playlistmaker.search.data.network.TracksSearchResponse
-import com.sakal.playlistmaker.search.data.storage.LocalStorage
+import com.sakal.playlistmaker.search.data.preferences.SharedPreferencesSearchHistoryStorage
 import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.search.domain.TracksRepo
 import com.sakal.playlistmaker.utils.Resource
@@ -12,7 +12,7 @@ import com.sakal.playlistmaker.utils.Resource
 
 class TracksRepoImpl(
     private val networkClient: NetworkClient, private val localStorage:
-    LocalStorage
+    SharedPreferencesSearchHistoryStorage
 ) : TracksRepo {
 
     override fun searchTracks(query: String): Resource<ArrayList<Track>> {

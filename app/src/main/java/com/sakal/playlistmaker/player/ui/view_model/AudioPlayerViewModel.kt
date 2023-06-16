@@ -6,15 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sakal.playlistmaker.Constants
-import com.sakal.playlistmaker.search.di.Creator
+import com.sakal.playlistmaker.player.domain.PlayerInteractor
 import com.sakal.playlistmaker.player.ui.PlayerScreenState
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AudioPlayerViewModel : ViewModel() {
-
-    private val playerInteractor = Creator.providePlayerInteractor()
+class AudioPlayerViewModel(private val playerInteractor: PlayerInteractor) : ViewModel() {
 
     private val stateLiveData = MutableLiveData<PlayerScreenState>()
 
@@ -37,6 +35,23 @@ class AudioPlayerViewModel : ViewModel() {
             }
         )
     }
+/*
+    if (url != null) {
+        playerInteractor.preparePlayer(
+            url = url,
+            onPreparedListener = {
+                renderState(PlayerState.Stopped)
+            },
+            onCompletionListener = {
+                handler.removeCallbacks(updatePlayingTimeRunnable)
+                renderState(PlayerState.Stopped)
+            }
+        )
+    } else {
+        renderState(PlayerState.Unplayable)
+    }
+
+ */
 
     private fun startPlayer() {
         playerInteractor.start()

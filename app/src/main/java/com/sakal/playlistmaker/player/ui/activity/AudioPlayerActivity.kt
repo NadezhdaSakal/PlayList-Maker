@@ -3,7 +3,6 @@ package com.sakal.playlistmaker.player.ui.activity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.sakal.playlistmaker.Constants
@@ -12,6 +11,7 @@ import com.sakal.playlistmaker.databinding.ActivityAudioplayerBinding
 import com.sakal.playlistmaker.player.ui.PlayerScreenState
 import com.sakal.playlistmaker.player.ui.view_model.AudioPlayerViewModel
 import com.sakal.playlistmaker.search.domain.Track
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -19,14 +19,13 @@ class AudioPlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAudioplayerBinding
 
-    private lateinit var viewModel: AudioPlayerViewModel
+    private val viewModel by viewModel<AudioPlayerViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAudioplayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this)[AudioPlayerViewModel::class.java]
         viewModel.observeState().observe(this) {
             render(it)
         }
@@ -51,7 +50,6 @@ class AudioPlayerActivity : AppCompatActivity() {
         binding.playerToolbar.setNavigationOnClickListener {
             finish()
         }
-
     }
 
     private fun render(state: PlayerScreenState) {

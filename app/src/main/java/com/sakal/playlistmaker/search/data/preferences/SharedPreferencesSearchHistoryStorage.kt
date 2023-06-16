@@ -1,15 +1,14 @@
-package com.sakal.playlistmaker.search.data.storage
+package com.sakal.playlistmaker.search.data.preferences
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.sakal.playlistmaker.Constants
-import com.sakal.playlistmaker.search.data.ILocalStorage
 import com.sakal.playlistmaker.search.domain.Track
 
-class LocalStorage(private val preferences: SharedPreferences, private val gson: Gson) :
-    ILocalStorage {
+class SharedPreferencesSearchHistoryStorage(private val preferences: SharedPreferences, private val gson: Gson) :
+    SearchHistorySrorage {
 
     override fun addToHistory(track: Track) {
 

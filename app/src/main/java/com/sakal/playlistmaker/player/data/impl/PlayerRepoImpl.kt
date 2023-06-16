@@ -1,43 +1,33 @@
 package com.sakal.playlistmaker.player.data.impl
 
-import android.media.MediaPlayer
+import com.sakal.playlistmaker.player.data.PlayerClient
 import com.sakal.playlistmaker.player.domain.PlayerRepo
 
 
-class PlayerRepoImpl: PlayerRepo {
-
-    private var mediaPlayer = MediaPlayer()
+class PlayerRepoImpl(private val client: PlayerClient): PlayerRepo {
 
     override fun prepare(
         url: String,
         onPreparedListener: () -> Unit,
         onCompletionListener: () -> Unit
     ) {
-        mediaPlayer.setDataSource(url)
-        mediaPlayer.prepareAsync()
-        mediaPlayer.setOnPreparedListener {
-            onPreparedListener.invoke()
-        }
-        mediaPlayer.setOnCompletionListener {
-            onCompletionListener.invoke()
-        }
+        client.prepare(
+            url = url,
+            onPreparedListener = onPreparedListener,
+            onCompletionListener = onCompletionListener
+        )
     }
 
     override fun start() {
-        mediaPlayer.start()
+        client.start()
     }
 
     override fun pause() {
-        mediaPlayer.pause()
+        client.pause()
     }
 
-    override fun isPlaying(): Boolean {
-        return mediaPlayer.isPlaying
-    }
+    override fun isPlaying(): Boolean = client.isPlaying()
 
-    override fun getCurrentPosition(): Int {
-        return mediaPlayer.currentPosition
-    }
-
+    override fun getCurrentPosition(): Int = client.getCurrentPosition()
 
 }

@@ -16,6 +16,10 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
 
     private val _screenState = MutableLiveData<SearchScreenState>()
     private val showToast = SingleLiveEvent<String>()
+
+    fun observeState(): LiveData<SearchScreenState> = _screenState
+    fun observeShowToast(): LiveData<String> = showToast
+
     private val handler = Handler(Looper.getMainLooper())
     private var lastQuery: String? = null
     private val _trackIsClickable = MutableLiveData(true)
@@ -27,10 +31,6 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
             renderState(SearchScreenState.ShowHistory(history))
         }
     }
-
-    fun observeState(): LiveData<SearchScreenState> = _screenState
-
-    fun observeShowToast(): LiveData<String> = showToast
 
     private fun makeDelaySearching(changedText: String) {
         val searchRunnable = Runnable { getTracks(changedText) }
@@ -88,7 +88,7 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
                         errorMessage != null -> {
                             renderState(
                                 SearchScreenState.Error(
-                                    message = errorMessage,
+                                    message = errorMessage
                                 )
                             )
                         }
@@ -102,7 +102,7 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
                         else -> {
                             renderState(
                                 SearchScreenState.Success(
-                                    tracks = tracks,
+                                    tracks = tracks
                                 )
                             )
                         }
@@ -138,8 +138,6 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
     private fun renderState(state: SearchScreenState) {
         _screenState.postValue(state)
     }
-
-
 
     companion object {
         private val SEARCH_REQUEST_TOKEN = Any()

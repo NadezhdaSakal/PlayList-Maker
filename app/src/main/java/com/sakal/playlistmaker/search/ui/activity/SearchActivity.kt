@@ -20,10 +20,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
-    private lateinit var router: Router
 
     private val viewModel by viewModel<SearchViewModel>()
 
+    private lateinit var router: Router
 
     private val searchAdapter = TrackAdapter {
         clickOnTrack(it)
