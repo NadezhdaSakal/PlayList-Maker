@@ -77,7 +77,6 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-
     private fun initToolbar() {
         binding.searchToolbar.setNavigationOnClickListener {
             router.goBack()
