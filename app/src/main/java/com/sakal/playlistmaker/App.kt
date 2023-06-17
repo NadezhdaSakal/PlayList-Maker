@@ -35,9 +35,8 @@ class App : Application() {
             )
         }
         val settingsInteractor: SettingsInteractor by inject()
-        settingsInteractor.applyCurrentTheme()
-
         darkTheme = settingsInteractor.isDarkModeOn()
+
         AppCompatDelegate.setDefaultNightMode(
             if (darkTheme || isDarkMode(applicationContext as App)) {
                 AppCompatDelegate.MODE_NIGHT_YES
@@ -45,6 +44,7 @@ class App : Application() {
                 AppCompatDelegate.MODE_NIGHT_NO
             }
         )
+        //settingsInteractor.applyCurrentTheme()
     }
 
     private fun isDarkMode(context: Context): Boolean {
