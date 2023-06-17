@@ -2,6 +2,7 @@ package com.sakal.playlistmaker.search.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sakal.playlistmaker.databinding.ItemSearchRecyclerBinding
 import com.sakal.playlistmaker.search.domain.Track
@@ -11,6 +12,14 @@ class TrackAdapter(private val onClickListener: TrackClickListener) :
     RecyclerView.Adapter<TrackViewHolder>() {
 
     var tracks = ArrayList<Track>()
+
+        set(newTrackList) {
+            val diffResult = DiffUtil.calculateDiff(
+                TracksDiffCallback(field, newTrackList)
+            )
+            field = newTrackList
+            diffResult.dispatchUpdatesTo(this)
+        }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
@@ -31,6 +40,7 @@ class TrackAdapter(private val onClickListener: TrackClickListener) :
     fun interface TrackClickListener {
         fun onTrackClick(tracks: Track)
     }
+
 }
 
 

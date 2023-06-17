@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.sakal.playlistmaker.main.ui.NavigationViewState
 import com.sakal.playlistmaker.utils.SingleLiveEvent
 
-class MainViewModel() : ViewModel() {
+class MainViewModel : ViewModel() {
 
     private val navigationViewStateLiveData = SingleLiveEvent<NavigationViewState>()
 
