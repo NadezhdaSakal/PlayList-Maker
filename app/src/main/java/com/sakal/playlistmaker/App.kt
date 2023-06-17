@@ -9,7 +9,7 @@ import com.sakal.playlistmaker.di.interactorModule
 import com.sakal.playlistmaker.di.repositoryModule
 import com.sakal.playlistmaker.di.viewModelModule
 import com.sakal.playlistmaker.settings.domain.SettingsInteractor
-import org.koin.android.ext.android.getKoin
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -34,10 +34,10 @@ class App : Application() {
                 )
             )
         }
-        val settingsInteractor: SettingsInteractor = getKoin().get()
+        val settingsInteractor: SettingsInteractor by inject()
+        settingsInteractor.applyCurrentTheme()
 
         darkTheme = settingsInteractor.isDarkModeOn()
-
         AppCompatDelegate.setDefaultNightMode(
             if (darkTheme || isDarkMode(applicationContext as App)) {
                 AppCompatDelegate.MODE_NIGHT_YES
@@ -48,7 +48,8 @@ class App : Application() {
     }
 
     private fun isDarkMode(context: Context): Boolean {
-        val darkModeFlag = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        val darkModeFlag =
+            context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         return darkModeFlag == Configuration.UI_MODE_NIGHT_YES
     }
 }

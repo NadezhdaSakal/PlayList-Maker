@@ -15,7 +15,6 @@ import com.sakal.playlistmaker.search.ui.adapters.TrackAdapter
 import com.sakal.playlistmaker.search.ui.view_model.SearchViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
@@ -73,7 +72,6 @@ class SearchActivity : AppCompatActivity() {
             }
             is SearchScreenState.NothingFound -> showContent(Content.NOT_FOUND)
             is SearchScreenState.Loading -> showContent(Content.LOADING)
-
         }
     }
 
