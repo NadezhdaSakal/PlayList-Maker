@@ -21,7 +21,6 @@ class SettingsActivity : AppCompatActivity() {
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         initToolbar()
 
         initSwitch()
@@ -32,7 +31,6 @@ class SettingsActivity : AppCompatActivity() {
 
         initButtonUserAgreement()
     }
-
 
     private fun initToolbar() {
         binding.settingsToolbar.apply {
