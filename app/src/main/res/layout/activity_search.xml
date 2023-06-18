@@ -75,7 +75,8 @@
             android:id="@+id/searchProgressBar"
             android:layout_width="@dimen/progress_bar_size"
             android:layout_height="@dimen/progress_bar_size"
-            android:layout_gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="148dp"
             android:indeterminateTint="@color/blue"
             android:visibility="gone"
             tools:visibility="visible"/>
