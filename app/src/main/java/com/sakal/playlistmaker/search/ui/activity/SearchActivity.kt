@@ -179,6 +179,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
             Content.TRACKS_HISTORY -> {
+                historyAdapter.notifyDataSetChanged()
                 binding.recyclerViewSearch.visibility = View.GONE
                 binding.placeholderCommunicationsProblem.visibility = View.GONE
                 binding.historyList.visibility = View.VISIBLE
@@ -187,6 +188,7 @@ class SearchActivity : AppCompatActivity() {
             }
 
             Content.SEARCH_RESULT -> {
+                searchAdapter.notifyDataSetChanged()
                 binding.recyclerViewSearch.visibility = View.VISIBLE
                 binding.placeholderCommunicationsProblem.visibility = View.GONE
                 binding.historyList.visibility = View.GONE
