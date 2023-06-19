@@ -3,30 +3,29 @@ package com.sakal.playlistmaker.player.domain.impl
 import com.sakal.playlistmaker.player.domain.PlayerInteractor
 import com.sakal.playlistmaker.player.domain.PlayerRepo
 
+class PlayerInteractorImpl(private val repository: PlayerRepo) : PlayerInteractor {
 
-class PlayerInteractorImpl(private val playerRepository: PlayerRepo): PlayerInteractor {
+    override fun prepare(
+        url: String,
+        onPreparedListener: () -> Unit,
+        onCompletionListener: () -> Unit
+    ) {
+        repository.prepare(url, onPreparedListener, onCompletionListener)
+    }
 
     override fun start() {
-        playerRepository.start()
+        repository.start()
     }
 
     override fun pause() {
-        playerRepository.pause()
+        repository.pause()
     }
 
-    override fun onDestroy() {
-        playerRepository.onDestroy()
+    override fun isPlaying(): Boolean {
+        return repository.isPlaying()
     }
 
-    override fun setOnCompletionListener(onComplete: () -> Unit) {
-        playerRepository.setOnCompletionListener(onComplete)
-    }
-
-    override fun getCurrentTime(): Int {
-        return playerRepository.getCurrentTime()
-    }
-
-    override fun preparePlayer(prepare: () -> Unit) {
-        playerRepository.preparePlayer(prepare)
+    override fun getCurrentPosition(): Int {
+        return repository.getCurrentPosition()
     }
 }

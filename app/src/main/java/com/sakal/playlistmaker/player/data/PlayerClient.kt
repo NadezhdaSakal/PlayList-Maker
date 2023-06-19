@@ -1,15 +1,17 @@
 package com.sakal.playlistmaker.player.data
 
 interface PlayerClient {
-    fun preparePlayer(prepare: () -> Unit)
-
-    fun setOnCompletionListener(onComplete: () -> Unit)
+    fun prepare(
+        url: String,
+        onPreparedListener: () -> Unit,
+        onCompletionListener: () -> Unit
+    )
 
     fun start()
 
     fun pause()
 
-    fun onDestroy()
+    fun isPlaying(): Boolean
 
-    fun getCurrentTime(): Int
+    fun getCurrentPosition(): Int
 }

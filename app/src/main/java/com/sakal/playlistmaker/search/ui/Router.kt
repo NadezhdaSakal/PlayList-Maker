@@ -1,12 +1,12 @@
 package com.sakal.playlistmaker.search.ui
 
-import android.app.Activity
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.player.ui.activity.AudioPlayerActivity
 import com.sakal.playlistmaker.search.domain.Track
 
-class Router(private val activity: Activity) {
+class Router(private val activity: AppCompatActivity) {
 
     fun goBack() {
         activity.finish()

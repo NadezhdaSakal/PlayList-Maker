@@ -1,4 +1,4 @@
-package com.sakal.playlistmaker.search.ui.activity
+package com.sakal.playlistmaker.utils
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData

@@ -12,7 +12,6 @@ class TrackAdapter(private val onClickListener: TrackClickListener) :
 
     var tracks = ArrayList<Track>()
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val layoutInspector = LayoutInflater.from(parent.context)
         val binding = ItemSearchRecyclerBinding.inflate(layoutInspector, parent, false)
@@ -31,6 +30,7 @@ class TrackAdapter(private val onClickListener: TrackClickListener) :
     fun interface TrackClickListener {
         fun onTrackClick(tracks: Track)
     }
+
 }
 
 

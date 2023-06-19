@@ -4,28 +4,30 @@ import com.sakal.playlistmaker.player.data.PlayerClient
 import com.sakal.playlistmaker.player.domain.PlayerRepo
 
 
-class PlayerRepoImpl(private val playerClient: PlayerClient): PlayerRepo {
-    override fun preparePlayer(prepare: () -> Unit) {
-        playerClient.preparePlayer(prepare)
-    }
+class PlayerRepoImpl(private val client: PlayerClient): PlayerRepo {
 
-    override fun setOnCompletionListener(onComplete: () -> Unit) {
-        playerClient.setOnCompletionListener(onComplete)
+    override fun prepare(
+        url: String,
+        onPreparedListener: () -> Unit,
+        onCompletionListener: () -> Unit
+    ) {
+        client.prepare(
+            url = url,
+            onPreparedListener = onPreparedListener,
+            onCompletionListener = onCompletionListener
+        )
     }
 
     override fun start() {
-        playerClient.start()
+        client.start()
     }
 
     override fun pause() {
-        playerClient.pause()
+        client.pause()
     }
 
-    override fun onDestroy() {
-        playerClient.onDestroy()
-    }
+    override fun isPlaying(): Boolean = client.isPlaying()
 
-    override fun getCurrentTime(): Int {
-        return playerClient.getCurrentTime()
-    }
+    override fun getCurrentPosition(): Int = client.getCurrentPosition()
+
 }

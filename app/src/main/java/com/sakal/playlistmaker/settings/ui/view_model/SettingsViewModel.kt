@@ -1,30 +1,18 @@
 package com.sakal.playlistmaker.settings.ui.view_model
 
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.sakal.playlistmaker.App
+import com.sakal.playlistmaker.settings.domain.SettingsInteractor
 
 
-class SettingsViewModel(application: App) : AndroidViewModel(application) {
-    private val switchThemeInteractor = application.themeSwitcherInteractor
+class SettingsViewModel(private val settingsInteractor: SettingsInteractor) : ViewModel() {
+
     fun switchTheme(isChecked: Boolean) {
-        switchThemeInteractor.switch(isChecked)
+        settingsInteractor.switch(isChecked)
     }
 
     fun isDarkThemeOn(): Boolean {
-        return switchThemeInteractor.isDarkModeOn()
+        return settingsInteractor.isDarkModeOn()
     }
 
-    companion object {
-        fun getViewModelFactory(application: App): ViewModelProvider.Factory =
-            object : ViewModelProvider.Factory {
-                @Suppress("UNCHECKED_CAST")
-                override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                    return SettingsViewModel(
-                        application = application
-                    ) as T
-                }
-            }
-    }
+
 }
