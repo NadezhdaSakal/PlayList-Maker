@@ -2,6 +2,7 @@ package com.sakal.playlistmaker.player.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -41,6 +42,7 @@ class AudioPlayerActivity : AppCompatActivity() {
         viewModel.preparePlayer(track.previewUrl)
 
         binding.playTrack.setOnClickListener {
+            binding.playTrack.startAnimation(AnimationUtils.loadAnimation(this@AudioPlayerActivity, R.anim.scale))
             viewModel.playbackControl()
         }
 
