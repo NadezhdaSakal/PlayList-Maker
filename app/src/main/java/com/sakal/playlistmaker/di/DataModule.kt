@@ -1,7 +1,6 @@
 package com.sakal.playlistmaker.di
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.media.MediaPlayer
 import com.google.gson.Gson
 import com.sakal.playlistmaker.ApiConstants
@@ -9,13 +8,13 @@ import com.sakal.playlistmaker.BuildConfig
 import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.player.data.Player
 import com.sakal.playlistmaker.player.data.PlayerClient
-import com.sakal.playlistmaker.search.data.preferences.SearchHistorySrorage
-import com.sakal.playlistmaker.search.data.network.NetworkClient
 import com.sakal.playlistmaker.search.data.network.ApiService
+import com.sakal.playlistmaker.search.data.network.NetworkClient
 import com.sakal.playlistmaker.search.data.network.RetrofitClient
+import com.sakal.playlistmaker.search.data.preferences.SearchHistorySrorage
 import com.sakal.playlistmaker.search.data.preferences.SharedPreferencesSearchHistoryStorage
-import com.sakal.playlistmaker.settings.data.preferences.ThemeStorage
 import com.sakal.playlistmaker.settings.data.preferences.SharedPrefsThemeStorage
+import com.sakal.playlistmaker.settings.data.preferences.ThemeStorage
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -68,12 +67,15 @@ val dataModule = module {
         MediaPlayer()
     }
 
-    singleOf(::SharedPrefsThemeStorage).bind<ThemeStorage>()
-
-    single<SharedPreferences> {
-        androidContext().getSharedPreferences(
+    single {
+        androidContext()
+            .getSharedPreferences(
             Constants.PLAYLIST_MAKER_PREFS,
             Context.MODE_PRIVATE
         )
     }
+
+    singleOf(::SharedPrefsThemeStorage).bind<ThemeStorage>()
+
+
 }
