@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.sakal.playlistmaker.databinding.ActivityMainBinding
 import com.sakal.playlistmaker.main.ui.NavigationViewState
-import com.sakal.playlistmaker.main.ui.view_model.MainViewModel
+import com.sakal.playlistmaker.main.ui.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {

@@ -12,7 +12,7 @@ import com.sakal.playlistmaker.search.ui.Content
 import com.sakal.playlistmaker.search.ui.Router
 import com.sakal.playlistmaker.search.ui.SearchScreenState
 import com.sakal.playlistmaker.search.ui.adapters.TrackAdapter
-import com.sakal.playlistmaker.search.ui.view_model.SearchViewModel
+import com.sakal.playlistmaker.search.ui.viewmodel.SearchViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchActivity : AppCompatActivity() {

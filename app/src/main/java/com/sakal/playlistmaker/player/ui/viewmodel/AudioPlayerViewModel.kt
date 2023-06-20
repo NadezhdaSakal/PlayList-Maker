@@ -1,4 +1,4 @@
-package com.sakal.playlistmaker.player.ui.view_model
+package com.sakal.playlistmaker.player.ui.viewmodel
 
 import android.os.Handler
 import android.os.Looper

@@ -1,4 +1,4 @@
-package com.sakal.playlistmaker.settings.ui.view_model
+package com.sakal.playlistmaker.settings.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.sakal.playlistmaker.settings.domain.SettingsInteractor

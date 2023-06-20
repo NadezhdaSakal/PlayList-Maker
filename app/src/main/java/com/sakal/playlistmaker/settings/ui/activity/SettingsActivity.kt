@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.databinding.ActivitySettingsBinding
-import com.sakal.playlistmaker.settings.ui.view_model.SettingsViewModel
+import com.sakal.playlistmaker.settings.ui.viewmodel.SettingsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

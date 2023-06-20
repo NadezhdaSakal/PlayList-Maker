@@ -10,7 +10,7 @@ import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.databinding.ActivityAudioplayerBinding
 import com.sakal.playlistmaker.player.ui.PlayerScreenState
-import com.sakal.playlistmaker.player.ui.view_model.AudioPlayerViewModel
+import com.sakal.playlistmaker.player.ui.viewmodel.AudioPlayerViewModel
 import com.sakal.playlistmaker.search.domain.Track
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat

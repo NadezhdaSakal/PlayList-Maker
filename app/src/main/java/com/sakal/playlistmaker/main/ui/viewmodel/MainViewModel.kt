@@ -1,4 +1,4 @@
-package com.sakal.playlistmaker.main.ui.view_model
+package com.sakal.playlistmaker.main.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
