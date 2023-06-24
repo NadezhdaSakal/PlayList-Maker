@@ -3,6 +3,7 @@ package com.sakal.playlistmaker.media_library.ui.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayoutMediator
+import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.databinding.ActivityLibraryBinding
 import com.sakal.playlistmaker.media_library.ui.MediaRouter
 import com.sakal.playlistmaker.media_library.ui.adapters.ViewPagerAdapter
@@ -24,7 +25,7 @@ class LibraryActivity : AppCompatActivity() {
         tabMediator = TabLayoutMediator(binding.tabLayout, binding.viewPager) {
             tab, position ->
             when(position) {
-                0 -> tab.text = resources.getString(R.string.favorites_tracks)
+                Constants.INDEX_FIRST -> tab.text = resources.getString(R.string.favorites_tracks)
                 else -> tab.text = resources.getString(R.string.playlists)
             }
         }
