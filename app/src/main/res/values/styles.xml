@@ -127,7 +127,6 @@
         <item name="tabMode">fixed</item>
         <item name="fontWeight">500</item>
         <item name="tabIndicatorColor">?attr/colorOnSecondary</item>
-        <item name="tabRippleColor">?attr/colorOnSecondary</item>
         <item name="tabPadding">@dimen/padding_16</item>
     </style>
 
