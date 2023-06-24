@@ -24,5 +24,8 @@
 
     <TextView
         android:text="@string/empty_playlists"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginHorizontal="@dimen/margin_24"
+        android:textFontWeight="500"
         style="@style/tabText"/>
 </LinearLayout>

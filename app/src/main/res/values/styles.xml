@@ -124,8 +124,8 @@
         <item name="android:textSize">@dimen/text_size_14</item>
         <item name="tabTextColor">?attr/colorOnSecondary</item>
         <item name="android:textAllCaps">false</item>
-        <item name="textAllCaps">false</item>
         <item name="tabMode">fixed</item>
+        <item name="fontWeight">500</item>
         <item name="tabIndicatorColor">?attr/colorOnSecondary</item>
         <item name="tabRippleColor">?attr/colorOnSecondary</item>
         <item name="tabPadding">@dimen/padding_16</item>
@@ -134,10 +134,9 @@
     <style name="tabText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">@dimen/margin_16</item>
-        <item name="android:layout_marginStart">@dimen/margin_24</item>
-        <item name="android:layout_marginEnd">@dimen/margin_24</item>
         <item name="android:textSize">@dimen/text_size_19</item>
+        <item name="fontWeight">400</item>
+        <item name="android:letterSpacing">0</item>
         <item name="android:textColor">?attr/colorOnSecondary</item>
         <item name="android:fontFamily">@font/ys_display_medium</item>
         <item name="android:layout_gravity">center</item>

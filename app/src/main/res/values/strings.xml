@@ -35,7 +35,7 @@
     <string name="track_duration_time_format" translatable="false">mm:ss</string>
 
     <string name="empty_media">Ваша медиатека пуста</string>
-    <string name="empty_playlists">Вы не создали ни одного плейлиста</string>
+    <string name="empty_playlists">Вы не создали\n ни одного плейлиста</string>
     <string name="new_playlist">Новый плейлист</string>
     <string name="favorites_tracks">Избранные треки</string>
     <string name="playlists">Плейлисты</string>

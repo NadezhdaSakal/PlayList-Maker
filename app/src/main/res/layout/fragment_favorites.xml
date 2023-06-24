@@ -15,6 +15,8 @@
         android:src="@drawable/nothingfound"/>
 
     <TextView
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginHorizontal="@dimen/margin_24"
         style="@style/tabText"
         android:text="@string/empty_media"/>
 </LinearLayout>
