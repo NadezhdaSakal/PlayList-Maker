@@ -41,7 +41,7 @@ class LibraryActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        binding.mediatekaToolbar.setNavigationOnClickListener() {
+        binding.mediatekaToolbar.setNavigationOnClickListener {
             navigationRouter.goBack()
         }
     }
