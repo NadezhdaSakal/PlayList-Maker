@@ -12,14 +12,21 @@ import com.sakal.playlistmaker.media_library.ui.viewmodels.PlaylistsFragmentView
 class PlaylistsFragment : Fragment() {
 
     private val viewModel by viewModel<PlaylistsFragmentViewModel>()
+    private var _binding: FragmentPlaylistsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        val binding = FragmentPlaylistsBinding.inflate(inflater, container, false)
+        _binding = FragmentPlaylistsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
