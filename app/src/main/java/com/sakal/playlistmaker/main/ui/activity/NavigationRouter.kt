@@ -9,8 +9,8 @@ import com.sakal.playlistmaker.settings.ui.activity.SettingsActivity
 class NavigationRouter(private val activity: AppCompatActivity) {
 
     fun toSearch() {
-        val serachIntent = Intent(activity, SearchActivity::class.java)
-        activity.startActivity(serachIntent)
+        val searchIntent = Intent(activity, SearchActivity::class.java)
+        activity.startActivity(searchIntent)
     }
 
     fun toMediaLibrary() {
