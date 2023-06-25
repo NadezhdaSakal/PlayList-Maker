@@ -9,7 +9,7 @@ import androidx.core.widget.doOnTextChanged
 import com.sakal.playlistmaker.databinding.ActivitySearchBinding
 import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.search.ui.Content
-import com.sakal.playlistmaker.search.ui.Router
+import com.sakal.playlistmaker.search.ui.SearchRouter
 import com.sakal.playlistmaker.search.ui.SearchScreenState
 import com.sakal.playlistmaker.search.ui.adapters.TrackAdapter
 import com.sakal.playlistmaker.search.ui.viewmodel.SearchViewModel
@@ -21,7 +21,7 @@ class SearchActivity : AppCompatActivity() {
 
     private val viewModel by viewModel<SearchViewModel>()
 
-    private lateinit var router: Router
+    private lateinit var router: SearchRouter
 
     private val searchAdapter = TrackAdapter {
         clickOnTrack(it)
@@ -52,7 +52,7 @@ class SearchActivity : AppCompatActivity() {
 
         initHistory()
 
-        router = Router(this)
+        router = SearchRouter(this)
 
     }
 

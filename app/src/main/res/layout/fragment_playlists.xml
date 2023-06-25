@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@style/Theme.PlaylistMaker"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/colorSecondary">
+
+    <Button
+        android:id="@+id/button_new_playlist"
+        style="@style/ErrorButtonPlaceholder"
+        android:text="@string/new_playlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_24"
+        android:layout_marginBottom="46dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center"
+        android:src="@drawable/nothingfound"/>
+
+    <TextView
+        android:text="@string/empty_playlists"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginHorizontal="@dimen/margin_24"
+        android:textFontWeight="500"
+        style="@style/tabText"/>
+</LinearLayout>
