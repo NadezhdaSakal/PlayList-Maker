@@ -45,7 +45,6 @@ class AudioPlayerActivity : AppCompatActivity() {
             binding.playTrack.startAnimation(AnimationUtils.loadAnimation(this@AudioPlayerActivity, R.anim.scale))
             viewModel.playbackControl()
         }
-
     }
 
     private fun initToolbar() {
@@ -133,5 +132,4 @@ class AudioPlayerActivity : AppCompatActivity() {
         super.onPause()
         viewModel.pausePlayer()
     }
-
 }

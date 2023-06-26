@@ -50,7 +50,6 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
         }
     }
 
-
     fun onSearchClicked(track: Track) {
         trackOnClickDebounce()
         addToHistory(track)
@@ -64,7 +63,6 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
     fun onDestroy() {
         handler.removeCallbacksAndMessages(SEARCH_REQUEST_TOKEN)
     }
-
 
     fun getTracks(query: String) {
         if (query.isNotEmpty()) {

@@ -90,6 +90,4 @@ class AudioPlayerViewModel(private val playerInteractor: PlayerInteractor) : Vie
         pausePlayer()
         handler.removeCallbacksAndMessages(null)
     }
-
-
 }

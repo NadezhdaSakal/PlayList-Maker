@@ -53,7 +53,6 @@ class SearchActivity : AppCompatActivity() {
         initHistory()
 
         router = SearchRouter(this)
-
     }
 
     private fun render(state: SearchScreenState) {
@@ -129,7 +128,6 @@ class SearchActivity : AppCompatActivity() {
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
         viewModel.clearSearch()
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -153,7 +151,6 @@ class SearchActivity : AppCompatActivity() {
         viewModel.onSearchClicked(track)
         router.openAudioPlayer(track)
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
