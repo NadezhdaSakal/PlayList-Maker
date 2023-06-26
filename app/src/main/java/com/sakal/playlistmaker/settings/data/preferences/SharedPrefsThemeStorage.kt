@@ -12,7 +12,7 @@ class SharedPrefsThemeStorage(private val preferences: SharedPreferences): Theme
             .apply()
     }
 
-    override fun isDarkModeOn(): Boolean {
+    override fun isDarkMode(): Boolean {
         return preferences.getBoolean(Constants.DARK_THEME_KEY, false)
     }
 }

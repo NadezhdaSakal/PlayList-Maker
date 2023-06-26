@@ -5,12 +5,12 @@ import com.sakal.playlistmaker.settings.domain.SettingsRepository
 
 class SettingsInteractorImpl(private val settingsRepository: SettingsRepository) :
     SettingsInteractor {
-    override fun switch(isDarkModeOn: Boolean) {
-        settingsRepository.switchTheme(isDarkModeOn)
+    override fun switch(isDarkMode: Boolean) {
+        settingsRepository.switchTheme(isDarkMode)
     }
 
-    override fun isDarkModeOn(): Boolean {
-        return settingsRepository.isDarkModeOn()
+    override fun isDarkMode(): Boolean {
+        return settingsRepository.isDarkMode()
     }
 
     override fun applyCurrentTheme() {

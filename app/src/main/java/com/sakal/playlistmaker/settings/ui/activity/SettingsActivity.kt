@@ -43,7 +43,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun initSwitch() {
         binding.themeSwitcher
             .apply {
-                isChecked = viewModel.isDarkThemeOn()
+                isChecked = viewModel.isDarkTheme()
                 setOnCheckedChangeListener { _, isChecked ->
                     viewModel.switchTheme(isChecked)
                 }

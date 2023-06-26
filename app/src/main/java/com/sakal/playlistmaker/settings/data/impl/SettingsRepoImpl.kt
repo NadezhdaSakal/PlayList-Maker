@@ -11,13 +11,13 @@ class SettingsRepoImpl(private val themeStorage: ThemeStorage) : SettingsReposit
         applyCurrentTheme()
     }
 
-    override fun isDarkModeOn(): Boolean {
-        return themeStorage.isDarkModeOn()
+    override fun isDarkMode(): Boolean {
+        return themeStorage.isDarkMode()
     }
 
     override fun applyCurrentTheme() {
         AppCompatDelegate.setDefaultNightMode(
-            if (isDarkModeOn()) {
+            if (isDarkMode()) {
                 AppCompatDelegate.MODE_NIGHT_YES
             } else {
                 AppCompatDelegate.MODE_NIGHT_NO

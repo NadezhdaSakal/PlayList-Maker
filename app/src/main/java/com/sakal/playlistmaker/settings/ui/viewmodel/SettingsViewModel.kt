@@ -10,8 +10,8 @@ class SettingsViewModel(private val settingsInteractor: SettingsInteractor) : Vi
         settingsInteractor.switch(isChecked)
     }
 
-    fun isDarkThemeOn(): Boolean {
-        return settingsInteractor.isDarkModeOn()
+    fun isDarkTheme(): Boolean {
+        return settingsInteractor.isDarkMode()
     }
 
 

@@ -1,7 +1,7 @@
 package com.sakal.playlistmaker.settings.domain
 
 interface SettingsInteractor {
-    fun switch(isDarkModeOn: Boolean)
-    fun isDarkModeOn(): Boolean
+    fun switch(isDarkMode: Boolean)
+    fun isDarkMode(): Boolean
     fun applyCurrentTheme()
 }
