@@ -1,4 +1,4 @@
-package com.sakal.playlistmaker.media_library.ui.fragments
+package com.sakal.playlistmaker.media_library.ui.child_fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

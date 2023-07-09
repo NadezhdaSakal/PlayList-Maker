@@ -65,4 +65,9 @@ dependencies {
     //Koin
     implementation "io.insert-koin:koin-android:3.4.2"
 
+    //Jetpack Navigation Component
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
+    implementation 'androidx.fragment:fragment-ktx:1.6.0'
+
 }
