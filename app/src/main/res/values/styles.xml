@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="MainBtn" parent="Widget.MaterialComponents.Button.UnelevatedButton">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/height_0</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginBottom">@dimen/margin_16</item>
-        <item name="backgroundTint">@color/white</item>
-        <item name="fontFamily">@font/ys_display_medium</item>
-        <item name="android:textFontWeight">500</item>
-        <item name="android:letterSpacing">0</item>
-        <item name="textAllCaps">false</item>
-        <item name="android:textColor">@color/black_blue</item>
-        <item name="android:textSize">@dimen/text_size_22</item>
-        <item name="cornerRadius">@dimen/corner_radius_16</item>
-        <item name="iconGravity">textStart</item>
-        <item name="iconPadding">@dimen/padding_10</item>
-        <item name="iconTint">@color/black_blue</item>
-        <item name="android:foreground">?attr/selectableItemBackground</item>
-    </style>
-
     <style name="SettingsBtn" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -65,7 +46,7 @@
     <style name="ErrorButtonPlaceholder">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_gravity">center</item>
         <item name="iconTint">@color/text_color_primary</item>
         <item name="fontFamily">@font/ys_display_medium</item>
         <item name="fontWeight">500</item>

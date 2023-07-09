@@ -9,8 +9,6 @@
     <dimen name="text_size_13">13sp</dimen>
 
 
-    <dimen name="height_0">0dp</dimen>
-
     <dimen name="margin_16">16dp</dimen>
     <dimen name="margin_24">24dp</dimen>
     <dimen name="margin_4">4dp</dimen>
@@ -19,11 +17,9 @@
     <dimen name="margin_54">54dp</dimen>
     <dimen name="margin_28">28dp</dimen>
 
-    <dimen name="corner_radius_16">16dp</dimen>
     <dimen name="corner_radius_2">2dp</dimen>
     <dimen name="corner_radius_8">8dp</dimen>
 
-    <dimen name="padding_10">10dp</dimen>
     <dimen name="padding_20">20dp</dimen>
     <dimen name="padding_16">16dp</dimen>
     <dimen name="padding_8">8dp</dimen>
