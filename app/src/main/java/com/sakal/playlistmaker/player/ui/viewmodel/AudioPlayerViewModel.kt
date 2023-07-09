@@ -14,7 +14,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AudioPlayerViewModel(private val playerInteractor: PlayerInteractor, private val trackInteractor: TracksInteractor) : ViewModel() {
+class AudioPlayerViewModel(
+    private val playerInteractor: PlayerInteractor,
+    private val trackInteractor: TracksInteractor
+) : ViewModel() {
 
     private val stateLiveData = MutableLiveData<PlayerScreenState>()
 
