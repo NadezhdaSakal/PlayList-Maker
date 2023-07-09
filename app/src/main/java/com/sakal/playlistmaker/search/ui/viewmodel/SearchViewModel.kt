@@ -14,6 +14,7 @@ import com.sakal.playlistmaker.search.ui.SearchScreenState
 class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewModel() {
 
     private val _screenState = MutableLiveData<SearchScreenState>()
+    private val history = ArrayList<Track>()
 
     fun observeState(): LiveData<SearchScreenState> = _screenState
 
@@ -23,7 +24,7 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
     var trackIsClickable: LiveData<Boolean> = _trackIsClickable
 
     init {
-        val history = showHistory()
+        history.addAll(tracksInteractor.getHistory())
         if(history.isNotEmpty()) {
             renderState(SearchScreenState.ShowHistory(history))
         }
