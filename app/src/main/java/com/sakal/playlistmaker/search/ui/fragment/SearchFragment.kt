@@ -53,7 +53,6 @@ class SearchFragment : Fragment() {
         initSearchResults()
 
         initHistory()
-
     }
 
     private fun render(state: SearchScreenState) {
@@ -147,8 +146,8 @@ class SearchFragment : Fragment() {
         findNavController().navigate(R.id.action_searchFragment_to_audioPlayerFragment)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         viewModel.onDestroy()
     }
 

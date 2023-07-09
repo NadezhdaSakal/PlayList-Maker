@@ -124,7 +124,6 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
     fun clearHistory() {
         tracksInteractor.clearHistory()
         _screenState.postValue(SearchScreenState.Success(arrayListOf()))
-
     }
 
     private fun showHistory(): ArrayList<Track> {

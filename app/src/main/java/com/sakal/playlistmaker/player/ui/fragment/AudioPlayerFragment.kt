@@ -131,7 +131,6 @@ class AudioPlayerFragment : Fragment() {
             } else {
                 albumName.visibility = View.GONE
                 album.visibility = View.GONE
-
             }
         }
     }

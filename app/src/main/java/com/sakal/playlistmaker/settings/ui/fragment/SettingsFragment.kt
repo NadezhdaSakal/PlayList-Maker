@@ -31,7 +31,6 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         initSwitch()
 
         initButtonSharing()
@@ -51,7 +50,7 @@ class SettingsFragment : Fragment() {
             }
     }
 
-    fun initButtonSharing() {
+    private fun initButtonSharing() {
         binding.buttonSharing.setOnClickListener {
             Intent(Intent.ACTION_SEND).apply {
                 putExtra(Intent.EXTRA_TEXT, getString(R.string.share_link))
@@ -72,7 +71,6 @@ class SettingsFragment : Fragment() {
             }
         }
     }
-
 
     private fun initButtonUserAgreement() {
         binding.buttonUserAgreement.setOnClickListener {
