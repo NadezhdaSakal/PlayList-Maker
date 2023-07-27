@@ -143,7 +143,7 @@ class SearchFragment : Fragment() {
     private fun clickOnTrack(track: Track) {
         if (viewModel.trackIsClickable.value == false) return
         viewModel.onSearchClicked(track)
-        findNavController().navigate(R.id.action_searchFragment_to_audioPlayerFragment)
+        findNavController().navigate(R.id.action_searchFragment_to_audioPlayerActivity)
     }
 
     override fun onDestroyView() {

@@ -1,17 +1,19 @@
 package com.sakal.playlistmaker.player.ui.viewmodel
 
-import android.os.Handler
-import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.player.domain.PlayerInteractor
 import com.sakal.playlistmaker.player.ui.PlayerScreenState
 import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.search.domain.TracksInteractor
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
 
 class AudioPlayerViewModel(
@@ -23,9 +25,7 @@ class AudioPlayerViewModel(
 
     fun observeState(): LiveData<PlayerScreenState> = stateLiveData
 
-    private val handler = Handler(Looper.getMainLooper())
-
-    private val updatePlayingTimeRunnable = Runnable { updatePlayingTime() }
+    private var progressTimer: Job? = null
 
     fun preparePlayer(url: String?) {
         renderState(PlayerScreenState.Preparing)
@@ -36,7 +36,7 @@ class AudioPlayerViewModel(
                     renderState(PlayerScreenState.Stopped)
                 },
                 onCompletionListener = {
-                    handler.removeCallbacks(updatePlayingTimeRunnable)
+                    progressTimer?.cancel()
                     renderState(PlayerScreenState.Stopped)
                 }
             )
@@ -48,14 +48,13 @@ class AudioPlayerViewModel(
     private fun startPlayer() {
         playerInteractor.start()
         renderState(PlayerScreenState.Playing)
-        handler.postDelayed(updatePlayingTimeRunnable, Constants.REFRESH_TIMER_DELAY)
+        updatePlayingTime()
     }
 
     fun pausePlayer() {
         playerInteractor.pause()
         renderState(PlayerScreenState.Paused)
-        handler.removeCallbacks(updatePlayingTimeRunnable)
-    }
+        progressTimer?.cancel()    }
 
     private fun isPlaying(): Boolean {
         return playerInteractor.isPlaying()
@@ -74,26 +73,25 @@ class AudioPlayerViewModel(
     }
 
     private fun updatePlayingTime() {
-        renderState(
-            PlayerScreenState.UpdatePlayingTime(
-                SimpleDateFormat(
-                    "mm:ss",
-                    Locale.getDefault()
-                ).format(
-                    getCurrentPosition()
+        progressTimer = viewModelScope.launch {
+            while (isPlaying()) {
+                delay(Constants.REFRESH_TIMER_DELAY)
+                renderState(
+                    PlayerScreenState.UpdatePlayingTime(
+                        SimpleDateFormat(
+                            "mm:ss",
+                            Locale.getDefault()
+                        ).format(
+                            getCurrentPosition()
+                        )
+                    )
                 )
-            )
-        )
-        handler.postDelayed(updatePlayingTimeRunnable, Constants.REFRESH_TIMER_DELAY)
+            }
+        }
     }
 
     private fun renderState(state: PlayerScreenState) {
         stateLiveData.postValue(state)
-    }
-
-    override fun onCleared() {
-        pausePlayer()
-        handler.removeCallbacksAndMessages(null)
     }
 
     fun getTrack(): Track {
