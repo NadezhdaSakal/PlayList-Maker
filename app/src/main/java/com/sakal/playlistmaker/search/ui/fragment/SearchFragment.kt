@@ -78,7 +78,11 @@ class SearchFragment : Fragment() {
 
         binding.inputSearchForm.doOnTextChanged { s: CharSequence?, _, _, _ ->
             binding.buttonClearSearchForm.visibility = clearButtonVisibility(s)
-            if (binding.inputSearchForm.hasFocus() && s.toString().isNotEmpty()) {
+            if (
+                binding.inputSearchForm.hasFocus()
+                && s.toString().isNotEmpty()
+                && binding.historyList.visibility == View.VISIBLE
+            ) {
                 showContent(Content.SEARCH_RESULT)
             }
             viewModel.searchDebounce(binding.inputSearchForm.text.toString())
@@ -141,14 +145,10 @@ class SearchFragment : Fragment() {
     }
 
     private fun clickOnTrack(track: Track) {
-        if (viewModel.trackIsClickable.value == false) return
-        viewModel.onSearchClicked(track)
-        findNavController().navigate(R.id.action_searchFragment_to_audioPlayerActivity)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewModel.onDestroy()
+        if(viewModel.clickDebounce()) {
+            viewModel.addToHistory(track)
+            findNavController().navigate(R.id.action_searchFragment_to_audioPlayerActivity)
+        }
     }
 
     private fun showContent(content: Content) {

@@ -8,6 +8,8 @@ import com.sakal.playlistmaker.search.data.preferences.SharedPreferencesSearchHi
 import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.search.domain.TracksRepo
 import com.sakal.playlistmaker.utils.Resource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 
 class TracksRepoImpl(
@@ -15,13 +17,15 @@ class TracksRepoImpl(
     SharedPreferencesSearchHistoryStorage
 ) : TracksRepo {
 
-    override fun searchTracks(query: String): Resource<ArrayList<Track>> {
+    override fun searchTracks(query: String): Flow<Resource<ArrayList<Track>>> = flow {
+
         val response = networkClient.doRequest(TracksSearchRequest(query))
 
         when (response.resultCode) {
             ApiConstants.NO_INTERNET_CONNECTION_CODE -> {
-                return Resource.Error(ApiConstants.INTERNET_CONNECTION_ERROR)
+                emit(Resource.Error(ApiConstants.INTERNET_CONNECTION_ERROR))
             }
+
             ApiConstants.SUCCESS_CODE -> {
                 val arrayListTracks = arrayListOf<Track>()
                 (response as TracksSearchResponse).results.forEach {
@@ -40,15 +44,13 @@ class TracksRepoImpl(
                         )
                     )
                 }
-                return Resource.Success(arrayListTracks)
+                emit(Resource.Success(arrayListTracks))
             }
             else -> {
-                return Resource.Error(ApiConstants.SERVER_ERROR)
+                emit(Resource.Error(ApiConstants.SERVER_ERROR))
             }
         }
-
     }
-
     override fun addTrackToHistory(track: Track) {
         localStorage.addToHistory(track)
     }
