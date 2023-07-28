@@ -33,7 +33,11 @@ class SearchFragment : Fragment() {
         clickOnTrack(it)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -61,14 +65,17 @@ class SearchFragment : Fragment() {
                 searchAdapter.tracks = state.tracks
                 showContent(Content.SEARCH_RESULT)
             }
+
             is SearchScreenState.ShowHistory -> {
                 historyAdapter.tracks = state.tracks
                 showContent(Content.TRACKS_HISTORY)
             }
+
             is SearchScreenState.Error -> {
                 binding.errorText.text = state.message
                 showContent(Content.ERROR)
             }
+
             is SearchScreenState.NothingFound -> showContent(Content.NOT_FOUND)
             is SearchScreenState.Loading -> showContent(Content.LOADING)
         }
@@ -145,10 +152,10 @@ class SearchFragment : Fragment() {
     }
 
     private fun clickOnTrack(track: Track) {
-        if(viewModel.clickDebounce()) {
-            viewModel.addToHistory(track)
-            findNavController().navigate(R.id.action_searchFragment_to_audioPlayerActivity)
-        }
+        if (!viewModel.isClickable) return
+        viewModel.addToHistory(track)
+        viewModel.onTrackClick()
+        findNavController().navigate(R.id.action_searchFragment_to_audioPlayerActivity)
     }
 
     private fun showContent(content: Content) {

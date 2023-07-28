@@ -17,7 +17,7 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
     private val _screenState = MutableLiveData<SearchScreenState>()
     private val history = ArrayList<Track>()
     fun observeState(): LiveData<SearchScreenState> = _screenState
-    private var isClickAllowed = true
+    var isClickable = true
 
     init {
         history.addAll(tracksInteractor.getHistory())
@@ -31,22 +31,20 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
             getTracks(query)
         }
 
+    private val trackClickDebounce =
+        debounce<Boolean>(Constants.CLICK_DEBOUNCE_DELAY, viewModelScope, false) {
+            isClickable = it
+        }
+
     fun searchDebounce(query: String) {
         if (query.isNotEmpty()) {
             tracksSearchDebounce(query)
         }
     }
 
-    fun clickDebounce(): Boolean {
-        val current = isClickAllowed
-        if (isClickAllowed) {
-            isClickAllowed = false
-            viewModelScope.launch {
-                delay(Constants.CLICK_DEBOUNCE_DELAY)
-                isClickAllowed = true
-            }
-        }
-        return current
+    fun onTrackClick() {
+        isClickable = false
+        trackClickDebounce(true)
     }
 
     fun getTracks(query: String) {
