@@ -33,7 +33,11 @@ class SearchFragment : Fragment() {
         clickOnTrack(it)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -61,14 +65,17 @@ class SearchFragment : Fragment() {
                 searchAdapter.tracks = state.tracks
                 showContent(Content.SEARCH_RESULT)
             }
+
             is SearchScreenState.ShowHistory -> {
                 historyAdapter.tracks = state.tracks
                 showContent(Content.TRACKS_HISTORY)
             }
+
             is SearchScreenState.Error -> {
                 binding.errorText.text = state.message
                 showContent(Content.ERROR)
             }
+
             is SearchScreenState.NothingFound -> showContent(Content.NOT_FOUND)
             is SearchScreenState.Loading -> showContent(Content.LOADING)
         }
@@ -78,7 +85,11 @@ class SearchFragment : Fragment() {
 
         binding.inputSearchForm.doOnTextChanged { s: CharSequence?, _, _, _ ->
             binding.buttonClearSearchForm.visibility = clearButtonVisibility(s)
-            if (binding.inputSearchForm.hasFocus() && s.toString().isNotEmpty()) {
+            if (
+                binding.inputSearchForm.hasFocus()
+                && s.toString().isNotEmpty()
+                && binding.historyList.visibility == View.VISIBLE
+            ) {
                 showContent(Content.SEARCH_RESULT)
             }
             viewModel.searchDebounce(binding.inputSearchForm.text.toString())
@@ -141,14 +152,10 @@ class SearchFragment : Fragment() {
     }
 
     private fun clickOnTrack(track: Track) {
-        if (viewModel.trackIsClickable.value == false) return
-        viewModel.onSearchClicked(track)
-        findNavController().navigate(R.id.action_searchFragment_to_audioPlayerFragment)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewModel.onDestroy()
+        if (!viewModel.isClickable) return
+        viewModel.addToHistory(track)
+        viewModel.onTrackClick()
+        findNavController().navigate(R.id.action_searchFragment_to_audioPlayerActivity)
     }
 
     private fun showContent(content: Content) {

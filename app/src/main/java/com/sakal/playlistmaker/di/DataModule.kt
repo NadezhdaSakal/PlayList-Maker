@@ -13,6 +13,7 @@ import com.sakal.playlistmaker.search.data.network.NetworkClient
 import com.sakal.playlistmaker.search.data.network.RetrofitClient
 import com.sakal.playlistmaker.search.data.preferences.SearchHistorySrorage
 import com.sakal.playlistmaker.search.data.preferences.SharedPreferencesSearchHistoryStorage
+import com.sakal.playlistmaker.search.data.network.ConnectionChecker
 import com.sakal.playlistmaker.settings.data.preferences.SharedPrefsThemeStorage
 import com.sakal.playlistmaker.settings.data.preferences.ThemeStorage
 import okhttp3.OkHttpClient
@@ -57,6 +58,8 @@ val dataModule = module {
     factory { Gson() }
 
     singleOf(::SharedPreferencesSearchHistoryStorage).bind<SearchHistorySrorage>()
+
+    singleOf(::ConnectionChecker)
 
     singleOf(:: RetrofitClient).bind<NetworkClient>()
 

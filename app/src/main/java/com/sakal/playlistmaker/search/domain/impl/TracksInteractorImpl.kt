@@ -4,16 +4,22 @@ import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.utils.Resource
 import com.sakal.playlistmaker.search.domain.TracksInteractor
 import com.sakal.playlistmaker.search.domain.TracksRepo
-import java.util.concurrent.Executors
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class TracksInteractorImpl(private val repository: TracksRepo): TracksInteractor {
-    private val executor = Executors.newCachedThreadPool()
 
-    override fun searchTracks(query: String, consumer: TracksInteractor.TracksConsumer) {
-        executor.execute {
-            when (val resource = repository.searchTracks(query)){
-                is Resource.Success ->{consumer.consume(resource.data, null)}
-                is Resource.Error -> {consumer.consume(null, resource.message)}
+class TracksInteractorImpl(private val repository: TracksRepo) : TracksInteractor {
+
+    override fun searchTracks(query: String): Flow<Pair<ArrayList<Track>?, String?>> {
+        return repository.searchTracks(query).map { result ->
+            when (result) {
+                is Resource.Success -> {
+                    Pair(result.data, null)
+                }
+
+                is Resource.Error -> {
+                    Pair(null, result.message)
+                }
             }
         }
     }
@@ -21,6 +27,7 @@ class TracksInteractorImpl(private val repository: TracksRepo): TracksInteractor
     override fun addTrackToHistory(track: Track) {
         repository.addTrackToHistory(track)
     }
+
 
     override fun clearHistory() {
         repository.clearHistory()
