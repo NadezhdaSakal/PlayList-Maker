@@ -1,5 +1,6 @@
 package com.sakal.playlistmaker.search.ui.fragment
 
+import android.annotation.SuppressLint
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -158,6 +159,7 @@ class SearchFragment : Fragment() {
         findNavController().navigate(R.id.action_searchFragment_to_audioPlayerActivity)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun showContent(content: Content) {
         when (content) {
             Content.NOT_FOUND -> {

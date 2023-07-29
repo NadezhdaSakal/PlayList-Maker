@@ -75,7 +75,7 @@ class AudioPlayerViewModel(
     private fun updatePlayingTime() {
         progressTimer = viewModelScope.launch {
             while (isPlaying()) {
-                delay(Constants.REFRESH_TIMER_DELAY)
+                delay(Constants.REFRESH_TIMER_DELAY_MILLIS)
                 renderState(
                     PlayerScreenState.UpdatePlayingTime(
                         SimpleDateFormat(

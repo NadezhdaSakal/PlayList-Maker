@@ -9,7 +9,6 @@ import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.search.domain.TracksInteractor
 import com.sakal.playlistmaker.search.ui.SearchScreenState
 import com.sakal.playlistmaker.utils.debounce
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewModel() {
@@ -27,12 +26,12 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
     }
 
     private val tracksSearchDebounce =
-        debounce<String>(Constants.SEARCH_DEBOUNCE_DELAY, viewModelScope, true) { query ->
+        debounce<String>(Constants.SEARCH_DEBOUNCE_DELAY_MILLIS, viewModelScope, true) { query ->
             getTracks(query)
         }
 
     private val trackClickDebounce =
-        debounce<Boolean>(Constants.CLICK_DEBOUNCE_DELAY, viewModelScope, false) {
+        debounce<Boolean>(Constants.CLICK_DEBOUNCE_DELAY_MILLIS, viewModelScope, false) {
             isClickable = it
         }
 

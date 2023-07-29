@@ -13,9 +13,9 @@ object Constants {
     const val HISTORY_LIST_SIZE = 10
     const val INDEX_FIRST = 0
 
-    const val CLICK_DEBOUNCE_DELAY = 1000L
-    const val SEARCH_DEBOUNCE_DELAY = 2000L
+    const val CLICK_DEBOUNCE_DELAY_MILLIS = 1000L
+    const val SEARCH_DEBOUNCE_DELAY_MILLIS = 2000L
 
-    const val REFRESH_TIMER_DELAY = 300L
+    const val REFRESH_TIMER_DELAY_MILLIS = 300L
 
 }
