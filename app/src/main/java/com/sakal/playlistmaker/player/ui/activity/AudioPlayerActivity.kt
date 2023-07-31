@@ -38,7 +38,9 @@ class AudioPlayerActivity : AppCompatActivity() {
 
         binding.playTrack.isEnabled = false
 
-        viewModel.preparePlayer(track.previewUrl)
+        if (savedInstanceState==null) {
+            viewModel.preparePlayer(track.previewUrl)
+        }
 
         binding.playTrack.setOnClickListener {
             binding.playTrack.startAnimation(
@@ -70,10 +72,12 @@ class AudioPlayerActivity : AppCompatActivity() {
             }
 
             is PlayerScreenState.Paused -> {
+                binding.playTrack.isEnabled = true
                 binding.playTrack.setImageResource(R.drawable.play_arrow)
             }
 
             is PlayerScreenState.Playing -> {
+                binding.playTrack.isEnabled = true
                 binding.playTrack.setImageResource(R.drawable.pause)
             }
 

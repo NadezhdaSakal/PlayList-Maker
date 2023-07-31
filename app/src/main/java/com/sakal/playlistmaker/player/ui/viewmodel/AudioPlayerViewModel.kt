@@ -94,6 +94,11 @@ class AudioPlayerViewModel(
         stateLiveData.postValue(state)
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        playerInteractor.releasePlayer()
+    }
+
     fun getTrack(): Track {
         return trackInteractor
             .getHistory()

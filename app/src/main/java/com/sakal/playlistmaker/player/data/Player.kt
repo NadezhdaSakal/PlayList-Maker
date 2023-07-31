@@ -34,4 +34,8 @@ class Player(private val client: MediaPlayer) : PlayerClient {
     override fun getCurrentPosition(): Int {
         return client.currentPosition
     }
+
+    override fun releasePlayer() {
+        client.release()
+    }
 }
