@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.sakal.playlistmaker.ApiConstants
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.databinding.FragmentSearchBinding
 import com.sakal.playlistmaker.search.domain.Track
@@ -73,7 +74,16 @@ class SearchFragment : Fragment() {
             }
 
             is SearchScreenState.Error -> {
-                binding.errorText.text = state.message
+                when (state.error) {
+                    ApiConstants.NO_INTERNET_CONNECTION_CODE ->
+                        binding.errorText.text =
+                            resources.getText(R.string.check_internet_connection)
+
+                    else -> binding.errorText.text = String.format(
+                        resources.getText(R.string.error).toString(),
+                        state.error
+                    )
+                }
                 showContent(Content.ERROR)
             }
 

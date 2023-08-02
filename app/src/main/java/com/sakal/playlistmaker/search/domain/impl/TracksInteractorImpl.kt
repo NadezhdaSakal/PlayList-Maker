@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 
 class TracksInteractorImpl(private val repository: TracksRepo) : TracksInteractor {
 
-    override fun searchTracks(query: String): Flow<Pair<ArrayList<Track>?, String?>> {
+    override fun searchTracks(query: String): Flow<Pair<ArrayList<Track>?, Int?>> {
         return repository.searchTracks(query).map { result ->
             when (result) {
                 is Resource.Success -> {
@@ -18,7 +18,7 @@ class TracksInteractorImpl(private val repository: TracksRepo) : TracksInteracto
                 }
 
                 is Resource.Error -> {
-                    Pair(null, result.message)
+                    Pair(null, result.error)
                 }
             }
         }

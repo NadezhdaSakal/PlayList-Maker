@@ -17,7 +17,7 @@ sealed interface SearchScreenState {
     ) : SearchScreenState
 
     data class Error(
-        val message: String
+        val error: Int?
     ) : SearchScreenState
 
 }

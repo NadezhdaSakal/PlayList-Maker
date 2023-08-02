@@ -23,7 +23,7 @@ class TracksRepoImpl(
 
         when (response.resultCode) {
             ApiConstants.NO_INTERNET_CONNECTION_CODE -> {
-                emit(Resource.Error(ApiConstants.INTERNET_CONNECTION_ERROR))
+                emit(Resource.Error(response.resultCode))
             }
 
             ApiConstants.SUCCESS_CODE -> {
@@ -47,7 +47,7 @@ class TracksRepoImpl(
                 emit(Resource.Success(arrayListTracks))
             }
             else -> {
-                emit(Resource.Error(ApiConstants.SERVER_ERROR))
+                emit(Resource.Error(response.resultCode))
             }
         }
     }

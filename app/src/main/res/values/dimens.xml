@@ -16,6 +16,7 @@
     <dimen name="margin_12">12dp</dimen>
     <dimen name="margin_54">54dp</dimen>
     <dimen name="margin_28">28dp</dimen>
+    <dimen name="margin_100">100dp</dimen>
 
     <dimen name="corner_radius_2">2dp</dimen>
     <dimen name="corner_radius_8">8dp</dimen>

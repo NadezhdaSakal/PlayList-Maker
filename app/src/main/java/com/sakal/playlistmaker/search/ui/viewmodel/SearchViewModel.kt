@@ -60,15 +60,15 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
         }
     }
 
-    private fun processResult(foundTracks: ArrayList<Track>?, errorMessage: String?) {
+    private fun processResult(foundTracks: ArrayList<Track>?, error: Int?) {
         val tracks = arrayListOf<Track>()
         if (foundTracks != null) {
             tracks.addAll(foundTracks)
         }
 
         when {
-            errorMessage != null -> {
-                renderState(SearchScreenState.Error(message = errorMessage))
+            error != null -> {
+                renderState(SearchScreenState.Error(error = error))
             }
 
             tracks.isEmpty() -> {
