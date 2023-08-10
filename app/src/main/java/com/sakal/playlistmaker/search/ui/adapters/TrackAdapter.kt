@@ -10,7 +10,7 @@ import com.sakal.playlistmaker.search.domain.Track
 class TrackAdapter(private val onClickListener: TrackClickListener) :
     RecyclerView.Adapter<TrackViewHolder>() {
 
-    var tracks = ArrayList<Track>()
+    var tracks = listOf<Track>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val layoutInspector = LayoutInflater.from(parent.context)

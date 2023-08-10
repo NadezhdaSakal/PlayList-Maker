@@ -112,22 +112,21 @@
         app:layout_constraintStart_toEndOf="@id/button_add_to_playlist"
         app:layout_constraintTop_toBottomOf="@id/artistName" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageView
         android:id="@+id/button_add_to_favorites"
         android:layout_width="@dimen/size_button"
         android:layout_height="@dimen/size_button"
         android:layout_marginEnd="@dimen/margin_8"
         android:contentDescription="@string/add_to_favorites"
         android:foregroundGravity="center"
-        android:src="@drawable/favorites"
+        android:src="@drawable/unlike"
         app:backgroundTint="?attr/button_player"
         app:elevation="0dp"
         app:fabCustomSize="@dimen/size_button"
         app:layout_constraintBottom_toBottomOf="@id/play_track"
         app:layout_constraintEnd_toEndOf="@id/right_guideline"
         app:layout_constraintStart_toEndOf="@id/play_track"
-        app:layout_constraintTop_toTopOf="@id/play_track"
-        app:tint="@color/white" />
+        app:layout_constraintTop_toTopOf="@id/play_track" />
 
     <TextView
         android:id="@+id/progress"

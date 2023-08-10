@@ -18,4 +18,6 @@ object Constants {
 
     const val REFRESH_TIMER_DELAY_MILLIS = 300L
 
+    const val TRACK = "track"
+
 }

@@ -6,6 +6,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.databinding.ActivityAudioplayerBinding
 import com.sakal.playlistmaker.player.ui.PlayerScreenState
@@ -19,16 +20,19 @@ class AudioPlayerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAudioplayerBinding
     private val viewModel by viewModel<AudioPlayerViewModel>()
-    private lateinit var track: Track
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAudioplayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        track = viewModel.getTrack()
+        val track = intent.getSerializableExtra(Constants.TRACK) as Track
 
         viewModel.observeState().observe(this) {
+            render(it)
+        }
+
+        viewModel.observeFavoriteState().observe(this) {
             render(it)
         }
 
@@ -36,9 +40,21 @@ class AudioPlayerActivity : AppCompatActivity() {
 
         showTrack(track)
 
+        viewModel.isFavorite(track.trackId)
+
+        binding.buttonAddToFavorites.setOnClickListener {
+            binding.buttonAddToFavorites.startAnimation(
+                AnimationUtils.loadAnimation(
+                    this@AudioPlayerActivity,
+                    R.anim.scale
+                )
+            )
+            viewModel.onFavoriteClicked(track)
+        }
+
         binding.playTrack.isEnabled = false
 
-        if (savedInstanceState==null) {
+        if (savedInstanceState == null) {
             viewModel.preparePlayer(track.previewUrl)
         }
 
@@ -51,6 +67,7 @@ class AudioPlayerActivity : AppCompatActivity() {
             )
             viewModel.playbackControl()
         }
+
 
     }
 
@@ -83,6 +100,14 @@ class AudioPlayerActivity : AppCompatActivity() {
 
             is PlayerScreenState.UpdatePlayingTime -> {
                 binding.progress.text = state.playingTime
+            }
+
+            is PlayerScreenState.StateFavorite -> {
+                if (state.isFavorite) {
+                    binding.buttonAddToFavorites.setImageResource(R.drawable.like)
+                } else {
+                    binding.buttonAddToFavorites.setImageResource(R.drawable.unlike)
+                }
             }
 
             is PlayerScreenState.Unplayable -> {

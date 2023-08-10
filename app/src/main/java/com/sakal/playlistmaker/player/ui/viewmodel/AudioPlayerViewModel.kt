@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sakal.playlistmaker.Constants
+import com.sakal.playlistmaker.media_library.domain.FavoritesInteractor
 import com.sakal.playlistmaker.player.domain.PlayerInteractor
 import com.sakal.playlistmaker.player.ui.PlayerScreenState
 import com.sakal.playlistmaker.search.domain.Track
-import com.sakal.playlistmaker.search.domain.TracksInteractor
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -18,15 +18,45 @@ import java.util.Locale
 
 class AudioPlayerViewModel(
     private val playerInteractor: PlayerInteractor,
-    private val trackInteractor: TracksInteractor
+    private val favoritesInteractor: FavoritesInteractor
 ) : ViewModel() {
 
     private val stateLiveData = MutableLiveData<PlayerScreenState>()
+    private val isFavoriteLiveData = MutableLiveData<PlayerScreenState.StateFavorite>()
+    private var progressTimer: Job? = null
+    private var isInFavorite: Boolean = false
 
     fun observeState(): LiveData<PlayerScreenState> = stateLiveData
+    fun observeFavoriteState(): LiveData<PlayerScreenState.StateFavorite> = isFavoriteLiveData
 
-    private var progressTimer: Job? = null
+    fun isFavorite(trackId: Int) {
+        viewModelScope.launch {
+            favoritesInteractor
+                .isFavorite(trackId)
+                .collect { isFavorite ->
+                    isInFavorite = isFavorite
+                    isFavoriteLiveData.postValue(
+                        PlayerScreenState.StateFavorite(isFavorite)
+                    )
+                }
+        }
+    }
 
+    fun onFavoriteClicked(track: Track) {
+        viewModelScope.launch {
+            if (isInFavorite) {
+                favoritesInteractor.deleteTrack(track.trackId)
+                isFavoriteLiveData.postValue(
+                    PlayerScreenState.StateFavorite(false)
+                )
+            } else {
+                favoritesInteractor.addTrack(track)
+                isFavoriteLiveData.postValue(
+                    PlayerScreenState.StateFavorite(true)
+                )
+            }
+        }
+    }
     fun preparePlayer(url: String?) {
         renderState(PlayerScreenState.Preparing)
         if (url != null) {
@@ -97,11 +127,5 @@ class AudioPlayerViewModel(
     override fun onCleared() {
         super.onCleared()
         playerInteractor.releasePlayer()
-    }
-
-    fun getTrack(): Track {
-        return trackInteractor
-            .getHistory()
-            .first()
     }
 }

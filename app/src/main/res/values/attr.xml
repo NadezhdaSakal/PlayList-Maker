@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="button_player" format="reference"/>
+    <attr name="fab_color" format="reference"/>
+
 
 </resources>

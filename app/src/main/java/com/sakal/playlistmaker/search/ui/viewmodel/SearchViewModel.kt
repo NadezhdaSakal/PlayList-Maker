@@ -14,12 +14,11 @@ import kotlinx.coroutines.launch
 class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewModel() {
 
     private val _screenState = MutableLiveData<SearchScreenState>()
-    private val history = ArrayList<Track>()
     fun observeState(): LiveData<SearchScreenState> = _screenState
     var isClickable = true
 
     init {
-        history.addAll(tracksInteractor.getHistory())
+        val history = showHistory()
         if (history.isNotEmpty()) {
             renderState(SearchScreenState.ShowHistory(history))
         }
@@ -60,10 +59,10 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
         }
     }
 
-    private fun processResult(foundTracks: ArrayList<Track>?, error: Int?) {
-        val tracks = arrayListOf<Track>()
+    private fun processResult(foundTracks: List<Track>?, error: Int?) {
+        var tracks = listOf<Track>()
         if (foundTracks != null) {
-            tracks.addAll(foundTracks)
+            tracks = foundTracks
         }
 
         when {
@@ -91,16 +90,16 @@ class SearchViewModel(private val tracksInteractor: TracksInteractor) : ViewMode
         if (historyTracks.isNotEmpty()) {
             renderState(SearchScreenState.ShowHistory(historyTracks))
         } else {
-            renderState(SearchScreenState.Success(arrayListOf()))
+            renderState(SearchScreenState.Success(listOf()))
         }
     }
 
     fun clearHistory() {
         tracksInteractor.clearHistory()
-        _screenState.postValue(SearchScreenState.Success(arrayListOf()))
+        _screenState.postValue(SearchScreenState.Success(listOf()))
     }
 
-    private fun showHistory(): ArrayList<Track> {
+    private fun showHistory(): List<Track> {
         return tracksInteractor.getHistory()
     }
 
