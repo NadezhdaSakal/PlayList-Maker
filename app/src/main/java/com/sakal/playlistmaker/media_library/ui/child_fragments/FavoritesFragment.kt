@@ -1,5 +1,6 @@
 package com.sakal.playlistmaker.media_library.ui.child_fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -59,17 +60,18 @@ class FavoritesFragment : Fragment() {
 
     private fun initAdapter() {
         binding.favoritesList.adapter = tracksAdapter
-        tracksAdapter.notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun render(state: FavoritesState) {
         when (state) {
             is FavoritesState.Empty -> {
-                binding.placeholderNothingWasFound.visibility = View.VISIBLE
                 binding.favoritesList.visibility = View.GONE
+                binding.placeholderNothingWasFound.visibility = View.VISIBLE
             }
 
             is FavoritesState.FavoritesTracks -> {
+                tracksAdapter.notifyDataSetChanged()
                 tracksAdapter.tracks = state.tracks
                 binding.placeholderNothingWasFound.visibility = View.GONE
                 binding.favoritesList.visibility = View.VISIBLE

@@ -2,7 +2,6 @@ package com.sakal.playlistmaker.media_library.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.Date
 
 @Entity(tableName = "favorites_tracks")
 data class TrackEntity(
@@ -13,9 +12,9 @@ data class TrackEntity(
     val trackTimeMillis: Long?,
     val artworkUrl100: String?,
     val collectionName: String?,
-    val country: String?,
-    val primaryGenreName: String?,
     val releaseDate: String?,
+    val primaryGenreName: String?,
+    val country: String?,
     val previewUrl: String?,
-    val saveDate: Date,
+    val saveDate: Long
 )

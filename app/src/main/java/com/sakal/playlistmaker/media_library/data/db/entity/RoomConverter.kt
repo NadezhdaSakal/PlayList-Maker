@@ -1,7 +1,7 @@
 package com.sakal.playlistmaker.media_library.data.db.entity
 
 import com.sakal.playlistmaker.search.domain.Track
-import java.util.Date
+import java.util.Calendar
 
 class RoomConverter {
     fun map(track: TrackEntity): Track {
@@ -31,7 +31,7 @@ class RoomConverter {
             track.primaryGenreName,
             track.releaseDate,
             track.previewUrl,
-            saveDate = Date()
+            Calendar.getInstance().timeInMillis
         )
     }
 }

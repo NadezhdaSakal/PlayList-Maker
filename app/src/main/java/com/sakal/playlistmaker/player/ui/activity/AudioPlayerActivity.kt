@@ -26,8 +26,6 @@ class AudioPlayerActivity : AppCompatActivity() {
         binding = ActivityAudioplayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val track = intent.getSerializableExtra(Constants.TRACK) as Track
-
         viewModel.observeState().observe(this) {
             render(it)
         }
@@ -35,6 +33,13 @@ class AudioPlayerActivity : AppCompatActivity() {
         viewModel.observeFavoriteState().observe(this) {
             render(it)
         }
+
+        viewModel.observeProgressTimer().observe(this) {
+            render(it)
+        }
+
+        @Suppress("DEPRECATION")
+        val track = intent.getSerializableExtra(Constants.TRACK) as Track
 
         initToolbar()
 
@@ -67,8 +72,6 @@ class AudioPlayerActivity : AppCompatActivity() {
             )
             viewModel.playbackControl()
         }
-
-
     }
 
     private fun initToolbar() {

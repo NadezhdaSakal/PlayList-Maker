@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.media_library.domain.FavoritesInteractor
+import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.utils.debounce
 import kotlinx.coroutines.launch
 
@@ -25,7 +26,7 @@ class FavoritesFragmentViewModel(
         }
 
     init {
-
+        getFavoritesTracks()
     }
 
     fun getFavoritesTracks() {
@@ -33,17 +34,20 @@ class FavoritesFragmentViewModel(
             interactor
                 .getFavoritesTracks()
                 .collect { favoritesTracks ->
-                    if (favoritesTracks.isEmpty()) {
-                        renderState(FavoritesState.Empty)
-                    } else {
-                        renderState(FavoritesState.FavoritesTracks(favoritesTracks))
-                    }
+                    processResult(favoritesTracks)
                 }
         }
     }
 
-    private fun renderState(state: FavoritesState) {
-        contentStateLiveData.postValue(state)
+    private fun processResult(trackList: List<Track>) {
+        when {
+            trackList.isEmpty() -> {
+                contentStateLiveData.value = FavoritesState.Empty
+            }
+            else -> {
+                contentStateLiveData.value = FavoritesState.FavoritesTracks(trackList)
+            }
+        }
     }
 
     fun onTrackClick() {

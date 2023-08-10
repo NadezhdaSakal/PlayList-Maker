@@ -171,7 +171,7 @@ class SearchFragment : Fragment() {
         val intent = Intent(requireContext(), AudioPlayerActivity::class.java).apply {
             putExtra(Constants.TRACK, track)
         }
-            startActivity(intent)
+        startActivity(intent)
     }
 
     @SuppressLint("NotifyDataSetChanged")

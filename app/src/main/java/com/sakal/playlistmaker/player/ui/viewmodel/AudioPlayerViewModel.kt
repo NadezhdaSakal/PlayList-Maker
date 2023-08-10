@@ -23,11 +23,15 @@ class AudioPlayerViewModel(
 
     private val stateLiveData = MutableLiveData<PlayerScreenState>()
     private val isFavoriteLiveData = MutableLiveData<PlayerScreenState.StateFavorite>()
-    private var progressTimer: Job? = null
-    private var isInFavorite: Boolean = false
+    private val progressTimerLiveData = MutableLiveData<PlayerScreenState.UpdatePlayingTime>()
 
     fun observeState(): LiveData<PlayerScreenState> = stateLiveData
     fun observeFavoriteState(): LiveData<PlayerScreenState.StateFavorite> = isFavoriteLiveData
+    fun observeProgressTimer(): LiveData<PlayerScreenState.UpdatePlayingTime> = progressTimerLiveData
+
+    private var progressTimer: Job? = null
+    private var isInFavorite: Boolean = false
+
 
     fun isFavorite(trackId: Int) {
         viewModelScope.launch {
@@ -106,7 +110,7 @@ class AudioPlayerViewModel(
         progressTimer = viewModelScope.launch {
             while (isPlaying()) {
                 delay(Constants.REFRESH_TIMER_DELAY_MILLIS)
-                renderState(
+                progressTimerLiveData.postValue(
                     PlayerScreenState.UpdatePlayingTime(
                         SimpleDateFormat(
                             "mm:ss",
