@@ -3,6 +3,7 @@ package com.sakal.playlistmaker.player.ui.activity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -34,10 +35,6 @@ class AudioPlayerActivity : AppCompatActivity() {
             render(it)
         }
 
-        viewModel.observeProgressTimer().observe(this) {
-            render(it)
-        }
-
         @Suppress("DEPRECATION")
         val track = intent.getSerializableExtra(Constants.TRACK) as Track
 
@@ -47,13 +44,8 @@ class AudioPlayerActivity : AppCompatActivity() {
 
         viewModel.isFavorite(track.trackId)
 
-        binding.buttonAddToFavorites.setOnClickListener {
-            binding.buttonAddToFavorites.startAnimation(
-                AnimationUtils.loadAnimation(
-                    this@AudioPlayerActivity,
-                    R.anim.scale
-                )
-            )
+        binding.buttonAddToFavorites.setOnClickListener { button ->
+            (button as? ImageView)?.let { startAnimation(it) }
             viewModel.onFavoriteClicked(track)
         }
 
@@ -63,15 +55,16 @@ class AudioPlayerActivity : AppCompatActivity() {
             viewModel.preparePlayer(track.previewUrl)
         }
 
-        binding.playTrack.setOnClickListener {
-            binding.playTrack.startAnimation(
-                AnimationUtils.loadAnimation(
-                    this@AudioPlayerActivity,
-                    R.anim.scale
-                )
-            )
+        binding.playTrack.setOnClickListener { button ->
+            (button as? ImageView)?.let { startAnimation(it) }
             viewModel.playbackControl()
         }
+    }
+
+    private fun startAnimation(button: ImageView) {
+        button.startAnimation(AnimationUtils.loadAnimation(
+            this@AudioPlayerActivity,
+            R.anim.scale))
     }
 
     private fun initToolbar() {
