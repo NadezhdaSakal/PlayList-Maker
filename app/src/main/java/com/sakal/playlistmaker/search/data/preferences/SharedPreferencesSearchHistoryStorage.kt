@@ -19,7 +19,7 @@ class SharedPreferencesSearchHistoryStorage(private val preferences: SharedPrefe
         if (searchedTracks.size > Constants.HISTORY_LIST_SIZE)
             searchedTracks.removeLast()
 
-        val json = gson.toJson(searchedTracks.toList())
+        val json = gson.toJson(searchedTracks)
         preferences.edit { putString(Constants.HISTORY_TRACKS_KEY, json) }
     }
 
