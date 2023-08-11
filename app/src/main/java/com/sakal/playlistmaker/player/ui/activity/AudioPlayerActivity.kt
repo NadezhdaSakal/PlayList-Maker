@@ -27,14 +27,6 @@ class AudioPlayerActivity : AppCompatActivity() {
         binding = ActivityAudioplayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.observeState().observe(this) {
-            render(it)
-        }
-
-        viewModel.observeFavoriteState().observe(this) {
-            render(it)
-        }
-
         @Suppress("DEPRECATION")
         val track = intent.getSerializableExtra(Constants.TRACK) as Track
 
@@ -44,9 +36,17 @@ class AudioPlayerActivity : AppCompatActivity() {
 
         viewModel.isFavorite(track.trackId)
 
+        viewModel.observeState().observe(this) {
+            render(it)
+        }
+
+        viewModel.observeFavoriteState().observe(this) {
+            renderLikeButton(it)
+        }
+
         binding.buttonAddToFavorites.setOnClickListener { button ->
             (button as? ImageView)?.let { startAnimation(it) }
-            viewModel.onFavoriteClicked(track)
+            viewModel.onFavoriteButtonClick(track)
         }
 
         binding.playTrack.isEnabled = false
@@ -59,6 +59,12 @@ class AudioPlayerActivity : AppCompatActivity() {
             (button as? ImageView)?.let { startAnimation(it) }
             viewModel.playbackControl()
         }
+    }
+
+    private fun renderLikeButton(isFavorite: Boolean) {
+        val imageResource = if (isFavorite) R.drawable.like
+        else R.drawable.unlike
+        binding.buttonAddToFavorites.setImageResource(imageResource)
     }
 
     private fun startAnimation(button: ImageView) {
@@ -96,14 +102,6 @@ class AudioPlayerActivity : AppCompatActivity() {
 
             is PlayerScreenState.UpdatePlayingTime -> {
                 binding.progress.text = state.playingTime
-            }
-
-            is PlayerScreenState.StateFavorite -> {
-                if (state.isFavorite) {
-                    binding.buttonAddToFavorites.setImageResource(R.drawable.like)
-                } else {
-                    binding.buttonAddToFavorites.setImageResource(R.drawable.unlike)
-                }
             }
 
             is PlayerScreenState.Unplayable -> {

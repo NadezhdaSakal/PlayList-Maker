@@ -9,6 +9,7 @@ import com.sakal.playlistmaker.media_library.domain.FavoritesInteractor
 import com.sakal.playlistmaker.player.domain.PlayerInteractor
 import com.sakal.playlistmaker.player.ui.PlayerScreenState
 import com.sakal.playlistmaker.search.domain.Track
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -22,40 +23,35 @@ class AudioPlayerViewModel(
 ) : ViewModel() {
 
     private val stateLiveData = MutableLiveData<PlayerScreenState>()
-    private val isFavoriteLiveData = MutableLiveData<PlayerScreenState.StateFavorite>()
+    private val isFavoriteLiveData = MutableLiveData<Boolean>()
 
     fun observeState(): LiveData<PlayerScreenState> = stateLiveData
-    fun observeFavoriteState(): LiveData<PlayerScreenState.StateFavorite> = isFavoriteLiveData
+    fun observeFavoriteState(): LiveData<Boolean> = isFavoriteLiveData
 
     private var progressTimer: Job? = null
-    private var isInFavorite: Boolean = false
+    private var isFavorite: Boolean = false
 
 
     fun isFavorite(trackId: Int) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             favoritesInteractor
                 .isFavorite(trackId)
-                .collect { isFavorite ->
-                    isInFavorite = isFavorite
-                    isFavoriteLiveData.postValue(
-                        PlayerScreenState.StateFavorite(isFavorite)
-                    )
+                .collect {
+                    isFavorite = it
+                    isFavoriteLiveData.postValue(isFavorite)
                 }
         }
     }
 
-    fun onFavoriteClicked(track: Track) {
-        viewModelScope.launch {
-            if (isInFavorite) {
-                favoritesInteractor.deleteTrack(track.trackId)
-                isFavoriteLiveData.postValue(
-                    PlayerScreenState.StateFavorite(false)
-                )
-            } else {
+    fun onFavoriteButtonClick(track: Track) {
+        isFavorite = !isFavorite
+        isFavoriteLiveData.value = isFavorite
+        viewModelScope.launch(Dispatchers.IO) {
+            if (isFavorite) {
                 favoritesInteractor.addTrack(track)
-                isFavoriteLiveData.postValue(
-                    PlayerScreenState.StateFavorite(true)
-                )
+            }
+            else {
+                favoritesInteractor.deleteTrack(track.trackId)
             }
         }
     }

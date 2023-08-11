@@ -2,7 +2,6 @@ package com.sakal.playlistmaker.player.ui
 
 sealed interface PlayerScreenState {
 
-
     object Preparing : PlayerScreenState
 
     object Stopped : PlayerScreenState
@@ -16,10 +15,4 @@ sealed interface PlayerScreenState {
     data class UpdatePlayingTime(
         val playingTime: String
     ) : PlayerScreenState
-
-    data class StateFavorite(
-        val isFavorite: Boolean
-    ) : PlayerScreenState
-
-
 }

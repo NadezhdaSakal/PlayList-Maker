@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.8.21'
+
 }
 
 android {
@@ -41,6 +43,15 @@ android {
     }
     kotlinOptions {
         jvmTarget = '17'
+    }
+
+    buildscript {
+        ext.kotlin_version = '1.8.21'
+        repositories { mavenCentral() }
+
+        dependencies {
+            classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        }
     }
 }
 
@@ -83,5 +94,7 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.5.2'
     kapt 'androidx.room:room-compiler:2.5.2'
     implementation 'androidx.room:room-ktx:2.5.2'
+
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1"
 
 }

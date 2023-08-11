@@ -19,7 +19,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bottom_with_top_border"
+        android:background="?attr/colorSecondary"
         app:elevation="0dp"
         app:itemIconTint="@drawable/nav_color"
         app:itemTextColor="@drawable/nav_color"
