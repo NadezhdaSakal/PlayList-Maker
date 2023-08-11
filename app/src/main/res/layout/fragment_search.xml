@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:layout_width="match_parent"
@@ -167,7 +167,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_clear_history"
                 style="@style/ErrorButtonPlaceholder"
-                android:layout_marginBottom="@dimen/margin_24"
+                android:layout_marginBottom="@dimen/margin_54"
                 android:inputType="textCapSentences"
                 android:text="@string/clear_history" />
         </LinearLayout>
