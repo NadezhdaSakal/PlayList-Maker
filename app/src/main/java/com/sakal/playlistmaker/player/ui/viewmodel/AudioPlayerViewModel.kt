@@ -124,6 +124,6 @@ class AudioPlayerViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        playerInteractor.releasePlayer()
+        playerInteractor.reset()
     }
 }

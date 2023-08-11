@@ -29,7 +29,7 @@ class PlayerInteractorImpl(private val repository: PlayerRepo) : PlayerInteracto
         return repository.getCurrentPosition()
     }
 
-    override fun releasePlayer() {
-        repository.releasePlayer()
+    override fun reset() {
+        repository.reset()
     }
 }

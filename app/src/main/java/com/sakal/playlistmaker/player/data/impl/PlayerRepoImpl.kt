@@ -4,7 +4,7 @@ import com.sakal.playlistmaker.player.data.PlayerClient
 import com.sakal.playlistmaker.player.domain.PlayerRepo
 
 
-class PlayerRepoImpl(private val client: PlayerClient): PlayerRepo {
+class PlayerRepoImpl(private val client: PlayerClient) : PlayerRepo {
 
     override fun prepare(
         url: String,
@@ -30,9 +30,7 @@ class PlayerRepoImpl(private val client: PlayerClient): PlayerRepo {
 
     override fun getCurrentPosition(): Int = client.getCurrentPosition()
 
-    override fun releasePlayer() {
-        client.releasePlayer()
+    override fun reset() {
+        client.reset()
     }
-
-
 }

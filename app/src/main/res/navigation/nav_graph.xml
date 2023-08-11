@@ -10,7 +10,7 @@
         android:label="@string/label_library"
         tools:layout="@layout/fragment_library" >
         <action
-            android:id="@+id/action_libraryFragment_to_audioPlayerActivity"
+            android:id="@+id/action_libraryFragment_to_audioPlayer"
             app:destination="@id/audioPlayerActivity"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -23,7 +23,7 @@
         android:label="@string/label_search"
         tools:layout="@layout/fragment_search" >
         <action
-            android:id="@+id/action_searchFragment_to_audioPlayerActivity"
+            android:id="@+id/action_searchFragment_to_audioPlayer"
             app:destination="@id/audioPlayerActivity"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"

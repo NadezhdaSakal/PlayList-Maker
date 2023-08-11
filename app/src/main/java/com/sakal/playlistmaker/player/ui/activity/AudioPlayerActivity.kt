@@ -30,12 +30,6 @@ class AudioPlayerActivity : AppCompatActivity() {
         @Suppress("DEPRECATION")
         val track = intent.getSerializableExtra(Constants.TRACK) as Track
 
-        initToolbar()
-
-        showTrack(track)
-
-        viewModel.isFavorite(track.trackId)
-
         viewModel.observeState().observe(this) {
             render(it)
         }
@@ -43,6 +37,12 @@ class AudioPlayerActivity : AppCompatActivity() {
         viewModel.observeFavoriteState().observe(this) {
             renderLikeButton(it)
         }
+
+        initToolbar()
+
+        showTrack(track)
+
+        viewModel.isFavorite(track.trackId)
 
         binding.buttonAddToFavorites.setOnClickListener { button ->
             (button as? ImageView)?.let { startAnimation(it) }
@@ -68,9 +68,12 @@ class AudioPlayerActivity : AppCompatActivity() {
     }
 
     private fun startAnimation(button: ImageView) {
-        button.startAnimation(AnimationUtils.loadAnimation(
-            this@AudioPlayerActivity,
-            R.anim.scale))
+        button.startAnimation(
+            AnimationUtils.loadAnimation(
+                this@AudioPlayerActivity,
+                R.anim.scale
+            )
+        )
     }
 
     private fun initToolbar() {

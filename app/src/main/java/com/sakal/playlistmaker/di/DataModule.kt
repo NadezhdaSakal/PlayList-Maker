@@ -58,6 +58,13 @@ val dataModule = module {
                 Context.MODE_PRIVATE)
     }
 
+    single {
+        Room
+            .databaseBuilder(androidContext(), DataBase::class.java, "database.db")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
     factory { Gson() }
 
     singleOf(::SharedPreferencesSearchHistoryStorage).bind<SearchHistoryStorage>()
@@ -79,14 +86,6 @@ val dataModule = module {
             Context.MODE_PRIVATE
         )
     }
-
-    single {
-        Room
-            .databaseBuilder(androidContext(), DataBase::class.java, "database.db")
-            .fallbackToDestructiveMigration()
-            .build()
-    }
-
     factoryOf(::RoomConverter)
 
     singleOf(::SharedPrefsThemeStorage).bind<ThemeStorage>()

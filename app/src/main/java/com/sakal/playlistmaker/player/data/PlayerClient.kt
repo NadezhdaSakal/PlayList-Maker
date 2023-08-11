@@ -15,6 +15,6 @@ interface PlayerClient {
 
     fun getCurrentPosition(): Int
 
-    fun releasePlayer()
+    fun reset()
 
 }
