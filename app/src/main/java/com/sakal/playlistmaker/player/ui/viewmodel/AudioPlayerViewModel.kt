@@ -31,7 +31,6 @@ class AudioPlayerViewModel(
     private var progressTimer: Job? = null
     private var isFavorite: Boolean = false
 
-
     fun isFavorite(trackId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             favoritesInteractor
