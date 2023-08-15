@@ -9,6 +9,7 @@ class Player(private val client: MediaPlayer) : PlayerClient {
         onPreparedListener: () -> Unit,
         onCompletionListener: () -> Unit
     ) {
+
         client.setDataSource(url)
         client.prepareAsync()
         client.setOnPreparedListener {
@@ -35,7 +36,7 @@ class Player(private val client: MediaPlayer) : PlayerClient {
         return client.currentPosition
     }
 
-    override fun releasePlayer() {
-        client.release()
+    override fun reset() {
+        client.reset()
     }
 }

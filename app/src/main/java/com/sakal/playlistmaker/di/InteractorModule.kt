@@ -1,5 +1,7 @@
 package com.sakal.playlistmaker.di
 
+import com.sakal.playlistmaker.media_library.domain.FavoritesInteractor
+import com.sakal.playlistmaker.media_library.domain.impl.FavoritesInteractorImpl
 import com.sakal.playlistmaker.player.domain.PlayerInteractor
 import com.sakal.playlistmaker.player.domain.impl.PlayerInteractorImpl
 import com.sakal.playlistmaker.search.domain.TracksInteractor
@@ -17,5 +19,7 @@ val interactorModule = module {
     singleOf(::PlayerInteractorImpl).bind<PlayerInteractor>()
 
     singleOf(::SettingsInteractorImpl).bind<SettingsInteractor>()
+
+    singleOf(::FavoritesInteractorImpl).bind<FavoritesInteractor>()
 
 }

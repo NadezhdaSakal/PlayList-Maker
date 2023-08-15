@@ -2,22 +2,25 @@ package com.sakal.playlistmaker.di
 
 import android.content.Context
 import android.media.MediaPlayer
+import androidx.room.Room
 import com.google.gson.Gson
 import com.sakal.playlistmaker.ApiConstants
-import com.sakal.playlistmaker.BuildConfig
 import com.sakal.playlistmaker.Constants
+import com.sakal.playlistmaker.media_library.data.db.DataBase
 import com.sakal.playlistmaker.player.data.Player
 import com.sakal.playlistmaker.player.data.PlayerClient
 import com.sakal.playlistmaker.search.data.network.ApiService
 import com.sakal.playlistmaker.search.data.network.NetworkClient
 import com.sakal.playlistmaker.search.data.network.RetrofitClient
-import com.sakal.playlistmaker.search.data.preferences.SearchHistorySrorage
+import com.sakal.playlistmaker.search.data.preferences.SearchHistoryStorage
 import com.sakal.playlistmaker.search.data.preferences.SharedPreferencesSearchHistoryStorage
 import com.sakal.playlistmaker.search.data.network.ConnectionChecker
 import com.sakal.playlistmaker.settings.data.preferences.SharedPrefsThemeStorage
 import com.sakal.playlistmaker.settings.data.preferences.ThemeStorage
+import com.sakal.playlistmaker.media_library.data.db.entity.RoomConverter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
@@ -55,9 +58,16 @@ val dataModule = module {
                 Context.MODE_PRIVATE)
     }
 
+    single {
+        Room
+            .databaseBuilder(androidContext(), DataBase::class.java, "database.db")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
     factory { Gson() }
 
-    singleOf(::SharedPreferencesSearchHistoryStorage).bind<SearchHistorySrorage>()
+    singleOf(::SharedPreferencesSearchHistoryStorage).bind<SearchHistoryStorage>()
 
     singleOf(::ConnectionChecker)
 
@@ -76,6 +86,7 @@ val dataModule = module {
             Context.MODE_PRIVATE
         )
     }
+    factoryOf(::RoomConverter)
 
     singleOf(::SharedPrefsThemeStorage).bind<ThemeStorage>()
 

@@ -1,5 +1,7 @@
 package com.sakal.playlistmaker.di
 
+import com.sakal.playlistmaker.media_library.domain.FavoritesRepo
+import com.sakal.playlistmaker.media_library.data.impl.FavoritesRepoImpl
 import com.sakal.playlistmaker.player.data.impl.PlayerRepoImpl
 import com.sakal.playlistmaker.player.domain.PlayerRepo
 import com.sakal.playlistmaker.search.data.impl.TracksRepoImpl
@@ -18,4 +20,6 @@ val repositoryModule = module {
     factoryOf(::PlayerRepoImpl).bind<PlayerRepo>()
 
     singleOf(::SettingsRepoImpl).bind<SettingsRepository>()
+
+    singleOf(::FavoritesRepoImpl).bind<FavoritesRepo>()
 }

@@ -17,7 +17,7 @@ class TracksRepoImpl(
     SharedPreferencesSearchHistoryStorage
 ) : TracksRepo {
 
-    override fun searchTracks(query: String): Flow<Resource<ArrayList<Track>>> = flow {
+    override fun searchTracks(query: String): Flow<Resource<List<Track>>> = flow {
 
         val response = networkClient.doRequest(TracksSearchRequest(query))
 
@@ -27,9 +27,7 @@ class TracksRepoImpl(
             }
 
             ApiConstants.SUCCESS_CODE -> {
-                val arrayListTracks = arrayListOf<Track>()
-                (response as TracksSearchResponse).results.forEach {
-                    arrayListTracks.add(
+                val listTracks: List<Track> = (response as TracksSearchResponse).results.map {
                         Track(
                             it.trackId,
                             it.trackName,
@@ -42,9 +40,9 @@ class TracksRepoImpl(
                             it.country,
                             it.previewUrl,
                         )
-                    )
+
                 }
-                emit(Resource.Success(arrayListTracks))
+                emit(Resource.Success(listTracks))
             }
             else -> {
                 emit(Resource.Error(response.resultCode))
@@ -59,7 +57,7 @@ class TracksRepoImpl(
         localStorage.clearHistory()
     }
 
-    override fun getHistory(): ArrayList<Track> {
+    override fun getHistory(): List<Track> {
         return localStorage.getHistory()
     }
 }

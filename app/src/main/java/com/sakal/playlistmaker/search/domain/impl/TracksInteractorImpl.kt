@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 
 class TracksInteractorImpl(private val repository: TracksRepo) : TracksInteractor {
 
-    override fun searchTracks(query: String): Flow<Pair<ArrayList<Track>?, Int?>> {
+    override fun searchTracks(query: String): Flow<Pair<List<Track>?, Int?>> {
         return repository.searchTracks(query).map { result ->
             when (result) {
                 is Resource.Success -> {
@@ -33,7 +33,7 @@ class TracksInteractorImpl(private val repository: TracksRepo) : TracksInteracto
         repository.clearHistory()
     }
 
-    override fun getHistory(): ArrayList<Track> {
+    override fun getHistory(): List<Track> {
         return repository.getHistory()
     }
 }

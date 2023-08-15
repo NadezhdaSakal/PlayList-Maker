@@ -5,10 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sakal.playlistmaker.Constants
+import com.sakal.playlistmaker.media_library.domain.FavoritesInteractor
 import com.sakal.playlistmaker.player.domain.PlayerInteractor
 import com.sakal.playlistmaker.player.ui.PlayerScreenState
 import com.sakal.playlistmaker.search.domain.Track
-import com.sakal.playlistmaker.search.domain.TracksInteractor
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -18,15 +19,42 @@ import java.util.Locale
 
 class AudioPlayerViewModel(
     private val playerInteractor: PlayerInteractor,
-    private val trackInteractor: TracksInteractor
+    private val favoritesInteractor: FavoritesInteractor
 ) : ViewModel() {
 
     private val stateLiveData = MutableLiveData<PlayerScreenState>()
+    private val isFavoriteLiveData = MutableLiveData<Boolean>()
 
     fun observeState(): LiveData<PlayerScreenState> = stateLiveData
+    fun observeFavoriteState(): LiveData<Boolean> = isFavoriteLiveData
 
     private var progressTimer: Job? = null
+    private var isFavorite: Boolean = false
 
+
+    fun isFavorite(trackId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            favoritesInteractor
+                .isFavorite(trackId)
+                .collect {
+                    isFavorite = it
+                    isFavoriteLiveData.postValue(isFavorite)
+                }
+        }
+    }
+
+    fun onFavoriteButtonClick(track: Track) {
+        isFavorite = !isFavorite
+        isFavoriteLiveData.value = isFavorite
+        viewModelScope.launch(Dispatchers.IO) {
+            if (isFavorite) {
+                favoritesInteractor.addTrack(track)
+            }
+            else {
+                favoritesInteractor.deleteTrack(track.trackId)
+            }
+        }
+    }
     fun preparePlayer(url: String?) {
         renderState(PlayerScreenState.Preparing)
         if (url != null) {
@@ -96,12 +124,6 @@ class AudioPlayerViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        playerInteractor.releasePlayer()
-    }
-
-    fun getTrack(): Track {
-        return trackInteractor
-            .getHistory()
-            .first()
+        playerInteractor.reset()
     }
 }

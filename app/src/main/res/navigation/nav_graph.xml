@@ -8,14 +8,22 @@
         android:id="@+id/libraryFragment"
         android:name="com.sakal.playlistmaker.media_library.ui.fragment.LibraryFragment"
         android:label="@string/label_library"
-        tools:layout="@layout/fragment_library" />
+        tools:layout="@layout/fragment_library" >
+        <action
+            android:id="@+id/action_libraryFragment_to_audioPlayer"
+            app:destination="@id/audioPlayerActivity"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.sakal.playlistmaker.search.ui.fragment.SearchFragment"
         android:label="@string/label_search"
         tools:layout="@layout/fragment_search" >
         <action
-            android:id="@+id/action_searchFragment_to_audioPlayerActivity"
+            android:id="@+id/action_searchFragment_to_audioPlayer"
             app:destination="@id/audioPlayerActivity"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -32,4 +40,6 @@
         android:name="com.sakal.playlistmaker.player.ui.activity.AudioPlayerActivity"
         android:label="@string/label_player"
         tools:layout="@layout/activity_audioplayer"/>
+
+
 </navigation>

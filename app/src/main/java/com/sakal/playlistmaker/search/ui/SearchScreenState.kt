@@ -9,11 +9,11 @@ sealed interface SearchScreenState {
     object NothingFound : SearchScreenState
 
     data class Success(
-        val tracks: ArrayList<Track>
+        val tracks: List<Track>
     ) : SearchScreenState
 
     data class ShowHistory(
-        val tracks: ArrayList<Track>
+        val tracks: List<Track>
     ) : SearchScreenState
 
     data class Error(

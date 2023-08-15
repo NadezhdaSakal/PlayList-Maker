@@ -2,8 +2,8 @@ package com.sakal.playlistmaker.search.data.preferences
 
 import com.sakal.playlistmaker.search.domain.Track
 
-interface SearchHistorySrorage {
+interface SearchHistoryStorage {
     fun addToHistory(track: Track)
     fun clearHistory()
-    fun getHistory(): ArrayList<Track>
+    fun getHistory(): List<Track>
 }

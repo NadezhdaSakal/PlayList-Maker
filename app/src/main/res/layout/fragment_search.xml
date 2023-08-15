@@ -167,7 +167,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_clear_history"
                 style="@style/ErrorButtonPlaceholder"
-                android:layout_marginBottom="@dimen/margin_24"
+                android:layout_marginBottom="@dimen/margin_54"
                 android:inputType="textCapSentences"
                 android:text="@string/clear_history" />
         </LinearLayout>

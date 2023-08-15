@@ -8,11 +8,11 @@ import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.search.domain.Track
 
 class SharedPreferencesSearchHistoryStorage(private val preferences: SharedPreferences, private val gson: Gson) :
-    SearchHistorySrorage {
+    SearchHistoryStorage {
 
     override fun addToHistory(track: Track) {
 
-        val searchedTracks = getHistory()
+        val searchedTracks = getHistory().toMutableList()
         searchedTracks.remove(track)
         searchedTracks.add(Constants.INDEX_FIRST, track)
 
@@ -27,10 +27,10 @@ class SharedPreferencesSearchHistoryStorage(private val preferences: SharedPrefe
         preferences.edit { remove(Constants.HISTORY_TRACKS_KEY) }
     }
 
-    override fun getHistory(): ArrayList<Track> {
+    override fun getHistory(): List<Track> {
         val json =
-            preferences.getString(Constants.HISTORY_TRACKS_KEY, null) ?: return arrayListOf()
-        return gson.fromJson(json, object : TypeToken<ArrayList<Track>>() {}.type)
+            preferences.getString(Constants.HISTORY_TRACKS_KEY, null) ?: return listOf()
+        return gson.fromJson(json, object : TypeToken<List<Track>>() {}.type)
     }
 }
 
