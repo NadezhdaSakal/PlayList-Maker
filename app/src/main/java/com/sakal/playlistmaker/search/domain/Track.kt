@@ -1,7 +1,9 @@
 package com.sakal.playlistmaker.search.domain
 
-import java.io.Serializable
+import kotlinx.serialization.Serializable
 
+
+@Serializable
 data class Track(
     val trackId: Int,
     val trackName: String,
@@ -13,7 +15,7 @@ data class Track(
     val primaryGenreName: String?,
     val country: String?,
     val previewUrl: String?
-) : Serializable {
+)  {
 
     override fun equals(other: Any?): Boolean {
         return if (other !is Track) {

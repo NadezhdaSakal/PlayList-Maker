@@ -7,6 +7,7 @@
     <dimen name="text_size_20">20sp</dimen>
     <dimen name="text_size_19">19sp</dimen>
     <dimen name="text_size_13">13sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
 
 
     <dimen name="margin_16">16dp</dimen>
@@ -17,9 +18,11 @@
     <dimen name="margin_54">54dp</dimen>
     <dimen name="margin_28">28dp</dimen>
     <dimen name="margin_100">100dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
 
     <dimen name="corner_radius_2">2dp</dimen>
     <dimen name="corner_radius_8">8dp</dimen>
+    <dimen name="corner_radius_4">4dp</dimen>
 
     <dimen name="padding_20">20dp</dimen>
     <dimen name="padding_16">16dp</dimen>
@@ -33,4 +36,13 @@
 
     <dimen name="size_button">52dp</dimen>
     <dimen name="progress_bar_size">44dp</dimen>
+
+    <dimen name="stroke_width_1">1dp</dimen>
+    <dimen name="img_size_160">160dp</dimen>
+    <dimen name="constraintGuide_16">16dp</dimen>
+    <dimen name="image_size_45dp">45dp</dimen>
+    <dimen name="margin_6">6dp</dimen>
+    <dimen name="margin_1">1dp</dimen>
+
+
 </resources>

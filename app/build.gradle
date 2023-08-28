@@ -3,11 +3,13 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.8.21'
+
 }
 
 android {
     namespace 'com.sakal.playlistmaker'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.sakal.playlistmaker"
@@ -43,6 +45,14 @@ android {
         jvmTarget = '17'
     }
 
+    buildscript {
+        ext.kotlin_version = '1.8.21'
+        repositories { mavenCentral() }
+        dependencies {
+            classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        }
+    }
+
 }
 
 dependencies {
@@ -73,8 +83,8 @@ dependencies {
     implementation "io.insert-koin:koin-android:3.4.2"
 
     //Jetpack Navigation Component
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.7.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
     implementation 'androidx.fragment:fragment-ktx:1.6.1'
 
     //Coroutines
@@ -84,6 +94,12 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.5.2'
     kapt 'androidx.room:room-compiler:2.5.2'
     implementation 'androidx.room:room-ktx:2.5.2'
+
+    //Coroutine permissions: PEKO
+    implementation 'com.markodevcic:peko:3.0.2'
+
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1"
+
 
 
 }

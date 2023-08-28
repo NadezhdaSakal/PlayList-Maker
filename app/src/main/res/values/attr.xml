@@ -2,6 +2,14 @@
 <resources>
     <attr name="button_player" format="reference"/>
     <attr name="fab_color" format="reference"/>
+    <attr name="yp_text_grey_color" format="reference"/>
+    <attr name="bottom_navigation_color" format="reference"/>
+    <attr name="general_icon_color" format="reference"/>
+    <attr name="toolbar_text_color" format="reference"/>
+    <attr name="general_text_color" format="reference"/>
+    <attr name="background_hint_color" format="reference"/>
+    <attr name="update_text_color" format="reference"/>
+    <attr name="ripple" format="reference"/>
 
 
 </resources>

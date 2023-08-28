@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".media_library.ui.bottom_sheet.BottomSheet"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <View
+        android:layout_width="50dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@drawable/rounder" />
+
+    <TextView
+        android:id="@+id/title"
+        android:fontFamily="@font/ys_display_medium"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="@dimen/text_size_19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="@dimen/margin_28"
+        android:text="@string/add_to_playlist" />
+
+    <Button
+        android:id="@+id/create_playlist_btn"
+        style="@style/ErrorButtonPlaceholder"
+        android:layout_gravity="center"
+        android:text="@string/new_playlist"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/playlists_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_12"
+        android:layout_marginTop="@dimen/margin_24"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_bottom_sheet" />
+</LinearLayout>

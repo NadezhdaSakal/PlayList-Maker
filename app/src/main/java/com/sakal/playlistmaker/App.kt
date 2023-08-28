@@ -1,6 +1,7 @@
 package com.sakal.playlistmaker
 
 import android.app.Application
+import com.markodevcic.peko.PermissionRequester
 import com.sakal.playlistmaker.di.dataModule
 import com.sakal.playlistmaker.di.interactorModule
 import com.sakal.playlistmaker.di.repositoryModule
@@ -29,6 +30,9 @@ class App : Application() {
                 )
             )
         }
+
+        PermissionRequester.initialize(applicationContext)
+
         val settingsInteractor: SettingsInteractor by inject()
         settingsInteractor.isDarkMode()
     }

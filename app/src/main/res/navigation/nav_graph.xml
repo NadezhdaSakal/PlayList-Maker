@@ -11,12 +11,38 @@
         tools:layout="@layout/fragment_library" >
         <action
             android:id="@+id/action_libraryFragment_to_audioPlayer"
-            app:destination="@id/audioPlayerActivity"
+            app:destination="@id/audioPlayer"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_libraryFragment_to_newPlaylistFragment"
+            app:destination="@+id/newPlaylist"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/newPlaylist"
+        android:name="com.sakal.playlistmaker.new_playlist.ui.fragment.NewPlaylistFragment"
+        android:label="@string/label_newPlaylistFragment"
+        tools:layout="@layout/fragment_new_playlist"/>
+    <dialog
+        android:id="@+id/bottomSheet"
+        android:name="com.sakal.playlistmaker.media_library.ui.bottom_sheet.BottomSheet"
+        android:label="BottomSheet" >
+        <action
+            android:id="@+id/action_bottomSheet_to_newPlaylist"
+            app:destination="@id/newPlaylist"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </dialog>
+
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.sakal.playlistmaker.search.ui.fragment.SearchFragment"
@@ -24,22 +50,28 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_audioPlayer"
-            app:destination="@id/audioPlayerActivity"
+            app:destination="@id/audioPlayer"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.sakal.playlistmaker.settings.ui.fragment.SettingsFragment"
         android:label="@string/label_settings"
         tools:layout="@layout/fragment_settings" />
-    <activity
-        android:id="@+id/audioPlayerActivity"
-        android:name="com.sakal.playlistmaker.player.ui.activity.AudioPlayerActivity"
+
+    <fragment
+        android:id="@+id/audioPlayer"
+        android:name="com.sakal.playlistmaker.player.ui.fragment.AudioPlayerFragment"
         android:label="@string/label_player"
-        tools:layout="@layout/activity_audioplayer"/>
+        tools:layout="@layout/fragment_audioplayer">
+        <action
+            android:id="@+id/action_audioPlayerFragment_to_bottomSheet"
+            app:destination="@id/bottomSheet" />
+    </fragment>
 
 
 </navigation>
