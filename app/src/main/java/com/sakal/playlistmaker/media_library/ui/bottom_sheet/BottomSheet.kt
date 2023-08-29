@@ -116,7 +116,7 @@ class BottomSheet : BottomSheetDialogFragment() {
         Snackbar
             .make(
                 requireContext(),
-                requireActivity().findViewById(R.id.newPlaylist),
+                requireActivity().findViewById(R.id.container),
                 message,
                 Snackbar.LENGTH_SHORT
             )

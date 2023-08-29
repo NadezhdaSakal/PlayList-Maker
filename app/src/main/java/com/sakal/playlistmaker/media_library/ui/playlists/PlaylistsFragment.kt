@@ -1,5 +1,6 @@
 package com.sakal.playlistmaker.media_library.ui.playlists
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -68,6 +69,7 @@ class PlaylistsFragment : Fragment() {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun showContent(content: List<Playlist>) {
 
         binding.apply {
