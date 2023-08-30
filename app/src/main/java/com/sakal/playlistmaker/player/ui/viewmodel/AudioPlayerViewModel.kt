@@ -54,6 +54,7 @@ class AudioPlayerViewModel(
             }
         }
     }
+
     fun preparePlayer(url: String?) {
         renderState(PlayerScreenState.Preparing)
         if (url != null) {

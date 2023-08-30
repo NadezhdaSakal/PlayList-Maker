@@ -95,6 +95,9 @@ class SearchFragment : Fragment() {
 
     private fun initInput() {
 
+        binding.inputSearchForm.setOnClickListener {
+            binding.inputSearchForm.isCursorVisible = true
+        }
         binding.inputSearchForm.doOnTextChanged { s: CharSequence?, _, _, _ ->
             binding.buttonClearSearchForm.visibility = clearButtonVisibility(s)
             if (

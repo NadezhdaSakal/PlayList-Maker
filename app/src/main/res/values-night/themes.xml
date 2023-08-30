@@ -16,6 +16,9 @@
         <item name="bottom_navigation_color">@color/blue</item>
         <item name="general_icon_color">@color/white</item>
 
+        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+
+
 
     </style>
 </resources>

@@ -18,6 +18,9 @@
         <item name="yp_text_grey_color">@color/grey</item>
         <item name="update_text_color">@color/white</item>
 
+        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+
+
 
 
 

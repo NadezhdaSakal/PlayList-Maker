@@ -42,6 +42,8 @@
             android:drawableStart="@drawable/search"
             android:drawablePadding="@dimen/padding_8"
             android:drawableTint="@color/search_form_text_hint_color"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:cursorVisible="false"
             android:hint="@string/search"
             android:imeOptions="actionDone"
             android:inputType="text"

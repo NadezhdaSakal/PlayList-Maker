@@ -23,27 +23,15 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/constraintGuide_16" />
 
-    <com.google.android.material.appbar.MaterialToolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_marginStart="@dimen/margin_4"
-        android:layout_marginBottom="@dimen/margin_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        style="@style/panelHeaderToolbar"
+        app:title="@string/new_playlist"
+        android:background="?attr/colorSecondary"
         app:navigationIcon="@drawable/arrow_back"
-        app:navigationIconTint="@color/toolbar_color">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/ys_display_medium"
-            android:gravity="center_vertical"
-            android:text="@string/new_playlist"
-            android:textColor="@color/toolbar_color"
-            android:textFontWeight="500"
-            android:textSize="@dimen/text_size_22" />
-    </com.google.android.material.appbar.MaterialToolbar>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cover_playlist_cardview"

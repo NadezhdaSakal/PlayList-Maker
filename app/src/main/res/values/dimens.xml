@@ -43,6 +43,7 @@
     <dimen name="image_size_45dp">45dp</dimen>
     <dimen name="margin_6">6dp</dimen>
     <dimen name="margin_1">1dp</dimen>
+    <dimen name="corner_radius_16">16dp</dimen>
 
 
 </resources>

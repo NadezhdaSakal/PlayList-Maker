@@ -6,8 +6,8 @@
     android:id="@+id/bottom_sheet_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/colorSecondary"
     android:orientation="vertical"
+    android:background="@drawable/bottom_sheet"
     android:theme="@style/Theme.PlaylistMaker"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     tools:context=".media_library.ui.bottom_sheet.BottomSheet">
