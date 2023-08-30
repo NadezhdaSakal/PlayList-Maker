@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_new_playlist"/>
     <dialog
         android:id="@+id/bottomSheet"
-        android:name="com.sakal.playlistmaker.media_library.ui.bottom_sheet.BottomSheet"
+        android:name="com.sakal.playlistmaker.media_library.ui.bottom_sheet.PlaylistsBottomSheet"
         android:label="BottomSheet" >
         <action
             android:id="@+id/action_bottomSheet_to_newPlaylist"

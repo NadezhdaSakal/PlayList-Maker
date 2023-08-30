@@ -10,7 +10,7 @@
     android:background="@drawable/bottom_sheet"
     android:theme="@style/Theme.PlaylistMaker"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-    tools:context=".media_library.ui.bottom_sheet.BottomSheet">
+    tools:context=".media_library.ui.bottom_sheet.PlaylistsBottomSheet">
 
     <View
         android:layout_width="50dp"

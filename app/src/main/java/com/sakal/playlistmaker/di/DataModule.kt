@@ -7,17 +7,17 @@ import com.google.gson.Gson
 import com.sakal.playlistmaker.ApiConstants
 import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.media_library.data.db.DataBase
+import com.sakal.playlistmaker.media_library.data.db.entity.RoomConverter
 import com.sakal.playlistmaker.player.data.Player
 import com.sakal.playlistmaker.player.data.PlayerClient
 import com.sakal.playlistmaker.search.data.network.ApiService
+import com.sakal.playlistmaker.search.data.network.ConnectionChecker
 import com.sakal.playlistmaker.search.data.network.NetworkClient
 import com.sakal.playlistmaker.search.data.network.RetrofitClient
 import com.sakal.playlistmaker.search.data.preferences.SearchHistoryStorage
 import com.sakal.playlistmaker.search.data.preferences.SharedPreferencesSearchHistoryStorage
-import com.sakal.playlistmaker.search.data.network.ConnectionChecker
 import com.sakal.playlistmaker.settings.data.preferences.SharedPrefsThemeStorage
 import com.sakal.playlistmaker.settings.data.preferences.ThemeStorage
-import com.sakal.playlistmaker.media_library.data.db.entity.RoomConverter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig
@@ -86,6 +86,7 @@ val dataModule = module {
             Context.MODE_PRIVATE
         )
     }
+
     factoryOf(::RoomConverter)
 
     singleOf(::SharedPrefsThemeStorage).bind<ThemeStorage>()

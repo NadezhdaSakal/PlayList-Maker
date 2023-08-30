@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.databinding.FragmentPlaylistsBinding
@@ -41,7 +41,7 @@ class PlaylistsFragment : Fragment() {
 
         initAdapter()
 
-        viewLifecycleOwner.lifecycle.coroutineScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.contentFlow.collect { screenState ->
                 render(screenState)
             }

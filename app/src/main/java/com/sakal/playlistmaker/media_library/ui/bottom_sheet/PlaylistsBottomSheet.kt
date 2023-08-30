@@ -31,7 +31,7 @@ import kotlinx.serialization.json.Json
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class BottomSheet : BottomSheetDialogFragment() {
+class PlaylistsBottomSheet : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetBinding
     private val viewModel by viewModel<BottomSheetViewModel>()

@@ -14,7 +14,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.databinding.FragmentAudioplayerBinding
-import com.sakal.playlistmaker.media_library.ui.bottom_sheet.BottomSheet
+import com.sakal.playlistmaker.media_library.ui.bottom_sheet.PlaylistsBottomSheet
 import com.sakal.playlistmaker.player.ui.PlayerScreenState
 import com.sakal.playlistmaker.player.ui.viewmodel.AudioPlayerViewModel
 import com.sakal.playlistmaker.search.domain.Track
@@ -138,7 +138,7 @@ class AudioPlayerFragment : Fragment() {
         binding.buttonAddToPlaylist.setOnClickListener { button ->
             (button as? ImageView)?.let { startAnimation(it) }
             findNavController().navigate(
-                R.id.action_audioPlayerFragment_to_bottomSheet, BottomSheet.createArgs(track)
+                R.id.action_audioPlayerFragment_to_bottomSheet, PlaylistsBottomSheet.createArgs(track)
             )
         }
     }
