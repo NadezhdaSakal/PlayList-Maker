@@ -2,7 +2,6 @@ package com.sakal.playlistmaker.search.ui.fragment
 
 import android.annotation.SuppressLint
 import android.content.Context.INPUT_METHOD_SERVICE
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +10,11 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.sakal.playlistmaker.ApiConstants
-import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.databinding.FragmentSearchBinding
-import com.sakal.playlistmaker.player.ui.activity.AudioPlayerActivity
+import com.sakal.playlistmaker.player.ui.fragment.AudioPlayerFragment
 import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.search.ui.Content
 import com.sakal.playlistmaker.search.ui.SearchScreenState
@@ -96,6 +95,9 @@ class SearchFragment : Fragment() {
 
     private fun initInput() {
 
+        binding.inputSearchForm.setOnClickListener {
+            binding.inputSearchForm.isCursorVisible = true
+        }
         binding.inputSearchForm.doOnTextChanged { s: CharSequence?, _, _, _ ->
             binding.buttonClearSearchForm.visibility = clearButtonVisibility(s)
             if (
@@ -168,10 +170,8 @@ class SearchFragment : Fragment() {
         if (!viewModel.isClickable) return
         viewModel.addToHistory(track)
         viewModel.onTrackClick()
-        val intent = Intent(requireContext(), AudioPlayerActivity::class.java).apply {
-            putExtra(Constants.TRACK, track)
-        }
-        startActivity(intent)
+        findNavController().navigate(R.id.action_searchFragment_to_audioPlayer,
+            AudioPlayerFragment.createArgs(track))
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -1,31 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:theme="@style/Theme.PlaylistMaker"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSecondary"
     android:orientation="vertical"
-    android:background="?attr/colorSecondary">
+    android:theme="@style/Theme.PlaylistMaker">
 
     <Button
         android:id="@+id/button_new_playlist"
         style="@style/ErrorButtonPlaceholder"
-        android:text="@string/new_playlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_24"
-        android:layout_marginBottom="46dp"/>
+        android:layout_marginBottom="46dp"
+        android:text="@string/new_playlist" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center"
-        android:src="@drawable/nothingfound"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:text="@string/empty_playlists"
-        android:layout_marginTop="@dimen/margin_16"
-        android:layout_marginHorizontal="@dimen/margin_24"
-        android:textFontWeight="500"
-        style="@style/tabText"/>
+        <LinearLayout
+            android:id="@+id/placeholder_no_playlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="com.practicum.playlistmaker.media_library.ui.fragment.PlaylistFragment">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center"
+                android:src="@drawable/nothingfound" />
+
+            <TextView
+                style="@style/tabText"
+                android:text="@string/empty_playlists" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPlaylist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_12"
+            android:useDefaultMargins="true"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_playlist" />
+    </FrameLayout>
 </LinearLayout>

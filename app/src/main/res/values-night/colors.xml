@@ -16,4 +16,9 @@
     <color name="search_result_track_text_color">#FFFFFF</color>
     <color name="search_result_artist_text_color">#FFFFFF</color>
     <color name="player_text_color">#FFFFFF</color>
+
+    <color name="snackbar">#FFFFFFFF</color>
+    <color name="snackbar_text">#FF000000</color>
+    <color name="box_stroke">#FFFFFFFF</color>
+    <color name="box_text">#FFFFFFFF</color>
 </resources>

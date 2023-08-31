@@ -13,5 +13,12 @@
         <item name="android:statusBarColor" >@color/status_bar_color</item>
         <!-- Customize your theme here. -->
         <item name="button_player">@color/dark_grey</item>
+        <item name="bottom_navigation_color">@color/blue</item>
+        <item name="general_icon_color">@color/white</item>
+
+        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+
+
+
     </style>
 </resources>

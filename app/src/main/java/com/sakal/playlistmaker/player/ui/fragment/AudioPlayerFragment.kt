@@ -1,40 +1,57 @@
-package com.sakal.playlistmaker.player.ui.activity
+package com.sakal.playlistmaker.player.ui.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.R
-import com.sakal.playlistmaker.databinding.ActivityAudioplayerBinding
+import com.sakal.playlistmaker.databinding.FragmentAudioplayerBinding
+import com.sakal.playlistmaker.media_library.ui.bottom_sheet.PlaylistsBottomSheet
 import com.sakal.playlistmaker.player.ui.PlayerScreenState
 import com.sakal.playlistmaker.player.ui.viewmodel.AudioPlayerViewModel
 import com.sakal.playlistmaker.search.domain.Track
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class AudioPlayerActivity : AppCompatActivity() {
+class AudioPlayerFragment : Fragment() {
 
-    private lateinit var binding: ActivityAudioplayerBinding
+    private lateinit var binding: FragmentAudioplayerBinding
     private val viewModel by viewModel<AudioPlayerViewModel>()
+    private lateinit var track: Track
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityAudioplayerBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentAudioplayerBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        @Suppress("DEPRECATION")
-        val track = intent.getSerializableExtra(Constants.TRACK) as Track
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        viewModel.observeState().observe(this) {
+        track = requireArguments()
+            .getString(Constants.TRACK)
+            ?.let { Json.decodeFromString<Track>(it) }!!
+
+
+        viewModel.observeState().observe(viewLifecycleOwner) {
             render(it)
         }
 
-        viewModel.observeFavoriteState().observe(this) {
+        viewModel.observeFavoriteState().observe(viewLifecycleOwner) {
             renderLikeButton(it)
         }
 
@@ -59,6 +76,8 @@ class AudioPlayerActivity : AppCompatActivity() {
             (button as? ImageView)?.let { startAnimation(it) }
             viewModel.playbackControl()
         }
+
+        initAddToPlaylistButton()
     }
 
     private fun renderLikeButton(isFavorite: Boolean) {
@@ -70,7 +89,7 @@ class AudioPlayerActivity : AppCompatActivity() {
     private fun startAnimation(button: ImageView) {
         button.startAnimation(
             AnimationUtils.loadAnimation(
-                this@AudioPlayerActivity,
+                requireContext(),
                 R.anim.scale
             )
         )
@@ -78,7 +97,7 @@ class AudioPlayerActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         binding.playerToolbar.setNavigationOnClickListener {
-            finish()
+            findNavController().navigateUp()
         }
     }
 
@@ -112,6 +131,15 @@ class AudioPlayerActivity : AppCompatActivity() {
                 binding.playTrack.setImageResource(R.drawable.play_arrow)
                 binding.progress.setText(R.string.playing_time)
             }
+        }
+    }
+
+    private fun initAddToPlaylistButton() {
+        binding.buttonAddToPlaylist.setOnClickListener { button ->
+            (button as? ImageView)?.let { startAnimation(it) }
+            findNavController().navigate(
+                R.id.action_audioPlayerFragment_to_bottomSheet, PlaylistsBottomSheet.createArgs(track)
+            )
         }
     }
 
@@ -181,5 +209,12 @@ class AudioPlayerActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         viewModel.pausePlayer()
+    }
+
+    companion object {
+
+        fun createArgs(track: Track): Bundle = bundleOf(
+            Constants.TRACK to Json.encodeToString(track)
+        )
     }
 }

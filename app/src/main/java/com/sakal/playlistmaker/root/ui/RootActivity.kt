@@ -2,6 +2,7 @@ package com.sakal.playlistmaker.root.ui
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -26,8 +27,10 @@ class RootActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.audioPlayerActivity -> {
+                R.id.audioPlayer, R.id.newPlaylist, R.id.bottomSheet -> {
                     binding.bottomNavigationView.visibility = View.GONE
+                    window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+
                 }
 
                 else -> {

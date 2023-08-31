@@ -26,6 +26,11 @@
     <color name="player_text_color">#1A1B22</color>
     <color name="like_color">#F56B6C</color>
 
+    <color name="snackbar">#FF000000</color>
+    <color name="snackbar_text">#FFFFFFFF</color>
+    <color name="box_stroke">#AEAFB4</color>
+    <color name="box_text">#FF000000</color>
+
 
 </resources>
 

@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/container"
     android:background="?attr/colorSecondary"
     android:theme="@style/Theme.PlaylistMaker"
-    tools:context=".player.ui.activity.AudioPlayerActivity">
+    tools:context=".player.ui.fragment.AudioPlayerFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/player_toolbar"

@@ -20,4 +20,9 @@ object Constants {
 
     const val TRACK = "track"
 
+    const val QUALITY_IMAGE = 30
+    const val MESSAGE_DURATION = 4000
+    const val MESSAGE_DURATION_MILLIS = 2000
+
+
 }

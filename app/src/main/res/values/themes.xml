@@ -13,6 +13,17 @@
         <item name="android:statusBarColor">@color/status_bar_color</item>
 
         <item name="button_player">@color/grey</item>
+        <item name="bottom_navigation_color">@color/blue</item>
+        <item name="general_icon_color">@color/grey</item>
+        <item name="yp_text_grey_color">@color/grey</item>
+        <item name="update_text_color">@color/white</item>
+
+        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+
+
+
+
+
     </style>
 
 </resources>
