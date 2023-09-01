@@ -18,8 +18,10 @@ class PlaylistsInteractorImpl(
         playlist.trackList.contains(track)
 
     override suspend fun addTrackToPlaylist(playlist: Playlist, track: Track) {
-        playlist.trackList = playlist.trackList + track
-        playlist.tracksCount = playlist.trackList.size
-        repository.updateTracks(playlist)
+        var updatedPlaylist: Playlist =
+            playlist.copy(trackList = listOf(track) + playlist.trackList)
+        updatedPlaylist = updatedPlaylist.copy(tracksCount = updatedPlaylist.trackList.size)
+
+        repository.updateTracks(updatedPlaylist)
     }
 }

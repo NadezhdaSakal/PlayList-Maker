@@ -24,5 +24,7 @@ object Constants {
     const val MESSAGE_DURATION = 4000
     const val MESSAGE_DURATION_MILLIS = 2000
 
+    const val PLAYLIST_ID = "playlist_id"
+
 
 }

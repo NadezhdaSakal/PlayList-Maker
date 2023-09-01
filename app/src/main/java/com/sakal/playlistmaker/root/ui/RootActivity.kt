@@ -27,7 +27,7 @@ class RootActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.audioPlayer, R.id.newPlaylist, R.id.bottomSheet -> {
+                R.id.audioPlayer, R.id.newPlaylist, R.id.bottomSheetPlaylists -> {
                     binding.bottomNavigationView.visibility = View.GONE
                     window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 

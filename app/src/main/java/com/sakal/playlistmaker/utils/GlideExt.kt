@@ -22,3 +22,12 @@ fun ImageView.setImage(uri: Uri, cornerRadius: Int) {
         .transform(CenterCrop(), RoundedCorners(cornerRadius))
         .into(this)
 }
+
+fun ImageView.setImage(url: String, placeholder: Int) {
+    Glide
+        .with(this.context)
+        .load(url)
+        .placeholder(placeholder)
+        .transform(CenterCrop())
+        .into(this)
+}

@@ -23,6 +23,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_libraryFragment_to_playlistFragment"
+            app:destination="@id/playlistFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -31,9 +38,9 @@
         android:label="@string/label_newPlaylistFragment"
         tools:layout="@layout/fragment_new_playlist"/>
     <dialog
-        android:id="@+id/bottomSheet"
+        android:id="@+id/bottomSheetPlaylists"
         android:name="com.sakal.playlistmaker.media_library.ui.bottom_sheet.PlaylistsBottomSheet"
-        android:label="BottomSheet" >
+        android:label="BottomSheetPlaylists" >
         <action
             android:id="@+id/action_bottomSheet_to_newPlaylist"
             app:destination="@id/newPlaylist"
@@ -70,7 +77,30 @@
         tools:layout="@layout/fragment_audioplayer">
         <action
             android:id="@+id/action_audioPlayerFragment_to_bottomSheet"
-            app:destination="@id/bottomSheet" />
+            app:destination="@id/bottomSheetPlaylists" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/playlistFragment"
+        android:name="com.sakal.playlistmaker.media_library.ui.playlist.PlaylistFragment"
+        android:label="fragment_playlist_menu"
+        tools:layout="@layout/fragment_playlist" >
+        <action
+            android:id="@+id/action_playlistFragment_to_audioPlayer"
+            app:destination="@id/audioPlayer"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_playlistFragment_to_bottomSheetPlaylist"
+            app:destination="@id/bottomSheetPlaylist" />
+        <dialog
+            android:id="@+id/bottomSheetPlaylist"
+            android:name="com.sakal.playlistmaker.media_library.ui.bottom_sheet.BottomSheetPlaylist"
+            android:label="BottomSheetPlaylist" />
+
+
     </fragment>
 
 

@@ -60,6 +60,9 @@
     <string name="message_playlist_dialog">Все несохраненные данные будут потеряны</string>
     <string name="cancel">Отмена</string>
     <string name="complete">Завершить</string>
+    <string name="more">Menu</string>
+    <string name="placeholder_image">placeholder img</string>
+    <string name="nothing_added">Вы ещё не добавили ни одного трека</string>
 
     <plurals name="tracks">
         <item quantity="zero">нет треков</item>
@@ -69,8 +72,8 @@
         <item quantity="many">%1$d треков</item>
         <item quantity="other">%1$d треков</item>
     </plurals>
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
