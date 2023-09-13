@@ -10,6 +10,10 @@
     <attr name="background_hint_color" format="reference"/>
     <attr name="update_text_color" format="reference"/>
     <attr name="ripple" format="reference"/>
+    <attr name="snackbar" format="reference"/>
+    <attr name="edit_text" format="reference"/>
+
+
 
 
 

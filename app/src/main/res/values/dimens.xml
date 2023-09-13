@@ -48,6 +48,9 @@
     <dimen name="text_size_24">24sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="padding_10">10dp</dimen>
+    <dimen name="padding_21">21dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+
 
 
 </resources>

@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.media_library.domain.FavoritesInteractor
 import com.sakal.playlistmaker.player.domain.PlayerInteractor
-import com.sakal.playlistmaker.player.ui.PlayerScreenState
+import com.sakal.playlistmaker.player.ui.state.PlayerScreenState
 import com.sakal.playlistmaker.search.domain.Track
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

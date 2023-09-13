@@ -1,12 +1,12 @@
 package com.sakal.playlistmaker.player.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -15,11 +15,9 @@ import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.databinding.FragmentAudioplayerBinding
 import com.sakal.playlistmaker.media_library.ui.bottom_sheet.PlaylistsBottomSheet
-import com.sakal.playlistmaker.player.ui.PlayerScreenState
+import com.sakal.playlistmaker.player.ui.state.PlayerScreenState
 import com.sakal.playlistmaker.player.ui.viewmodel.AudioPlayerViewModel
 import com.sakal.playlistmaker.search.domain.Track
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -41,11 +39,6 @@ class AudioPlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        track = requireArguments()
-            .getString(Constants.TRACK)
-            ?.let { Json.decodeFromString<Track>(it) }!!
-
 
         viewModel.observeState().observe(viewLifecycleOwner) {
             render(it)
@@ -78,6 +71,12 @@ class AudioPlayerFragment : Fragment() {
         }
 
         initAddToPlaylistButton()
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        track = arguments?.getSerializable(Constants.TRACK) as Track
     }
 
     private fun renderLikeButton(isFavorite: Boolean) {
@@ -137,9 +136,8 @@ class AudioPlayerFragment : Fragment() {
     private fun initAddToPlaylistButton() {
         binding.buttonAddToPlaylist.setOnClickListener { button ->
             (button as? ImageView)?.let { startAnimation(it) }
-            findNavController().navigate(
-                R.id.action_audioPlayerFragment_to_bottomSheet, PlaylistsBottomSheet.createArgs(track)
-            )
+            PlaylistsBottomSheet.newInstance(track).show(childFragmentManager, PlaylistsBottomSheet.TAG)
+
         }
     }
 
@@ -211,10 +209,4 @@ class AudioPlayerFragment : Fragment() {
         viewModel.pausePlayer()
     }
 
-    companion object {
-
-        fun createArgs(track: Track): Bundle = bundleOf(
-            Constants.TRACK to Json.encodeToString(track)
-        )
-    }
 }

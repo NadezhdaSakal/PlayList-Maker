@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:visibility="gone"
             tools:context="com.practicum.playlistmaker.media_library.ui.fragment.PlaylistFragment">
 
             <ImageView
@@ -40,7 +41,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewPlaylist"
+            android:id="@+id/recyclerViewPlaylists"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/margin_12"

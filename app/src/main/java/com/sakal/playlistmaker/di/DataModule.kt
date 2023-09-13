@@ -91,4 +91,5 @@ val dataModule = module {
 
     singleOf(::SharedPrefsThemeStorage).bind<ThemeStorage>()
 
+
 }

@@ -55,6 +55,6 @@
             android:layout_marginTop="@dimen/margin_4"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@string/_0_tracks"/>
+            tools:text="18 треков" />
     </LinearLayout>
 </LinearLayout>

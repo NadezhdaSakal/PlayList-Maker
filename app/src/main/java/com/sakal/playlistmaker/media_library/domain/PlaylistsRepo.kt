@@ -1,14 +1,27 @@
 package com.sakal.playlistmaker.media_library.domain
 
-import com.sakal.playlistmaker.new_playlist.domain.models.Playlist
-import kotlinx.coroutines.flow.Flow
+import android.net.Uri
+import com.sakal.playlistmaker.media_library.domain.models.Playlist
+import com.sakal.playlistmaker.search.domain.Track
 
 interface PlaylistsRepo {
-    suspend fun createPlaylist(playlist: Playlist)
+    suspend fun createPlaylist(playlistName: String, playlistDescription: String, imageUri: Uri?)
+
+    suspend fun addTrack(track: Track, playlistId: Int)
+
+    suspend fun isTrackAlreadyExists(trackId: Int, playlistId: Int): Boolean
+
+    suspend fun getPlaylist(playlistId: Int): Playlist
+
+    suspend fun getPlaylistTracks(playlistId: Int): List<Track>
+
+    suspend fun getPlaylists(): List<Playlist>
+
+    suspend fun deleteTrack(trackId: Int, playlistId: Int)
+
+    suspend fun updatePlaylist(playlistId: Int, playlistName: String, playlistDescription: String, imageUri: Uri?)
 
     suspend fun deletePlaylist(playlist: Playlist)
 
-    suspend fun updateTracks(playlist: Playlist)
 
-    fun getSavedPlaylists(): Flow<List<Playlist>>
 }
