@@ -9,7 +9,7 @@ import com.sakal.playlistmaker.media_library.data.db.entity.PlaylistsTrackEntity
 import com.sakal.playlistmaker.media_library.data.db.entity.TrackEntity
 import com.sakal.playlistmaker.media_library.data.db.entity.TrackPlaylistEntity
 
-@Database(version = 1, entities = [TrackEntity::class, PlaylistEntity::class, PlaylistsTrackEntity::class, TrackPlaylistEntity::class])
+@Database(version = 3, entities = [TrackEntity::class, PlaylistEntity::class, PlaylistsTrackEntity::class, TrackPlaylistEntity::class])
 abstract class DataBase : RoomDatabase() {
 
     abstract fun tracksDao(): TracksDao

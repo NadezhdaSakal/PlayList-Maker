@@ -27,8 +27,6 @@ class PlaylistMenuBottomSheet(private val playlist: Playlist, private val shareT
 
     private val viewModel by viewModel<PlaylistMenuBottomSheetViewModel>()
 
-    private lateinit var confirmDialog: MaterialAlertDialogBuilder
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,8 +40,11 @@ class PlaylistMenuBottomSheet(private val playlist: Playlist, private val shareT
         super.onViewCreated(view, savedInstanceState)
 
         drawPlaylistInfo()
+
         initBtnShare()
+
         initBtnEdit()
+
         initBtnDelete()
     }
 
@@ -104,18 +105,19 @@ class PlaylistMenuBottomSheet(private val playlist: Playlist, private val shareT
 
     private fun initBtnDelete() {
         binding.buttonDelete.setOnClickListener {
-            confirmDialog = MaterialAlertDialogBuilder(requireContext()).apply {
-                setTitle(getString(R.string.delete_playlist_message) + " ${playlist.name}?")
-                setNegativeButton(resources.getText(R.string.no)) { _, _ ->
-                }
-                setPositiveButton(resources.getText(R.string.yes)) { _, _ ->
-                    viewModel.deletePlaylist(
-                        playlist
-                    ) { findNavController().popBackStack() }
-                }
-            }
-            confirmDialog.show()
+            showDialog()
         }
+    }
+
+    private fun showDialog() {
+        MaterialAlertDialogBuilder(requireContext(), R.style.CustomMaterialDialog)
+            .setTitle(getString(R.string.delete_playlist_message) + " ${playlist.name}?")
+            .setNegativeButton(resources.getText(R.string.no)) { _, _ -> }
+            .setPositiveButton(resources.getText(R.string.yes)) { _, _ ->
+                viewModel.deletePlaylist(playlist)
+                { findNavController().popBackStack() }
+            }
+            .show()
     }
 
     companion object {

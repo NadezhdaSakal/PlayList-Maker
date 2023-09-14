@@ -7,10 +7,12 @@ import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.R
@@ -37,8 +39,6 @@ class PlaylistFragment : Fragment() {
 
     private lateinit var playlist: Playlist
 
-    private lateinit var dialog: MaterialAlertDialogBuilder
-
     private val trackAdapter = TrackAdapter({ clickOnTrack(it) }, { longClickOnTrack(it) })
 
     override fun onCreateView(
@@ -52,8 +52,6 @@ class PlaylistFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.tracksRecycler.adapter = trackAdapter
 
         viewModel.observeState().observe(viewLifecycleOwner) {
             when (it) {
@@ -74,6 +72,8 @@ class PlaylistFragment : Fragment() {
 
         initMoreBtn()
 
+        initAdapter()
+
     }
 
     override fun onResume() {
@@ -91,6 +91,10 @@ class PlaylistFragment : Fragment() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+    }
+
+    private fun initAdapter() {
+        binding.tracksRecycler.adapter = trackAdapter
     }
 
     private fun initShareBtn() {
@@ -132,7 +136,6 @@ class PlaylistFragment : Fragment() {
         return message
     }
 
-
     private fun showPlaylist() {
         with(binding) {
             val filePath = File(
@@ -156,6 +159,8 @@ class PlaylistFragment : Fragment() {
                 playlistDescription.visibility = View.GONE
             }
         }
+
+        initBottomSheetBehavior()
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -187,6 +192,20 @@ class PlaylistFragment : Fragment() {
         }
     }
 
+    private fun initBottomSheetBehavior() {
+        with(binding) {
+            val bottomSheetBehavior = BottomSheetBehavior.from(tracksBottomSheet)
+            bottomBlank.viewTreeObserver.addOnGlobalLayoutListener(
+                object : ViewTreeObserver.OnGlobalLayoutListener {
+                    override fun onGlobalLayout() {
+                        bottomSheetBehavior.peekHeight = bottomBlank.height
+                        bottomBlank.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    }
+                }
+            )
+        }
+    }
+
     private fun clickOnTrack(track: Track) {
         if (viewModel.clickDebounce()) {
             findNavController().navigate(
@@ -199,15 +218,13 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun longClickOnTrack(track: Track) {
-        dialog = MaterialAlertDialogBuilder(requireContext()).apply {
-            setTitle(resources.getText(R.string.delete_track))
-            setNegativeButton(resources.getText(R.string.no)) { _, _ ->
+        MaterialAlertDialogBuilder(requireContext(), R.style.CustomMaterialDialog)
+            .setTitle(resources.getText(R.string.delete_track))
+            .setNegativeButton(resources.getText(R.string.no)) { _, _ ->
             }
-            setPositiveButton(resources.getText(R.string.yes)) { _, _ ->
+            .setPositiveButton(resources.getText(R.string.yes)) { _, _ ->
                 viewModel.deleteTrack(track.trackId, playlist.playlistId)
             }
-        }
-        dialog.show()
+            .show()
     }
-
 }

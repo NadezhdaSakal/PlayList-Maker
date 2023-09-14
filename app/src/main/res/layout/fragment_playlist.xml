@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/pale_grey"
-        tools:context=".medialibrary.presentation.playlists.PlayListFragment">
+        tools:context=".media_library.ui.playlists.PlaylistFragment">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/left_guideline"
@@ -71,7 +70,7 @@
             app:layout_constraintEnd_toEndOf="@id/right_guideline"
             app:layout_constraintStart_toStartOf="@id/left_guideline"
             app:layout_constraintBottom_toTopOf="@+id/playlist_info"
-            tools:text="Best songs 2021 description"
+            tools:text="2022"
             android:visibility="gone"/>
 
         <LinearLayout
@@ -131,7 +130,7 @@
             app:layout_constraintEnd_toEndOf="@id/right_guideline" />
 
         <View
-            android:id="@+id/bottomBlankView"
+            android:id="@+id/bottom_blank"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_24"
@@ -143,7 +142,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:id="@+id/tracksBottomSheet"
+        android:id="@+id/tracks_bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bottom_sheet"
@@ -160,7 +159,7 @@
             android:background="@drawable/rounder" />
 
         <ImageView
-            android:id="@+id/ivPlaceholder"
+            android:id="@+id/iv_placeholder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -169,7 +168,7 @@
             android:src="@drawable/nothingfound" />
 
         <TextView
-            android:id="@+id/tvPlaceholder"
+            android:id="@+id/tv_placeholder"
             style="@style/YSRegular16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
