@@ -34,6 +34,7 @@ class TracksRepoImpl(
                             it.artistName,
                             it.trackTimeMillis,
                             it.artworkUrl100,
+                            it.artworkUrl60,
                             it.collectionName,
                             it.releaseDate,
                             it.primaryGenreName,

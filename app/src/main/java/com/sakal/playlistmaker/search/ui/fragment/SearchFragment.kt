@@ -12,12 +12,12 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.sakal.playlistmaker.ApiConstants
+import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.R
 import com.sakal.playlistmaker.databinding.FragmentSearchBinding
-import com.sakal.playlistmaker.player.ui.fragment.AudioPlayerFragment
 import com.sakal.playlistmaker.search.domain.Track
-import com.sakal.playlistmaker.search.ui.Content
-import com.sakal.playlistmaker.search.ui.SearchScreenState
+import com.sakal.playlistmaker.search.ui.state.Content
+import com.sakal.playlistmaker.search.ui.state.SearchScreenState
 import com.sakal.playlistmaker.search.ui.adapters.TrackAdapter
 import com.sakal.playlistmaker.search.ui.viewmodel.SearchViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,13 +28,9 @@ class SearchFragment : Fragment() {
 
     private val viewModel by viewModel<SearchViewModel>()
 
-    private val searchAdapter = TrackAdapter {
-        clickOnTrack(it)
-    }
+    private var searchAdapter = TrackAdapter({ clickOnTrack(it) })
 
-    private val historyAdapter = TrackAdapter {
-        clickOnTrack(it)
-    }
+    private var historyAdapter = TrackAdapter({ clickOnTrack(it) })
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -170,8 +166,12 @@ class SearchFragment : Fragment() {
         if (!viewModel.isClickable) return
         viewModel.addToHistory(track)
         viewModel.onTrackClick()
-        findNavController().navigate(R.id.action_searchFragment_to_audioPlayer,
-            AudioPlayerFragment.createArgs(track))
+        findNavController().navigate(
+            R.id.action_to_Player,
+            Bundle().apply {
+                putSerializable(Constants.TRACK, track)
+            }
+        )
     }
 
     @SuppressLint("NotifyDataSetChanged")

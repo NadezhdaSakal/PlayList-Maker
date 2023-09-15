@@ -19,6 +19,13 @@
         <item name="update_text_color">@color/white</item>
 
         <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+        <item name="snackbar">@color/black</item>
+        <item name="edit_text">@color/pale_grey</item>
+
+
+
+
+
 
 
 

@@ -16,7 +16,7 @@ class FavoritesRepoImpl(
     override suspend fun saveTrack(track: Track) {
         database
             .tracksDao()
-            .addTrack(converter.map(track))
+            .addTrack(converter.mapToEntity(track))
     }
 
     override suspend fun deleteTrack(trackId: Int) {

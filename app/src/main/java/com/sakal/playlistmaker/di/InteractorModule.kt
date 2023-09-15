@@ -4,8 +4,6 @@ import com.sakal.playlistmaker.media_library.domain.FavoritesInteractor
 import com.sakal.playlistmaker.media_library.domain.PlaylistsInteractor
 import com.sakal.playlistmaker.media_library.domain.impl.FavoritesInteractorImpl
 import com.sakal.playlistmaker.media_library.domain.impl.PlaylistsInteractorImpl
-import com.sakal.playlistmaker.new_playlist.domain.NewPlaylistInteractor
-import com.sakal.playlistmaker.new_playlist.domain.impl.NewPlaylistInteractorImpl
 import com.sakal.playlistmaker.player.domain.PlayerInteractor
 import com.sakal.playlistmaker.player.domain.impl.PlayerInteractorImpl
 import com.sakal.playlistmaker.search.domain.TracksInteractor
@@ -25,8 +23,6 @@ val interactorModule = module {
     singleOf(::SettingsInteractorImpl).bind<SettingsInteractor>()
 
     singleOf(::FavoritesInteractorImpl).bind<FavoritesInteractor>()
-
-    singleOf(::NewPlaylistInteractorImpl).bind<NewPlaylistInteractor>()
 
     singleOf(::PlaylistsInteractorImpl).bind<PlaylistsInteractor>()
 

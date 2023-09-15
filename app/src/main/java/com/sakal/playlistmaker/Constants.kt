@@ -21,8 +21,8 @@ object Constants {
     const val TRACK = "track"
 
     const val QUALITY_IMAGE = 30
-    const val MESSAGE_DURATION = 4000
-    const val MESSAGE_DURATION_MILLIS = 2000
 
+    const val PLAYLISTS_IMAGES = "playlist_images"
+    const val PLAYLIST = "playlist"
 
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.media_library.domain.FavoritesInteractor
+import com.sakal.playlistmaker.media_library.ui.state.FavoritesState
 import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.utils.debounce
 import kotlinx.coroutines.launch

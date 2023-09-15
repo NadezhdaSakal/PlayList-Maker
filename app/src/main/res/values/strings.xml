@@ -41,28 +41,31 @@
     <string name="label_library">LibraryFragment</string>
     <string name="label_search">SearchFragment</string>
     <string name="label_settings">SettingsFragment</string>
-    <string name="label_player">AudioPlayerActivity</string>
+    <string name="label_player">AudioPlayerFragment</string>
+    <string name="label_newPlaylistFragment">PlaylistCreatorFragment</string>
+    <string name="label_favorites">FavoritesFragment</string>
+    <string name="label_playlist_creator">PlaylistCreatorFragment</string>
+    <string name="label_playlists">PlaylistsFragment</string>
+    <string name="label_bottom_sheet_player">BottomSheetPlayer</string>
+    <string name="label_playlist">PlaylistFragment</string>
 
-    <string name="_0_tracks">0 треков</string>
     <string name="cover">Обложка альбома</string>
     <string name="create">Создать</string>
     <string name="description">Описание</string>
     <string name="name">Название*</string>
-    <string name="label_newPlaylistFragment">NewPlaylistFragment</string>
 
-    <string name="rationale_permission_message">Необходимо разрешение для просмотра галереи</string>
     <string name="playlist">Плейлист</string>
-    <string name="my_playlists">my_playlists</string>
-    <string name="created">создан</string>
-    <string name="added">Добавлено в плейлист</string>
-    <string name="already_added">Трек уже добавлен в плейлист</string>
+    <string name="playlist_created">Плейлист %s создан</string>
+    <string name="added">Добавлено в плейлист %1$s</string>
+    <string name="already_added">Трек уже добавлен в плейлист %1$s</string>
     <string name="title_playlist_dialog">Завершить создание плейлиста?</string>
     <string name="message_playlist_dialog">Все несохраненные данные будут потеряны</string>
     <string name="cancel">Отмена</string>
     <string name="complete">Завершить</string>
+    <string name="nothing_added">Вы ещё не добавили ни одного трека</string>
 
     <plurals name="tracks">
-        <item quantity="zero">нет треков</item>
+        <item quantity="zero">%1$d треков</item>
         <item quantity="one">%1$d трек</item>
         <item quantity="two">%1$d трека</item>
         <item quantity="few">%1$d трека</item>
@@ -70,7 +73,31 @@
         <item quantity="other">%1$d треков</item>
     </plurals>
 
+    <string name="share_playlist">Поделиться</string>
+    <string name="information">Редактировать информацию</string>
+    <string name="delete">Удалить плейлист</string>
+    <string name="delete_playlist_message">Хотите удалить плейлист</string>
+    <string name="delete_track">Хотите удалить трек?</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
 
+    <plurals name="minutes">
+        <item quantity="zero">%1$d минут</item>
+        <item quantity="one">%1$d минута</item>
+        <item quantity="two">%1$d минуты</item>
+        <item quantity="few">%1$d минуты</item>
+        <item quantity="many">%1$d минут</item>
+        <item quantity="other">%1$d минут</item>
+    </plurals>
+
+    <string name="edit_title">Редактировать</string>
+    <string name="save_playlist">Сохранить</string>
+    <string name="changed">изменен</string>
+    <string name="empty_track_list">В этом плейлисте нет списка треков, которым можно поделиться</string>
+    <string name="chooser_title">Выберите приложение:</string>
+    <string name="empty_playlist">Плейлист пуст</string>
+    <string name="deleted">Плейлист удален</string>
+    <string name="settings_not_found_app">Не найдено подходящих приложений</string>
 
 
 </resources>

@@ -1,48 +1,32 @@
 package com.sakal.playlistmaker.media_library.ui.viewmodels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sakal.playlistmaker.media_library.domain.PlaylistsInteractor
-import com.sakal.playlistmaker.new_playlist.domain.models.Playlist
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.sakal.playlistmaker.media_library.ui.state.PlaylistsScreenState
 import kotlinx.coroutines.launch
 
-class PlaylistsViewModel(private val interactor: PlaylistsInteractor) :
-    ViewModel() {
+class PlaylistsViewModel(private val interactor: PlaylistsInteractor) : ViewModel() {
 
-    private val _contentFlow: MutableStateFlow<PlaylistsScreenState> =
-        MutableStateFlow(PlaylistsScreenState.Empty)
-    val contentFlow: StateFlow<PlaylistsScreenState> = _contentFlow
+    private val stateLiveData = MutableLiveData<PlaylistsScreenState>()
 
-    var isClickable = true
+    fun observeState(): LiveData<PlaylistsScreenState> = stateLiveData
 
-    init {
-        fillData()
+    private fun renderState(state: PlaylistsScreenState) {
+        stateLiveData.postValue(state)
     }
 
-    private fun fillData() {
-        viewModelScope.launch(Dispatchers.IO) {
-            interactor
-                .getPlaylists()
-                .collect { playlists ->
-                    processResult(playlists)
-                }
-        }
+    fun requestPlaylists() {
+        viewModelScope.launch {
+            val playlists = interactor.getPlaylists()
 
-    }
-
-    private fun processResult(playlists: List<Playlist>) {
-        if (playlists.isEmpty()) {
-            _contentFlow.value = (PlaylistsScreenState.Empty)
-        } else {
-            _contentFlow.value = (PlaylistsScreenState.Content(playlists))
+            if (playlists.isEmpty()) {
+                renderState(PlaylistsScreenState.Empty)
+            } else {
+                renderState(PlaylistsScreenState.NotEmpty(playlists))
+            }
         }
     }
-
-    fun onPlaylistClick() {
-        isClickable = false
-    }
-
 }

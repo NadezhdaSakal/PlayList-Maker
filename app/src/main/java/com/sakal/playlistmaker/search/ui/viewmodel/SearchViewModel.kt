@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.sakal.playlistmaker.Constants
 import com.sakal.playlistmaker.search.domain.Track
 import com.sakal.playlistmaker.search.domain.TracksInteractor
-import com.sakal.playlistmaker.search.ui.SearchScreenState
+import com.sakal.playlistmaker.search.ui.state.SearchScreenState
 import com.sakal.playlistmaker.utils.debounce
 import kotlinx.coroutines.launch
 
