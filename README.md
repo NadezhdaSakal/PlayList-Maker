@@ -31,11 +31,10 @@ PlayList-Maker - приложение для создания плейлисто
 Удалить трек можно долгим нажатием.
 Если открыть меню, можно поделиться плейлистом в виде списка треков, отредактировать плейлист или удалить его.
 
-<img src="https://github.com/NadezhdaSakal/PlayList-Maker/assets/79761587/dceb94db-805e-456c-9eb9-347b94263945" width=30% height=30%>
-
-<img src="https://github.com/NadezhdaSakal/PlayList-Maker/assets/79761587/ed575ca4-e620-4a3f-bdd1-7f8fb146e93c" width=30% height=30%>
-
-<img src="https://github.com/NadezhdaSakal/PlayList-Maker/assets/79761587/191d7287-0c96-45a9-bd6e-903e9e852942" width=30% height=30%>
+<img src="https://github.com/NadezhdaSakal/PlayList-Maker/assets/79761587/dceb94db-805e-456c-9eb9-347b94263945" width=24% height=24%>
+<img src="https://github.com/NadezhdaSakal/PlayList-Maker/assets/79761587/ed575ca4-e620-4a3f-bdd1-7f8fb146e93c" width=24% height=24%>
+<img src="https://github.com/NadezhdaSakal/PlayList-Maker/assets/79761587/191d7287-0c96-45a9-bd6e-903e9e852942" width=24% height=24%>
+<img src="https://github.com/NadezhdaSakal/PlayList-Maker/assets/79761587/90e827be-d97a-4ceb-b05f-a7778197acc6" width=24% height=24%>
 
 ### Настройки
 На экране настройки можно изменить тему приложения, поделиться приложением, написать в поддержку и прочитать пользовательское соглашение.
